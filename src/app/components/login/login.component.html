@@ -1,0 +1,26 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+>
+  <div>
+    <input 
+      placeholder="Email"
+      type="email" 
+      name="email" 
+      formControlName="email"
+    >
+  </div>
+  
+  <div>
+    <input 
+      placeholder="Password"
+      type="password"
+      name="password"
+      formControlName="password"
+    >
+  </div>
+
+  <button class="button">Log in</button>
+  <p>New user? <a [routerLink]="['/sign-up']">Sign up</a></p>
+  <p><a>Forgot your password?</a></p>
+</form>
