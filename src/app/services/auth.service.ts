@@ -11,7 +11,12 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   registerUser(data: any): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
     return this.http.post(`${this.apiUrl}/sessions/register`, data);
+  }
+
+  loginUser(data: any): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
+    return this.http.post(`${this.apiUrl}/sessions/login`, data)
   }
 }

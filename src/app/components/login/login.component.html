@@ -1,26 +1,38 @@
-<form
-  [formGroup]="form"
-  (ngSubmit)="onSubmit()"
->
-  <div>
-    <input 
-      placeholder="Email"
-      type="email" 
-      name="email" 
-      formControlName="email"
-    >
-  </div>
-  
-  <div>
-    <input 
-      placeholder="Password"
-      type="password"
-      name="password"
-      formControlName="password"
-    >
-  </div>
+<div class="container">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="mt-3">
+      <input 
+        placeholder="Email"
+        type="email" 
+        name="email" 
+        formControlName="email"
+        class="form-control"
+      >
 
-  <button class="button">Log in</button>
-  <p>New user? <a [routerLink]="['/sign-up']">Sign up</a></p>
-  <p><a>Forgot your password?</a></p>
-</form>
+      @if (form.controls.email.touched && form.controls.email.invalid && form.controls.email.dirty) {
+        <p>invalid email</p>
+      }
+    </div>
+    
+    <div class="mt-3">
+      <input 
+        placeholder="Password"
+        type="password"
+        name="password"
+        formControlName="password"
+        class="form-control"
+      >
+
+      @if (form.controls.password.touched && form.controls.password.invalid && form.controls.password.dirty) {
+        <p>invalid password</p>
+      }
+    </div>
+
+    <button class="button btn btn-primary form-control mt-3">Log in</button>
+    <p>New user? <a [routerLink]="['/sign-up']">Sign up</a></p>
+    <p><a>Forgot your password?</a></p>
+  </form>
+</div>
