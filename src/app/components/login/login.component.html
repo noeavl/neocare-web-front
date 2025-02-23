@@ -26,6 +26,11 @@
         class="form-control"
       >
 
+    <input
+      type="checkbox"
+      formControlName="rememberMe"
+    >Remember me
+
       @if (form.controls.password.touched && form.controls.password.invalid && form.controls.password.dirty) {
         <p>invalid password</p>
       }

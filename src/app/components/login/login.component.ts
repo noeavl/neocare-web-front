@@ -28,7 +28,8 @@ export class LoginComponent {
         Validators.required,
         Validators.minLength(8)
       ]
-    })
+    }),
+    rememberMe: new FormControl('', )
   })
 
   onSubmit() {
@@ -38,19 +39,26 @@ export class LoginComponent {
 
     const formData = {
       email: this.form.controls.email.value,
-      password: this.form.controls.password.value
+      password: this.form.controls.password.value,
     }
+
+    const rememberMe =  this.form.controls.rememberMe.value
 
     this.authService.loginUser(formData).subscribe(
       (response) => {
         console.log(response)
-        window.localStorage.setItem(
-          'token',
-          JSON.stringify({
-            token: response.token
-          })
-        )
-        this.form.reset();
+        if (rememberMe) {
+          window.localStorage.setItem(
+            'token',
+            response.token
+          )
+        } else {
+          window.sessionStorage.setItem(
+            'token',
+            response.token
+          )
+        }
+        this.form.reset()
       },
       (error) => {
         console.error(error);
