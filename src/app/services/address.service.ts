@@ -18,4 +18,13 @@ export class AddressService {
   indexAddress(): Observable<any> {
     return this.http.get(`${this.apiUrl}/addresses`)
   }
+
+  updateAddress(id: number, data: any): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
+    return this.http.patch(`${this.apiUrl}/addresses/${id}`, data)
+  }
+
+  deleteAddress(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/addresses/${id}`)
+  }
 }
