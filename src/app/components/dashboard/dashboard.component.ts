@@ -1,15 +1,19 @@
-import { Component, HostListener, OnInit, signal } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, HostListener, OnInit, signal, NgModule } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { SideNavComponent } from "./side-nav/side-nav.component";
+import { CommonModule } from '@angular/common';
+import { DashboardContentComponent } from "./dashboard-content/dashboard-content.component";
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
   imports: [
-    SideNavComponent
-  ]
+    SideNavComponent,
+    RouterOutlet,
+    CommonModule,
+    DashboardContentComponent
+]
 })
 export class DashboardComponent implements OnInit {
   isLeftSidebarCollapsed = signal<boolean>(false);
