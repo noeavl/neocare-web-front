@@ -5,8 +5,7 @@ import { NavComponent } from './components/nav/nav.component';
 @Component({
   selector: 'app-root',
   imports: [
-    RouterOutlet,
-    NavComponent
+    RouterOutlet
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

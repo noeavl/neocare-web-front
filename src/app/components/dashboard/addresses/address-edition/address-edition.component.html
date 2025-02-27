@@ -11,7 +11,7 @@
         formControlName="state"
       >
 
-      @if (form.controls.state.touched && form.controls.state.invalid && form.controls.state.dirty) {
+      @if (form.controls['state'].touched && form.controls['state'].invalid && form.controls['state'].dirty) {
         <p>invalid state</p>
       }
     </div>
@@ -24,7 +24,7 @@
         formControlName="city"
       >
 
-      @if (form.controls.city.invalid && form.controls.city.dirty && form.controls.city.touched) {
+      @if (form.controls['city'].invalid && form.controls['city'].dirty && form.controls['city'].touched) {
         <p>invalid city</p>
       }
     </div>
@@ -37,7 +37,7 @@
         formControlName="neighborhood"
       >
 
-      @if (form.controls.neighborhood.invalid && form.controls.neighborhood.dirty && form.controls.neighborhood.touched) {
+      @if (form.controls['neighborhood'].invalid && form.controls['neighborhood'].dirty && form.controls['neighborhood'].touched) {
         <p>invalid neighbourhood</p>
       }
     </div>
@@ -50,7 +50,7 @@
         formControlName="street"
       >
 
-      @if (form.controls.street.invalid && form.controls.street.dirty && form.controls.street.touched) {
+      @if (form.controls['street'].invalid && form.controls['street'].dirty && form.controls['street'].touched) {
         <p>invalid street</p>
       }
     </div>
@@ -63,7 +63,7 @@
         formControlName="number"
       >
 
-      @if (form.controls.number.invalid && form.controls.number.dirty && form.controls.number.touched) {
+      @if (form.controls['number'].invalid && form.controls['number'].dirty && form.controls['number'].touched) {
         <p>invalid number</p>
       }
     </div>
@@ -76,14 +76,13 @@
         formControlName="zipCode"
       >
 
-      @if (form.controls.zipCode.invalid && form.controls.zipCode.dirty && form.controls.zipCode.touched) {
+      @if (form.controls['zipCode'].invalid && form.controls['zipCode'].dirty && form.controls['zipCode'].touched) {
         <p>invalid zip code</p>
       }
     </div>
 
     <button
       class="button btn btn-success form-control mt-3"
-      [disabled]="form.invalid"
     >
       Submit
     </button>

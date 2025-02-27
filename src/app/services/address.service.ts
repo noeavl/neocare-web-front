@@ -27,4 +27,8 @@ export class AddressService {
   deleteAddress(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/addresses/${id}`)
   }
+
+  showAddress(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/addresses/${id}`)
+  }
 }

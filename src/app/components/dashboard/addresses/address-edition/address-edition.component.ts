@@ -9,47 +9,77 @@ import { ActivatedRoute } from '@angular/router';
     ReactiveFormsModule
   ],
   templateUrl: './address-edition.component.html',
-  styleUrl: './address-edition.component.css'
+  styleUrls: ['./address-edition.component.css']
 })
 export class AddressEditionComponent implements OnInit {
+  form!: FormGroup;
+  
   constructor(
     private addressService: AddressService,
     private route: ActivatedRoute
   ) {}
-
-  form = new FormGroup({
-    state: new FormControl(''),
-    city: new FormControl(''),
-    neighborhood: new FormControl(''),
-    street: new FormControl(''),
-    number: new FormControl('', [
-      Validators.pattern('^[0-9]*$')
-    ]),
-    zipCode: new FormControl('', [
-      Validators.minLength(5),
-      Validators.maxLength(5),
-      Validators.pattern('^[0-9]*$')
-    ])
-  });
-
+  
   id!: number;
-
+  
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.id = Number(params.get('id'));
+      this.loadAddress(this.id);
     });
 
-    console.log(this.id);
+    this.form = new FormGroup({
+      state: new FormControl('', [
+          Validators.required
+      ]),
+      city: new FormControl('', [
+          Validators.required
+      ]),
+      neighborhood: new FormControl('', [
+        Validators.required
+      ]),
+      street: new FormControl('', [
+        Validators.required
+      ]),
+      number: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[0-9]*$')
+      ]),
+      zipCode: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(5),
+        Validators.pattern('^[0-9]*$')
+      ])
+    });
+  }
+  
+  loadAddress(id: number) {
+    this.addressService.showAddress(id).subscribe(
+      (response) => {
+        console.log(response);
+        this.form.patchValue({
+          state: response.address.state,
+          city: response.address.city,
+          neighborhood: response.address.neighborhood,
+          street: response.address.street,
+          number: response.address.number,
+          zipCode: response.address.zip_code
+        });
+      },
+      (error) => {
+        console.error('Error fetching address:', error);
+      }
+    );
   }
 
   onSubmit() {
     const formData = {
-      state: this.form.controls.state.value ? this.form.controls.state.value : null,
-      city: this.form.controls.city.value ? this.form.controls.city.value : null,
-      neighborhood: this.form.controls.neighborhood.value ? this.form.controls.neighborhood.value : null,
-      street: this.form.controls.street.value ? this.form.controls.street.value : null,
-      number: this.form.controls.number.value ? this.form.controls.number.value : null,
-      zip_code: this.form.controls.zipCode.value ? this.form.controls.zipCode.value : null
+      state: this.form.controls['state'].value,
+      city: this.form.controls['city'].value,
+      neighborhood: this.form.controls['neighborhood'].value,
+      street: this.form.controls['street'].value,
+      number: this.form.controls['number'].value,
+      zip_code: this.form.controls['zipCode'].value
     };
 
     this.addressService.updateAddress(this.id, formData).subscribe(
