@@ -1,0 +1,32 @@
+h1 {
+  color: #492E87;
+  font-weight: bold;
+  margin: 0px;
+  justify-content: center;
+}
+.title-container {
+  display: flex;
+  align-items: center;
+}
+.add-address-button {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 10px;
+  background-color: #7A1CAC;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+img.button-img {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+div.header-content {
+  display: flex;
+  justify-content: space-between;
+
+}

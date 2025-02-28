@@ -10,7 +10,6 @@ import { DashboardContentComponent } from "./dashboard-content/dashboard-content
   styleUrl: './dashboard.component.css',
   imports: [
     SideNavComponent,
-    RouterOutlet,
     CommonModule,
     DashboardContentComponent
 ]

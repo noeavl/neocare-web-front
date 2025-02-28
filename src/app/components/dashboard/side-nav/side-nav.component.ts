@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, HostListener } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -9,9 +9,13 @@ import { RouterModule } from '@angular/router';
   templateUrl: './side-nav.component.html',
   styleUrl: './side-nav.component.css',
 })
-export class SideNavComponent {
-  isLeftSidebarCollapsed = input.required<boolean>();
-  changeIsLeftSidebarCollapsed = output<boolean>();
+export class SideNavComponent implements OnInit, OnChanges {
+  @Input() isLeftSidebarCollapsed!: boolean;
+  @Output() changeIsLeftSidebarCollapsed = new EventEmitter<boolean>();
+
+  showText: boolean = false;
+  isMobile: boolean = false;
+
   items = [
     {
       routeLink: '/dashboard',
@@ -24,22 +28,61 @@ export class SideNavComponent {
       label: 'Hospitals',
     },
     {
-      routeLink: 'pages',
+      routeLink: '/dashboard/rooms/list',
       icon: '/recursos-web/room-icon.png',
       label: 'Rooms',
     },
     {
-      routeLink: 'settings',
+      routeLink: '/dashboard/incubators/list',
       icon: '/recursos-web/incubator-icon.png',
       label: 'Incubators',
     },
+    {
+      routeLink: '/dashboard/babies/list',
+      icon: '/recursos-web/baby-icon.png',
+      label: 'Babies',
+    },
+    {
+      routeLink: '/dashboard/relatives/list',
+      icon: '/recursos-web/relatives-icon.png',
+      label: 'Relatives',
+    }
   ];
 
-  toggleCollapse(): void {
-    this.changeIsLeftSidebarCollapsed.emit(!this.isLeftSidebarCollapsed());
+  ngOnInit(): void {
+    this.checkScreenSize();
+    this.showText = !this.isLeftSidebarCollapsed;
   }
 
-  closeSidenav(): void {
-    this.changeIsLeftSidebarCollapsed.emit(true);
+  @HostListener('window:resize', [])
+  onResize(): void {
+    this.checkScreenSize();
+  }
+
+  checkScreenSize(): void {
+    this.isMobile = window.innerWidth < 768;
+    if (this.isMobile) {
+      this.isLeftSidebarCollapsed = true;
+      this.showText = false;
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['isLeftSidebarCollapsed']) {
+      if (this.isLeftSidebarCollapsed) {
+        setTimeout(() => {
+          this.showText = false;
+        }, 300);
+      } else {
+        this.showText = true;
+      }
+    }
+  }
+
+  toggleCollapse(): void {
+    if (this.isMobile) return
+
+    const newState = !this.isLeftSidebarCollapsed;
+    this.changeIsLeftSidebarCollapsed.emit(newState);
   }
 }

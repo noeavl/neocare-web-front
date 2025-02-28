@@ -15,8 +15,8 @@ export class AddressService {
     return this.http.post(`${this.apiUrl}/addresses`, data)
   }
 
-  indexAddress(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/addresses`)
+  indexAddress(page: number = 1): Observable<any> {
+    return this.http.get(`${this.apiUrl}/addresses?page=${page}`);
   }
 
   updateAddress(id: number, data: any): Observable<any> {

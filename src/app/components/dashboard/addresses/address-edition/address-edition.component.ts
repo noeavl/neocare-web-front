@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AddressService } from '../../../../services/address.service';
 import { ActivatedRoute } from '@angular/router';
+import { SectionHeaderComponent } from '../../section-header/section-header.component';
 
 @Component({
   selector: 'app-address-edition',
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SectionHeaderComponent
   ],
   templateUrl: './address-edition.component.html',
   styleUrls: ['./address-edition.component.css']

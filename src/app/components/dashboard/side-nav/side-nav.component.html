@@ -1,12 +1,12 @@
 <div
   class="sidenav"
-  [ngClass]="isLeftSidebarCollapsed() ? 'sidenav-collapsed' : ''"
+  [ngClass]="isLeftSidebarCollapsed ? 'sidenav-collapsed' : ''"
 >
   <div class="logo-container">
     <button class="logo" (click)="toggleCollapse()">
       <img class="logo-img" src="recursos-web/LOGOBLANCO.png">
     </button>
-    @if (!isLeftSidebarCollapsed()) {
+    @if (showText) {
       <div class="logo-text">NEOCARE</div>
     }
   </div>
@@ -20,7 +20,7 @@
           [routerLinkActiveOptions]="{ exact: true }"
         >
           <img [src]="item.icon" class="nav-item">
-          @if (!isLeftSidebarCollapsed()) {
+          @if (showText) {
             <span class="sidenav-link-text">{{ item.label }}</span>
           }
         </a>

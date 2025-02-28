@@ -17,7 +17,7 @@ export class AuthService {
 
   loginUser(data: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
-    return this.http.post(`${this.apiUrl}/sessions/login`, data)
+    return this.http.post(`${this.apiUrl}/sessions/login/web`, data)
   }
 
   userRole() {

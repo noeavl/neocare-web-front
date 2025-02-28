@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AddressService } from '../../../../services/address.service';
+import { SectionHeaderComponent } from "../../section-header/section-header.component";
 
 @Component({
   selector: 'app-address-registration',
   imports: [
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    SectionHeaderComponent
+],
   templateUrl: './address-registration.component.html',
   styleUrl: './address-registration.component.css'
 })
@@ -28,7 +30,8 @@ export class AddressRegistrationComponent {
     ]),
     number: new FormControl('', [
       Validators.required,
-      Validators.pattern('^[0-9]*$')
+      Validators.pattern('^[0-9]*$'),
+      Validators.min(1)
     ]),
     zipCode: new FormControl('', [
       Validators.required,
