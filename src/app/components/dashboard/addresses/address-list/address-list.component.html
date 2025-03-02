@@ -1,7 +1,7 @@
 <app-section-header
   title="Addresses"
   [route]="'/dashboard/addresses/registration'"
-  [imgRoute]="'/recursos-web/baby-icon.png'"
+  [imgRoute]="'/crud-icons/plus-icon.png'"
 ></app-section-header>
 
 <div class="cols">
@@ -19,6 +19,8 @@
     }
   </div>
 </div>
+
+<router-outlet></router-outlet>
 
 <mat-paginator 
   [length]="totalItems"

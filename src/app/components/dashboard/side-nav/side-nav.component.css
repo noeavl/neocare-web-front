@@ -101,3 +101,12 @@ img.logo-img {
   width: 130%;
   height: 130%;
 }
+
+.delayed-fade-in {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.sidenav:not(.sidenav-collapsed) .delayed-fade-in {
+  opacity: 1;
+}

@@ -4,6 +4,7 @@ import { AddressService } from '../../../../services/address.service';
 import { AddressCardComponent } from "./address-card/address-card.component";
 import { SectionHeaderComponent } from '../../section-header/section-header.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-address-list',
@@ -11,7 +12,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
   imports: [
     AddressCardComponent,
     SectionHeaderComponent,
-    MatPaginatorModule
+    MatPaginatorModule,
+    RouterOutlet
   ],
   templateUrl: './address-list.component.html',
   styleUrls: ['./address-list.component.css']
@@ -19,7 +21,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 export class AddressListComponent implements OnInit {
   addresses: any[] = [];
   totalItems: number = 0;
-  pageSize: number = 8;
+  pageSize: number = 9;
   currentPage: number = 0;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator; 

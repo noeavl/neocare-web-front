@@ -19,7 +19,7 @@
 
         @if (form.controls.state.touched && form.controls.state.invalid && form.controls.state.dirty) {
           <p class="error-msg">
-            The state field is required.
+            State required. Must be shorter than 50 characters.
           </p>
         }
       </div>
@@ -34,7 +34,7 @@
 
         @if (form.controls.city.invalid && form.controls.city.dirty && form.controls.city.touched) {
           <p class="error-msg">
-            The city field is required.
+            City required. Must be shorter than 50 characters.
           </p>
         }
       </div>
@@ -49,7 +49,7 @@
 
         @if (form.controls.neighborhood.invalid && form.controls.neighborhood.dirty && form.controls.neighborhood.touched) {
           <p class="error-msg">
-            The neighborhood field is required.
+            Neighbourhood required. Must be shorter than 50 characters.
           </p>
         }
       </div>
@@ -64,7 +64,7 @@
 
         @if (form.controls.street.invalid && form.controls.street.dirty && form.controls.street.touched) {
           <p class="error-msg">
-            The street field is required.
+            Street required. Must be shorter than 50 characters.
           </p>
         }
       </div>
@@ -79,7 +79,7 @@
 
         @if (form.controls.number.invalid && form.controls.number.dirty && form.controls.number.touched) {
           <p class="error-msg">
-            The number field is required and must be 1 or higher.
+            Number required. Must be 1 or higher.
           </p>
         }
       </div>
@@ -94,7 +94,7 @@
 
         @if (form.controls.zipCode.invalid && form.controls.zipCode.dirty && form.controls.zipCode.touched) {
           <p class="error-msg">
-            The zip code field is required and must contain 5 digits.
+            Zip code field required. Must contain 5 digits.
           </p>
         }
       </div>

@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [RouterModule, CommonModule],
   templateUrl: './side-nav.component.html',
-  styleUrl: './side-nav.component.css',
+  styleUrls: ['./side-nav.component.css'],
 })
 export class SideNavComponent implements OnInit, OnChanges {
   @Input() isLeftSidebarCollapsed!: boolean;
@@ -69,20 +69,24 @@ export class SideNavComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['isLeftSidebarCollapsed']) {
-      if (this.isLeftSidebarCollapsed) {
+      if (!this.isLeftSidebarCollapsed) {
         setTimeout(() => {
-          this.showText = false;
-        }, 300);
+          this.showText = true;
+        }, 500); // Delay the appearance of text by 500ms
       } else {
-        this.showText = true;
+        this.showText = false;
       }
     }
   }
 
   toggleCollapse(): void {
-    if (this.isMobile) return
+    if (this.isMobile) return;
 
     const newState = !this.isLeftSidebarCollapsed;
     this.changeIsLeftSidebarCollapsed.emit(newState);
+  }
+
+  trackByFn(index: number, item: any): number {
+    return index;
   }
 }

@@ -1,9 +1,11 @@
-<app-side-nav
-  [isLeftSidebarCollapsed]="isLeftSidebarCollapsed()"
-  (changeIsLeftSidebarCollapsed)="changeIsLeftSidebarCollapsed($event)"
-></app-side-nav>
+<div class="dashboard">
+  <app-side-nav
+    [isLeftSidebarCollapsed]="isLeftSidebarCollapsed()"
+    (changeIsLeftSidebarCollapsed)="changeIsLeftSidebarCollapsed($event)"
+  ></app-side-nav>
 
-<app-dashboard-content
-  [isLeftSidebarCollapsed]="isLeftSidebarCollapsed()"
-  [screenWidth]="screenWidth()"
-></app-dashboard-content>
+  <app-dashboard-content
+    [isLeftSidebarCollapsed]="isLeftSidebarCollapsed()"
+    [screenWidth]="screenWidth()"
+  ></app-dashboard-content>
+</div>

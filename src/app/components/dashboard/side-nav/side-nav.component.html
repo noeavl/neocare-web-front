@@ -6,25 +6,19 @@
     <button class="logo" (click)="toggleCollapse()">
       <img class="logo-img" src="recursos-web/LOGOBLANCO.png">
     </button>
-    @if (showText) {
-      <div class="logo-text">NEOCARE</div>
-    }
+    <div *ngIf="showText" class="logo-text delayed-fade-in">NEOCARE</div>
   </div>
   <div class="sidenav-nav">
-    @for (item of items; track $index) {
-      <li class="sidenav-nav-item">
-        <a
-          class="sidenav-nav-link"
-          [routerLink]="item.routeLink"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          <img [src]="item.icon" class="nav-item">
-          @if (showText) {
-            <span class="sidenav-link-text">{{ item.label }}</span>
-          }
-        </a>
-      </li>
-    }
+    <li *ngFor="let item of items; trackBy: trackByFn" class="sidenav-nav-item">
+      <a
+        class="sidenav-nav-link"
+        [routerLink]="item.routeLink"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <img [src]="item.icon" class="nav-item">
+        <span *ngIf="showText" class="sidenav-link-text delayed-fade-in">{{ item.label }}</span>
+      </a>
+    </li>
   </div>
 </div>

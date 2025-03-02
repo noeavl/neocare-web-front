@@ -17,16 +17,20 @@ export class AddressRegistrationComponent {
 
   form = new FormGroup({
     state: new FormControl('', [
-      Validators.required 
+      Validators.required,
+      Validators.maxLength(50)
     ]),
     city: new FormControl('',[
-      Validators.required
+      Validators.required,
+      Validators.maxLength(50)
     ]),
     neighborhood: new FormControl('', [
-      Validators.required
+      Validators.required,
+      Validators.maxLength(50)
     ]),
     street: new FormControl('', [
-      Validators.required
+      Validators.required,
+      Validators.maxLength(50)
     ]),
     number: new FormControl('', [
       Validators.required,

@@ -24,10 +24,15 @@ export const routes: Routes = [
         path: 'addresses', 
         component: AddressesComponent,
         children: [
-          { path: 'list', component: AddressListComponent },
+          { 
+            path: 'list', 
+            component: AddressListComponent,
+            children: [
+              { path: 'delete/:id', component: AddressDeleteComponent }
+            ]
+          },
           { path: 'registration', component: AddressRegistrationComponent},
-          { path: 'update/:id', component: AddressEditionComponent },
-          { path: 'delete/:id', component: AddressDeleteComponent }
+          { path: 'update/:id', component: AddressEditionComponent }
         ]
       }
     ]

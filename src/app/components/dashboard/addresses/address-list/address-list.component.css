@@ -5,9 +5,40 @@
     gap: 16px;
     justify-content: space-between;
   }
-  
   app-address-card {
-    width: calc(50% - 8px);
+    width: calc(33.33% - 10.67px);
     box-sizing: border-box;
   }
+}
+::ng-deep .mat-mdc-paginator {
+  background-color: transparent !important;
+  color: #7A1CAC !important;
+}
+::ng-deep .mat-mdc-paginator-navigation-previous,
+::ng-deep .mat-mdc-paginator-navigation-next {
+  color: #7A1CAC !important;
+  background-color: transparent !important;
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+}
+::ng-deep .mat-mdc-paginator-navigation-previous:hover,
+::ng-deep .mat-mdc-paginator-navigation-next:hover {
+  background-color: rgba(122, 28, 172, 0.1) !important;
+}
+::ng-deep .mat-mdc-paginator-navigation-previous:focus,
+::ng-deep .mat-mdc-paginator-navigation-next:focus {
+  outline: 2px solid #7A1CAC !important;
+  background-color: rgba(122, 28, 172, 0.2) !important;
+}
+::ng-deep .mat-mdc-paginator .mdc-button__label,
+::ng-deep .mat-mdc-paginator .mat-mdc-select-value-text,
+::ng-deep .mat-mdc-paginator .mat-mdc-icon-button {
+  color: #7A1CAC !important;
+}
+::ng-deep .mat-mdc-paginator .mat-mdc-select-arrow {
+  color: #7A1CAC !important;
+}
+::ng-deep .mat-mdc-paginator .mdc-button {
+  border: 1px solid #7A1CAC !important;
+  border-radius: 5px;
 }
