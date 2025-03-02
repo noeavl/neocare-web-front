@@ -1,10 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { AddressService } from '../../../../../services/address.service';
 
 @Component({
   selector: 'app-address-card',
   imports: [
-    RouterLink
+    RouterLink,
+    SweetAlert2Module
   ],
   templateUrl: './address-card.component.html',
   styleUrls: ['./address-card.component.css']
@@ -17,4 +20,19 @@ export class AddressCardComponent {
   @Input({ required: true }) neighborhood!: string
   @Input({ required: true }) number!: string
   @Input({ required: true }) zip_code!: string
+  @Output() deleteAddress = new EventEmitter()
+
+  constructor(private addressService: AddressService) {}
+
+  delete(addressId: number) {
+    this.addressService.deleteAddress(this.id).subscribe(
+      (response) => {
+        console.log(response)
+        this.deleteAddress.emit()
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+  }
 }
