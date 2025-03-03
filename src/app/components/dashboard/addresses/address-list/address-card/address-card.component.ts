@@ -20,18 +20,21 @@ export class AddressCardComponent {
   @Input({ required: true }) neighborhood!: string
   @Input({ required: true }) number!: string
   @Input({ required: true }) zip_code!: string
-  @Output() deleteAddress = new EventEmitter()
+  @Output() reloadAddresses = new EventEmitter()
+  @Output() alertDelete = new EventEmitter()
 
-  constructor(private addressService: AddressService) {}
+  constructor(
+    private addressService: AddressService
+  ) {}
 
   delete(addressId: number) {
     this.addressService.deleteAddress(this.id).subscribe(
       (response) => {
-        console.log(response)
-        this.deleteAddress.emit()
+        this.alertDelete.emit(response)
+        this.reloadAddresses.emit()
       },
       (error) => {
-        console.log(error)
+        this.alertDelete.emit(error)
       }
     )
   }

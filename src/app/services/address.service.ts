@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AddressService {
-  private apiUrl = 'http://localhost:8000/api/v1'
+  private apiUrl = 'http://34.215.209.108/api/v1'
 
   constructor(private http: HttpClient) {}
 
@@ -21,7 +21,7 @@ export class AddressService {
 
   updateAddress(id: number, data: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
-    return this.http.patch(`${this.apiUrl}/addresses/${id}`, data)
+    return this.http.put(`${this.apiUrl}/addresses/${id}`, data)
   }
 
   deleteAddress(id: number): Observable<any> {

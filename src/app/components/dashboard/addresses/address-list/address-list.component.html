@@ -15,7 +15,8 @@
         [street]="address.street"
         [number]="address.number"
         [zip_code]="address.zip_code"
-        (deleteAddress)="loadAddresses(this.currentPage)"
+        (reloadAddresses)="loadAddresses(this.currentPage)"
+        (alertDelete)="manageDeletion($event)"
       />
     }
   </div>

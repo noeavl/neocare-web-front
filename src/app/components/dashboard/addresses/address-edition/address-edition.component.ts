@@ -30,20 +30,20 @@ export class AddressEditionComponent implements OnInit {
     private addressService: AddressService,
     private route: ActivatedRoute,
     private messageService: MessageService,
-    private router: Router
+    private router: Router,
   ) {}
-
-  showAlert(severity: string, summary: string, detail: string) {
-    this.messageService.add({ severity: severity, summary: summary, detail: detail, key: 'br', life: 3000 });
-  }
   
   id!: number
+
+  showAlert(severity: string, summary: string, detail: string) {
+    this.messageService.add({ severity: severity, summary: summary, detail: detail, key: 'br', life: 3000 })
+  }
   
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.id = Number(params.get('id'));
-      this.loadAddress(this.id);
-    });
+      this.id = Number(params.get('id'))
+      this.loadAddress(this.id)
+    })
 
     this.form = new FormGroup({
       state: new FormControl('', [
@@ -72,7 +72,7 @@ export class AddressEditionComponent implements OnInit {
         Validators.maxLength(5),
         Validators.pattern('^[0-9]*$')
       ])
-    });
+    })
   }
   
   loadAddress(id: number) {

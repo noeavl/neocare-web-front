@@ -45,6 +45,14 @@ export class AddressListComponent implements OnInit {
     this.messageService.add({ severity: severity, summary: summary, detail: detail, key: 'br', life: 3000 });
   }
 
+  manageDeletion(event: any) {
+    if (event.status == 404) {
+      this.showAlert('error', 'Error', event.error.msg)
+    } else {
+      this.showAlert('success', 'Success', event.msg)
+    }
+  }
+
   ngOnInit(): void {
     this.loadAddresses(this.currentPage);
   }
@@ -52,11 +60,12 @@ export class AddressListComponent implements OnInit {
   loadAddresses(page: number): void {
     this.addressService.indexAddress(page + 1).subscribe(
       (response) => {
-        this.addresses = response.data
-        this.totalItems = response.total
-        this.currentPage = response.current_page - 1
+        this.addresses = response.addresses.data
+        this.totalItems = response.addresses.total
+        this.currentPage = response.addresses.current_page - 1
       },
       (error) => {
+        console.log(error)
         this.addresses = []
         this.totalItems = 0
         this.currentPage = 1

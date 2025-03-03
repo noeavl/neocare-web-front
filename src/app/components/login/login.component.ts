@@ -46,7 +46,6 @@ export class LoginComponent {
 
     this.authService.loginUser(formData).subscribe(
       (response) => {
-        console.log(response)
         if (rememberMe) {
           window.localStorage.setItem(
             'token',
@@ -61,7 +60,7 @@ export class LoginComponent {
         this.form.reset()
       },
       (error) => {
-        console.error(error);
+        console.error(error)
       }
     )
   }
