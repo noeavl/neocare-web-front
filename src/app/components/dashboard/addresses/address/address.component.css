@@ -58,6 +58,3 @@ input.ng-invalid.ng-dirty.ng-touched::placeholder {
 p.error-msg {
   color: red;
 }
-.btn-submit:focus {
-  box-shadow: 0 0 5px #7A1CAC;
-}

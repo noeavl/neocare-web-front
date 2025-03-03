@@ -5,6 +5,10 @@ import { AddressCardComponent } from "./address-card/address-card.component";
 import { SectionHeaderComponent } from '../../section-header/section-header.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { RouterOutlet } from '@angular/router';
+import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-address-list',
@@ -13,10 +17,16 @@ import { RouterOutlet } from '@angular/router';
     AddressCardComponent,
     SectionHeaderComponent,
     MatPaginatorModule,
-    RouterOutlet
+    RouterOutlet,
+    ToastModule, 
+    ButtonModule,
+    RippleModule
   ],
   templateUrl: './address-list.component.html',
-  styleUrls: ['./address-list.component.css']
+  styleUrls: ['./address-list.component.css'],
+  providers: [
+    MessageService
+  ]
 })
 export class AddressListComponent implements OnInit {
   addresses: any[] = [];
@@ -26,7 +36,14 @@ export class AddressListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator; 
 
-  constructor(private addressService: AddressService) {}
+  constructor(
+    private addressService: AddressService,
+    private messageService: MessageService
+  ) {}
+
+  showAlert(severity: string, summary: string, detail: string) {
+    this.messageService.add({ severity: severity, summary: summary, detail: detail, key: 'br', life: 3000 });
+  }
 
   ngOnInit(): void {
     this.loadAddresses(this.currentPage);
@@ -35,19 +52,21 @@ export class AddressListComponent implements OnInit {
   loadAddresses(page: number): void {
     this.addressService.indexAddress(page + 1).subscribe(
       (response) => {
-        console.log(response);
-        this.addresses = response.data;
-        this.totalItems = response.total; 
-        this.currentPage = response.current_page - 1;
+        this.addresses = response.data
+        this.totalItems = response.total
+        this.currentPage = response.current_page - 1
       },
       (error) => {
-        console.error(error);
+        this.addresses = []
+        this.totalItems = 0
+        this.currentPage = 1
+        this.showAlert('info', "Error", error.error.msg)
       }
-    );
+    )
   }
 
   onPageChange(event: any): void {
-    this.currentPage = event.pageIndex;
-    this.loadAddresses(this.currentPage);
+    this.currentPage = event.pageIndex
+    this.loadAddresses(this.currentPage)
   }
 }

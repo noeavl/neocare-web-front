@@ -2,18 +2,31 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AddressService } from '../../../../services/address.service';
 import { SectionHeaderComponent } from "../../section-header/section-header.component";
+import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-address-registration',
   imports: [
     ReactiveFormsModule,
-    SectionHeaderComponent
+    SectionHeaderComponent,
+    ToastModule, 
+    ButtonModule,
+    RippleModule
 ],
   templateUrl: './address-registration.component.html',
-  styleUrl: './address-registration.component.css'
+  styleUrl: './address-registration.component.css',
+  providers: [
+    MessageService
+  ]
 })
 export class AddressRegistrationComponent {
-  constructor(private addressService: AddressService) {}
+  constructor(
+    private addressService: AddressService,
+    private messageService: MessageService
+  ) {}
 
   form = new FormGroup({
     state: new FormControl('', [
@@ -45,9 +58,11 @@ export class AddressRegistrationComponent {
     ])
   })
 
-  onSubmit() {
-    console.log(this.form)
+  showAlert(severity: string, summary: string, detail: string) {
+    this.messageService.add({ severity: severity, summary: summary, detail: detail, key: 'br', life: 3000 });
+  }
 
+  onSubmit() {
     const formData = {
       state: this.form.controls.state.value,
       city: this.form.controls.city.value,
@@ -59,11 +74,15 @@ export class AddressRegistrationComponent {
 
     this.addressService.createAddress(formData).subscribe(
       (response) => {
-        console.log("address added")
+        this.showAlert('success', 'Address added', response.msg);
         this.form.reset()
       },
       (error) => {
-        console.log(error)
+        Object.values(error.error.errors).forEach((messages) => {
+          this.showAlert('error', 'Error', messages as string)
+        })
+        
+        this.showAlert('error', 'Error', 'Por favor, revisa los datos ingresados.')
       }
     )
   }

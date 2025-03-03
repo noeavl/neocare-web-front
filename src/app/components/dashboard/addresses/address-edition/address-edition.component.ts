@@ -1,27 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AddressService } from '../../../../services/address.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SectionHeaderComponent } from '../../section-header/section-header.component';
+import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-address-edition',
   imports: [
     ReactiveFormsModule,
-    SectionHeaderComponent
+    SectionHeaderComponent,
+    ToastModule, 
+    ButtonModule,
+    RippleModule
   ],
   templateUrl: './address-edition.component.html',
-  styleUrls: ['./address-edition.component.css']
+  styleUrls: ['./address-edition.component.css'],
+  providers: [
+    MessageService
+  ]
 })
 export class AddressEditionComponent implements OnInit {
   form!: FormGroup;
   
   constructor(
     private addressService: AddressService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private messageService: MessageService,
+    private router: Router
   ) {}
+
+  showAlert(severity: string, summary: string, detail: string) {
+    this.messageService.add({ severity: severity, summary: summary, detail: detail, key: 'br', life: 3000 });
+  }
   
-  id!: number;
+  id!: number
   
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -62,7 +78,7 @@ export class AddressEditionComponent implements OnInit {
   loadAddress(id: number) {
     this.addressService.showAddress(id).subscribe(
       (response) => {
-        console.log(response);
+        console.log(response)
         this.form.patchValue({
           state: response.address.state,
           city: response.address.city,
@@ -70,12 +86,12 @@ export class AddressEditionComponent implements OnInit {
           street: response.address.street,
           number: response.address.number,
           zipCode: response.address.zip_code
-        });
+        })
       },
       (error) => {
-        console.error('Error fetching address:', error);
+        console.error('Error fetching address:', error)
       }
-    );
+    )
   }
 
   onSubmit() {
@@ -86,15 +102,17 @@ export class AddressEditionComponent implements OnInit {
       street: this.form.controls['street'].value,
       number: this.form.controls['number'].value,
       zip_code: this.form.controls['zipCode'].value
-    };
+    }
 
     this.addressService.updateAddress(this.id, formData).subscribe(
       (response) => {
-        console.log("address edited");
-        this.form.reset();
+        this.showAlert('success', 'Success', response.msg)
+        setTimeout(() => {
+          this.router.navigate(['/dashboard/addresses/address', this.id])
+        }, 3000)
       },
       (error) => {
-        console.log(error);
+        console.log(error)
       }
     );
   }

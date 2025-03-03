@@ -9,6 +9,8 @@ import { AddressRegistrationComponent } from './components/dashboard/addresses/a
 import { AddressesComponent } from './components/dashboard/addresses/addresses.component';
 import { AddressListComponent } from './components/dashboard/addresses/address-list/address-list.component';
 import { AddressEditionComponent } from './components/dashboard/addresses/address-edition/address-edition.component';
+import { AddressComponent } from './components/dashboard/addresses/address/address.component';
+
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -23,12 +25,10 @@ export const routes: Routes = [
         path: 'addresses', 
         component: AddressesComponent,
         children: [
-          { 
-            path: 'list', 
-            component: AddressListComponent
-          },
+          { path: 'list', component: AddressListComponent },
           { path: 'registration', component: AddressRegistrationComponent},
           { path: 'update/:id', component: AddressEditionComponent },
+          { path: 'address/:id', component: AddressComponent}
         ]
       }
     ]

@@ -2,6 +2,10 @@ import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } fr
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2'
+import { providePrimeNG } from 'primeng/config' 
+import Aura from '@primeng/themes/aura'
+import Nora from '@primeng/themes/nora'
+import { provideAnimations } from '@angular/platform-browser/animations'
 
 import { routes } from './app.routes';
 import { tokenInterceptor } from './interceptors/token.interceptor';
@@ -11,9 +15,9 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes),
     provideHttpClient(
-    withInterceptors([
-      tokenInterceptor
-    ])),
-    importProvidersFrom([SweetAlert2Module.forRoot()])
+    withInterceptors([tokenInterceptor])),
+    importProvidersFrom([SweetAlert2Module.forRoot()]),
+    providePrimeNG({theme: { preset: Nora } }),
+    provideAnimations()
   ]
 };
