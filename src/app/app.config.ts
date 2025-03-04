@@ -5,6 +5,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2'
 import { providePrimeNG } from 'primeng/config' 
 import Aura from '@primeng/themes/aura'
 import Nora from '@primeng/themes/nora'
+import Material from '@primeng/themes/material'
+import Lara from '@primeng/themes/lara'
 import { provideAnimations } from '@angular/platform-browser/animations'
 
 import { routes } from './app.routes';

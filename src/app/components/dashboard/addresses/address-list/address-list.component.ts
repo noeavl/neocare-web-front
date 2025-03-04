@@ -4,11 +4,11 @@ import { AddressService } from '../../../../services/address.service';
 import { AddressCardComponent } from "./address-card/address-card.component";
 import { SectionHeaderComponent } from '../../section-header/section-header.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { RouterOutlet } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { MessageService } from 'primeng/api';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-address-list',
@@ -17,10 +17,10 @@ import { MessageService } from 'primeng/api';
     AddressCardComponent,
     SectionHeaderComponent,
     MatPaginatorModule,
-    RouterOutlet,
     ToastModule, 
     ButtonModule,
-    RippleModule
+    RippleModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './address-list.component.html',
   styleUrls: ['./address-list.component.css'],
@@ -29,10 +29,11 @@ import { MessageService } from 'primeng/api';
   ]
 })
 export class AddressListComponent implements OnInit {
-  addresses: any[] = [];
-  totalItems: number = 0;
-  pageSize: number = 9;
-  currentPage: number = 0;
+  addresses: any[] = []
+  totalItems: number = 0
+  pageSize: number = 9
+  currentPage: number = 0
+  addressesLoaded: boolean = false
 
   @ViewChild(MatPaginator) paginator!: MatPaginator; 
 
@@ -63,12 +64,13 @@ export class AddressListComponent implements OnInit {
         this.addresses = response.addresses.data
         this.totalItems = response.addresses.total
         this.currentPage = response.addresses.current_page - 1
+        this.addressesLoaded = true
       },
       (error) => {
         console.log(error)
         this.addresses = []
         this.totalItems = 0
-        this.currentPage = 1
+        this.currentPage = 0
         this.showAlert('info', "Error", error.error.msg)
       }
     )

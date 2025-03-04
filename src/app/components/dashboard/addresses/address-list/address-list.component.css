@@ -9,6 +9,22 @@
     width: calc(33.33% - 10.67px);
     box-sizing: border-box;
   }
+  .spinner {
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (max-width: 768px) {
+  .spinner {
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 ::ng-deep .mat-mdc-paginator {
   background-color: transparent !important;
@@ -41,4 +57,7 @@
 ::ng-deep .mat-mdc-paginator .mdc-button {
   border: 1px solid #7A1CAC !important;
   border-radius: 5px;
+}
+::ng-deep mat-spinner circle {
+  stroke: #7A1CAC !important;
 }

@@ -108,7 +108,7 @@ export class AddressEditionComponent implements OnInit {
       (response) => {
         this.showAlert('success', 'Success', response.msg)
         setTimeout(() => {
-          this.router.navigate(['/dashboard/addresses/address', this.id])
+          this.router.navigate(['/dashboard/addresses/list'])
         }, 3000)
       },
       (error) => {

@@ -5,8 +5,8 @@ export function tokenInterceptor(request: HttpRequest<unknown>, next: HttpHandle
   if (token) {
     const clonedRequest = request.clone({
       headers: request.headers.set('Authorization', `Bearer ${token}`)
-    });
-    return next(clonedRequest);
+    })
+    return next(clonedRequest)
   }
-  return next(request);
+  return next(request)
 }

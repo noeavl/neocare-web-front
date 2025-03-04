@@ -4,31 +4,35 @@
   [imgRoute]="'/crud-icons/plus-icon.png'"
 ></app-section-header>
 
-<div class="cols">
-  <div class="flex-container">
-    @for (address of addresses; track address) {
-      <app-address-card 
-        [id]=address.id
-        [state]="address.state"
-        [city]="address.city"
-        [neighborhood]="address.neighborhood"
-        [street]="address.street"
-        [number]="address.number"
-        [zip_code]="address.zip_code"
-        (reloadAddresses)="loadAddresses(this.currentPage)"
-        (alertDelete)="manageDeletion($event)"
-      />
-    }
+@if (!addressesLoaded) {
+  <div class="spinner">
+    <mat-spinner></mat-spinner>
   </div>
-</div>
-
-<router-outlet></router-outlet>
-
-<mat-paginator 
-  [length]="totalItems"
-  [pageSize]="pageSize"
-  (page)="onPageChange($event)"
-  aria-label="Select page">
-</mat-paginator>
+}
+@if (addressesLoaded) {
+  <div class="cols">
+    <div class="flex-container">
+      @for (address of addresses; track address) {
+        <app-address-card 
+          [id]=address.id
+          [state]="address.state"
+          [city]="address.city"
+          [neighborhood]="address.neighborhood"
+          [street]="address.street"
+          [number]="address.number"
+          [zip_code]="address.zip_code"
+          (reloadAddresses)="loadAddresses(this.currentPage)"
+          (alertDelete)="manageDeletion($event)"
+        />
+      }
+    </div>
+  </div>
+  <mat-paginator 
+    [length]="totalItems"
+    [pageSize]="pageSize"
+    (page)="onPageChange($event)"
+    aria-label="Select page">
+  </mat-paginator>
+}
 
 <p-toast position="bottom-right" key="br" />

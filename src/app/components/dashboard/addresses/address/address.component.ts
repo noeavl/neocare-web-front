@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { SectionHeaderComponent } from '../../section-header/section-header.component';
 import { AddressService } from '../../../../services/address.service';
 import { ActivatedRoute } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-address',
   imports: [
-    SectionHeaderComponent
+    SectionHeaderComponent,
+    MatProgressSpinnerModule
   ],
   templateUrl: './address.component.html',
   styleUrl: './address.component.css'
@@ -24,6 +26,7 @@ export class AddressComponent implements OnInit {
   street!: string
   number!: number
   zip_code!: string
+  addressLoaded = false
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -41,6 +44,7 @@ export class AddressComponent implements OnInit {
         this.street = response.address.street
         this.number = response.address.number
         this.zip_code = response.address.zip_code
+        this.addressLoaded = true
       }
     )
   }
