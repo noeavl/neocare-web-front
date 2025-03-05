@@ -2,19 +2,26 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, Validators, FormControl } from '@angular/forms'
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-
+import { InputComponent } from '../shared/input/input.component';
+import { CardComponent } from "../shared/card/card.component";
+import { TitleComponent } from '../shared/title/title.component';
+import { ButtonComponent } from '../shared/button/button.component';
 @Component({
   selector: 'app-login',
   imports: [
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    InputComponent,
+    TitleComponent,
+    CardComponent,
+    ButtonComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 
 export class LoginComponent {
-  constructor(private authService: AuthService) {} 
+  constructor(private authService: AuthService) { }
 
   form = new FormGroup({
     email: new FormControl('', {
@@ -29,7 +36,7 @@ export class LoginComponent {
         Validators.minLength(8)
       ]
     }),
-    rememberMe: new FormControl('', )
+    rememberMe: new FormControl('',)
   })
 
   onSubmit() {
@@ -42,7 +49,7 @@ export class LoginComponent {
       password: this.form.controls.password.value,
     }
 
-    const rememberMe =  this.form.controls.rememberMe.value
+    const rememberMe = this.form.controls.rememberMe.value
 
     this.authService.loginUser(formData).subscribe(
       (response) => {
