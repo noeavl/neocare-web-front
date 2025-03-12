@@ -2,20 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { RouterLink } from '@angular/router';
+import { InputComponent } from '../shared/input/input.component';
+import { ButtonComponent } from '../shared/button/button.component';
+import { CardComponent } from "../shared/card/card.component";
 
 @Component({
   selector: 'app-signup',
   imports: [
     RouterLink,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    InputComponent,
+    ButtonComponent,
+    CardComponent
+],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
 export class SignupComponent implements OnInit {
   passwordsMatch = true;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   form = new FormGroup({
     firstName: new FormControl('', [

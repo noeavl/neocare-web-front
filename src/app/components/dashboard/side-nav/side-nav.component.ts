@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, HostListener } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -13,6 +14,7 @@ export class SideNavComponent implements OnInit, OnChanges {
   @Input() isLeftSidebarCollapsed!: boolean;
   @Output() changeIsLeftSidebarCollapsed = new EventEmitter<boolean>();
 
+  constructor(private authService: AuthService) { }
   showText: boolean = false;
   isMobile: boolean = false;
 
@@ -88,5 +90,10 @@ export class SideNavComponent implements OnInit, OnChanges {
 
   trackByFn(index: number, item: any): number {
     return index;
+  }
+
+  logout() {
+
+    this.authService.logout()
   }
 }

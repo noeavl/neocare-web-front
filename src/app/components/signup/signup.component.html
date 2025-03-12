@@ -1,119 +1,75 @@
-<div 
-  class="container mt-3"
->
-  <form
-    [formGroup]="form"
-    (ngSubmit)="onSubmit()"
-  >
-    <div>
-      <input
-        placeholder="Name"
-        type="text"
-        name="name"
-        formControlName="firstName"
-        class="form-control mt-3"
-      >
+<div class="container mt-3">
+  <app-card>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="mt-3">
+        <app-input placeholder="Name" type="text" name="name" formControlName="firstName"></app-input>
 
-      @if (form.controls.firstName.touched && form.controls.firstName.invalid && form.controls.firstName.dirty) {
+        @if (form.controls.firstName.touched && form.controls.firstName.invalid && form.controls.firstName.dirty) {
         <p>invalid name</p>
-      }
-    </div>
+        }
+      </div>
 
-    <div>
-      <input
-        placeholder="First last name"
-        type="text"
-        name="firstLastName"
-        formControlName="firstLastName"
-        class="form-control mt-3"
-      >
+      <div class="mt-3">
+        <app-input placeholder="First last name" type="text" name="firstLastName"
+          formControlName="firstLastName"></app-input>
 
-      @if (form.controls.firstLastName.touched && form.controls.firstLastName.invalid && form.controls.firstLastName.dirty) {
+        @if (form.controls.firstLastName.touched && form.controls.firstLastName.invalid &&
+        form.controls.firstLastName.dirty) {
         <p>invalid first last name</p>
-      }
-    </div>
+        }
+      </div>
 
-    <div>
-      <input
-        placeholder="Second last name"
-        type="text"
-        name="secondLastName"
-        formControlName="secondLastName"
-        class="form-control mt-3"
-      >
+      <div class="mt-3">
+        <app-input placeholder="Second last name" type="text" name="secondLastName"
+          formControlName="secondLastName"></app-input>
 
-      @if (form.controls.secondLastName.touched && form.controls.secondLastName.invalid && form.controls.secondLastName.dirty) {
+        @if (form.controls.secondLastName.touched && form.controls.secondLastName.invalid &&
+        form.controls.secondLastName.dirty) {
         <p>invalid second last name</p>
-      }
-    </div>
+        }
+      </div>
 
-    <div>
-      <input
-        placeholder="User name"
-        type="text"
-        name="userName"
-        formControlName="userName"
-        class="form-control mt-3"
-      >
+      <div class="mt-3">
+        <app-input placeholder="Username" type="text" name="userName" formControlName="userName"></app-input>
 
-      @if (form.controls.userName.touched && form.controls.userName.invalid && form.controls.userName.dirty) {
+        @if (form.controls.userName.touched && form.controls.userName.invalid && form.controls.userName.dirty) {
         <p>invalid user name</p>
-      }
-    </div>
+        }
+      </div>
 
-    <div>
-      <input
-        placeholder="Email"
-        type="email"
-        name="email"
-        formControlName="email"
-        class="form-control mt-3"
-      >
-      
-      @if (form.controls.email.touched && form.controls.email.invalid && form.controls.email.dirty) {
+      <div class="mt-3">
+        <app-input placeholder="Email" type="email" name="email" formControlName="email"></app-input>
+
+        @if (form.controls.email.touched && form.controls.email.invalid && form.controls.email.dirty) {
         <p>invalid email address</p>
-      }
-    </div>
+        }
+      </div>
 
-    <div>
-      <input
-        placeholder="Password"
-        type="password"
-        name="password"
-        formControlName="password"
-        class="form-control mt-3"
-      >
+      <div class="mt-3">
+        <app-input placeholder="Password" type="password" name="password" formControlName="password"></app-input>
 
-      @if (form.controls.password.touched && form.controls.password.invalid && form.controls.password.dirty) {
+        @if (form.controls.password.touched && form.controls.password.invalid && form.controls.password.dirty) {
         <p>invalid password</p>
-      }
-    </div>
+        }
+      </div>
 
-    <div>
-      <input
-        placeholder="Confirm password"
-        type="password"
-        name="confirmPassword"
-        formControlName="confirmPassword"
-        class="form-control mt-3"
-      >
-    </div>
+      <div class="mt-3">
+        <app-input placeholder="Confirm password" type="password" name="confirmPassword"
+          formControlName="confirmPassword"></app-input>
+      </div>
 
-    @if (!passwordsMatch && form.controls.confirmPassword.touched) {
+      @if (!passwordsMatch && form.controls.confirmPassword.touched) {
       <p>Passwords do not match</p>
-    }
+      }
 
-    <div class="mt 3">
-      <button 
-        class="button btn btn-primary form-control mt-3"
-        [disabled]="form.invalid || !passwordsMatch"
-      >
-        Sign in
-      </button>
-    </div>
+      <div class="mt-3">
+        <app-button text="Sign up">
+        </app-button>
+      </div>
 
-    <div class="mt-3">
-      <p>Already registered? <a [routerLink]="['/log-in']">Log in</a></p>
-    </div>
-  </form>
+      <div class="mt-3">
+        <p>Already registered? <a [routerLink]="['/log-in']">Log in</a></p>
+      </div>
+    </form>
+  </app-card>
 </div>

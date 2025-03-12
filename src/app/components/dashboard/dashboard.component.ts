@@ -1,5 +1,4 @@
 import { Component, HostListener, OnInit, signal, NgModule } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { SideNavComponent } from "./side-nav/side-nav.component";
 import { CommonModule } from '@angular/common';
 import { DashboardContentComponent } from "./dashboard-content/dashboard-content.component";
@@ -12,7 +11,7 @@ import { DashboardContentComponent } from "./dashboard-content/dashboard-content
     SideNavComponent,
     CommonModule,
     DashboardContentComponent
-]
+  ]
 })
 export class DashboardComponent implements OnInit {
   isLeftSidebarCollapsed = signal<boolean>(false);

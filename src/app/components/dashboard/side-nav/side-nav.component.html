@@ -1,24 +1,28 @@
-<div
-  class="sidenav"
-  [ngClass]="isLeftSidebarCollapsed ? 'sidenav-collapsed' : ''"
->
+<div class="sidenav" [ngClass]="isLeftSidebarCollapsed ? 'sidenav-collapsed' : ''">
   <div class="logo-container">
     <button class="logo" (click)="toggleCollapse()">
       <img class="logo-img" src="recursos-web/LOGOBLANCO.png">
     </button>
     <div *ngIf="showText" class="logo-text delayed-fade-in">NEOCARE</div>
   </div>
-  <div class="sidenav-nav">
-    <li *ngFor="let item of items; trackBy: trackByFn" class="sidenav-nav-item">
-      <a
-        class="sidenav-nav-link"
-        [routerLink]="item.routeLink"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <img [src]="item.icon" class="nav-item">
-        <span *ngIf="showText" class="sidenav-link-text delayed-fade-in">{{ item.label }}</span>
-      </a>
-    </li>
+  <div class="sidenav-nav d-flex justify-content-between">
+    <ul class="container-fluid list-unstyled p-0">
+      <li *ngFor=" let item of items; trackBy: trackByFn" class="sidenav-nav-item">
+        <a class="sidenav-nav-link" [routerLink]="item.routeLink" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <img [src]="item.icon" class="nav-item">
+          <span *ngIf="showText" class="sidenav-link-text delayed-fade-in">{{ item.label }}</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="container-fluid list-unstyled p-0">
+      <li>
+        <a class=" sidenav-nav-link text-decoration-none" (click)=" logout()" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <img [src]="'/recursos-web/logout.png'" class="nav-item me-4">
+          <span *ngIf="showText" class="sidenav-link-text delayed-fade-in text-white">Logout</span>
+        </a>
+      </li>
+    </ul>
   </div>
 </div>

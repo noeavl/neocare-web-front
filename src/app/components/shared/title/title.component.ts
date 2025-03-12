@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,6 +9,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./title.component.css']
 })
 export class TitleComponent {
-  @Input() title: string = '';
-  @Input() class: string = '';
+  title = input.required<string>();
+  class = input<string>();
 }

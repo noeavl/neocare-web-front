@@ -1,4 +1,8 @@
 .super-container {
-    background-color: #492E87;
-    opacity: 0.9;
+    padding: 2rem 1rem;
+    background-color: var(--color-morado);
+
+    @media (min-width: 768px) {
+        padding: 3rem 2rem;
+    }
 }
