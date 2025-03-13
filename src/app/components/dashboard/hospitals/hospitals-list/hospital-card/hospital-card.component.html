@@ -1,0 +1,41 @@
+<app-card>
+    <div class="row">
+        <div class="col-2 col-md-1 p-0 text-start">
+            <div class="rounded-circle d-flex justify-content-center align-items-center"
+                [style]="{'height':'40px','width':'40px','background-color':'var(--color-morado)'}">
+                <span class="fw-bold text-white">{{ id }}</span>
+            </div>
+        </div>
+        <div class="col-7 col-md-7 p-0 text-start d-flex align-items-center">
+            <h5 class="fw-bold ms-2">{{ name }}</h5>
+        </div>
+        <div class="col-3 col-md-4 p-0 text-end">
+            {{ date }}
+        </div>
+    </div>
+    <div class="row p-0 mt-3">
+        <div class="col-12 col-md-6 p-0">
+            <div class="d-flex align-items-center ms-3">
+                <mat-icon>call</mat-icon>
+                <p class="mb-0 ms-2">{{ phone }}</p>
+            </div>
+            <div class="d-flex align-items-center ms-3 mt-2">
+                <mat-icon>place</mat-icon>
+                <p class="mb-0 ms-2">{{ city }}</p>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 p-0 mt-3 mt-md-0">
+            <div class="d-flex justify-content-end gap-3 p-0">
+                <button mat-fab color="primary">
+                    <mat-icon>visibility</mat-icon>
+                </button>
+                <button mat-fab color="accent">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-fab color="warn">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</app-card>

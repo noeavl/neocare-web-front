@@ -25,7 +25,7 @@ export class SideNavComponent implements OnInit, OnChanges {
       label: 'Dashboard',
     },
     {
-      routeLink: '/dashboard/addresses/list',
+      routeLink: '/dashboard/hospitals',
       icon: '/recursos-web/hospital-icon.png',
       label: 'Hospitals',
     },

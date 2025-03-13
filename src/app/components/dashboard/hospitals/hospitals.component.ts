@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-
+import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-hospitals',
-  imports: [],
+  imports: [RouterOutlet],
   templateUrl: './hospitals.component.html',
   styleUrl: './hospitals.component.css'
 })

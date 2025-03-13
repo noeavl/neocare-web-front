@@ -17,7 +17,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     AddressCardComponent,
     SectionHeaderComponent,
     MatPaginatorModule,
-    ToastModule, 
+    ToastModule,
     ButtonModule,
     RippleModule,
     MatProgressSpinnerModule
@@ -35,12 +35,12 @@ export class AddressListComponent implements OnInit {
   currentPage: number = 0
   addressesLoaded: boolean = false
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator; 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private addressService: AddressService,
     private messageService: MessageService
-  ) {}
+  ) { }
 
   showAlert(severity: string, summary: string, detail: string) {
     this.messageService.add({ severity: severity, summary: summary, detail: detail, key: 'br', life: 3000 });
