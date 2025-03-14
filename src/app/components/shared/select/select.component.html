@@ -1,0 +1,6 @@
+<!-- select.component.html -->
+<select [name]="name" (change)="onSelect($event)" [disabled]="disabled" [value]="value">
+    <option value="" disabled selected>Select an address</option>
+    <option *ngFor="let option of options" [value]="option.value" [selected]="value === option.value">{{ option.label }}
+    </option>
+</select>

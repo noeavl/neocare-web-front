@@ -12,10 +12,10 @@ import { MessageService } from 'primeng/api';
   imports: [
     ReactiveFormsModule,
     SectionHeaderComponent,
-    ToastModule, 
+    ToastModule,
     ButtonModule,
     RippleModule
-],
+  ],
   templateUrl: './address-registration.component.html',
   styleUrl: './address-registration.component.css',
   providers: [
@@ -26,14 +26,14 @@ export class AddressRegistrationComponent {
   constructor(
     private addressService: AddressService,
     private messageService: MessageService
-  ) {}
+  ) { }
 
   form = new FormGroup({
     state: new FormControl('', [
       Validators.required,
       Validators.maxLength(50)
     ]),
-    city: new FormControl('',[
+    city: new FormControl('', [
       Validators.required,
       Validators.maxLength(50)
     ]),
@@ -81,7 +81,7 @@ export class AddressRegistrationComponent {
         Object.values(error.error.errors).forEach((messages) => {
           this.showAlert('error', 'Error', messages as string)
         })
-        
+
         this.showAlert('error', 'Error', 'Por favor, revisa los datos ingresados.')
       }
     )

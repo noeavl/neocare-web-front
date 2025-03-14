@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class AddressService {
   private apiUrl = 'http://34.215.209.108/api/v1'
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   createAddress(data: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,6 +17,9 @@ export class AddressService {
 
   indexAddress(page: number = 1): Observable<any> {
     return this.http.get(`${this.apiUrl}/addresses?page=${page}`);
+  }
+  indexNoPaginate(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/addressesNoPaginate`);
   }
 
   updateAddress(id: number, data: any): Observable<any> {

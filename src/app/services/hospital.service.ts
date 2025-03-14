@@ -16,5 +16,11 @@ export class HospitalService {
   show(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/hospitals/` + id)
   }
+  create(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/hospitals`, data)
+  }
 
+  update(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/hospitals/` + id, data)
+  }
 }

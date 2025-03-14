@@ -1,0 +1,11 @@
+select {
+    border-radius: 100px;
+    height: 50px;
+    border-color: var(--color-morado);
+    padding: 0 2rem;
+    color: var(--color-morado);
+    border: 1px solid var(--color-morado);
+    background-color: transparent;
+    font-family: inherit;
+    width: 100%;
+}
