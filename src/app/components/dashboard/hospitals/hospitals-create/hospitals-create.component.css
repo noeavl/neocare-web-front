@@ -9,3 +9,7 @@
 ::ng-deep mat-spinner circle {
     stroke: var(--color-violeta) !important;
 }
+
+.main-container {
+    height: 80vh;
+}

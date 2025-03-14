@@ -8,4 +8,5 @@ select {
     background-color: transparent;
     font-family: inherit;
     width: 100%;
+    appearance: none;
 }

@@ -12,3 +12,10 @@ button:hover {
     cursor: pointer;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
+
+button:disabled {
+    background-color: gray !important;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.6;
+}

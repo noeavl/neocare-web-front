@@ -69,8 +69,12 @@ export class HospitalsCreateComponent {
         error: (error) => {
           if (error instanceof HttpErrorResponse) {
             if (error.status === 0) {
-              this.showAlert('error', 'Error', 'Error de conexion al servidor');
+              this.showAlert('error', 'Error', 'Fail to connect to the server')
             }
+          }
+          if (error.error) {
+            this.handleError(error.error)
+            this.showAlert('error', 'Error', 'Please check the form')
           }
         }
       })
@@ -89,13 +93,11 @@ export class HospitalsCreateComponent {
         this.dataLoad = true
       },
       error: (error) => {
+        console.log(error)
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
             this.showAlert('error', 'Error', 'Error de conexion al servidor');
           }
-        } else {
-          this.handleError(error.error)
-          this.showAlert('error', 'Error', error.error);
         }
       }
     })
@@ -108,10 +110,10 @@ export class HospitalsCreateComponent {
       this.errorMessage = error.message;
     }
 
-    if (error.errors) {
-      for (const key in error.errors) {
-        if (error.errors.hasOwnProperty(key)) {
-          this.fieldErrors[key] = error.errors[key];
+    if (error) {
+      for (const key in error) {
+        if (error.hasOwnProperty(key)) {
+          this.fieldErrors[key] = error[key];
         }
       }
     }
