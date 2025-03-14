@@ -1,0 +1,10 @@
+mat-icon {
+    color: var(--color-rosa-claro);
+}
+
+.id {
+    background-color: var(--color-rosa);
+    color: var(--color-morado);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}

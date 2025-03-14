@@ -26,10 +26,10 @@
         </div>
         <div class="col-12 col-md-6 p-0 mt-3 mt-md-0">
             <div class="d-flex justify-content-end gap-3 p-0">
-                <button mat-fab color="primary">
+                <button mat-fab color="primary" [routerLink]="['/dashboard/hospitals',id]">
                     <mat-icon>visibility</mat-icon>
                 </button>
-                <button mat-fab color="accent">
+                <button mat-fab color="accent" [routerLink]="['/dashboard/hospitals',id ,'edit']">
                     <mat-icon>edit</mat-icon>
                 </button>
                 <button mat-fab color="warn">

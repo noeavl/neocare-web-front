@@ -13,4 +13,8 @@ export class HospitalService {
     return this.http.get(`${this.apiUrl}/hospitals?page=${page}`)
   }
 
+  show(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/hospitals/` + id)
+  }
+
 }

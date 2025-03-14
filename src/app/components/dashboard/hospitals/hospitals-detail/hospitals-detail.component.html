@@ -1,1 +1,124 @@
-<p>hospitals-detail works!</p>
+<app-section-header title="Hospital Detail" [route]="'/dashboard/hospitals'"
+    [imgRoute]="'/recursos-web/list-text.png'"></app-section-header>
+
+@if (!dataLoad) {
+<div class="spinner">
+    <mat-spinner></mat-spinner>
+</div>
+}
+
+@if(dataLoad){
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-12">
+            <app-card>
+                <div class="d-flex">
+                    <div>
+                        <div class="d-flex align-items-center">
+                            <app-icon [img]="'/recursos-web/hospital-icon.png'" [size]="60"></app-icon>
+                            <div class="id p-2">
+                                <span class="ms-2 fw-bold">{{hospital.id}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ms-4 d-flex align-items-center">
+                        <h4 class="fw-bold">Hospital</h4>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center ms-3 mt-3">
+                        <mat-icon>call</mat-icon>
+                        <p class="mb-0 ms-2">{{ hospital.phone_number }}</p>
+                    </div>
+                    <div class="d-flex align-items-center ms-3 mt-2">
+                        <mat-icon>place</mat-icon>
+                        <p class="mb-0 ms-2">{{ hospital.name }}</p>
+                    </div>
+                    <div class="d-flex align-items-center ms-3 mt-2">
+                        <mat-icon>event</mat-icon>
+                        <p class="mb-0 ms-2">{{ hospital.created_at }}</p>
+                    </div>
+                </div>
+            </app-card>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <app-card>
+                <div class="d-flex">
+                    <div>
+                        <div class="d-flex align-items-center">
+                            <app-icon [img]="'/recursos-web/address.png'" [size]="60"></app-icon>
+                            <div class="id p-2">
+                                <span class="ms-2 fw-bold">{{hospital.address.id}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ms-4 d-flex align-items-center">
+                        <h4 class="fw-bold">Address</h4>
+                    </div>
+                </div>
+
+                <div class="ms-4 d-flex align-items-center justify-content-between mt-3">
+                    <div class="d-flex align-items-center">
+                        <mat-icon>location_city</mat-icon>
+                        <p class="mb-0 ms-2">{{ hospital.address.neighborhood }}</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <mat-icon>place</mat-icon>
+                        <p class="mb-0 ms-2">{{ hospital.address.street }}</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <mat-icon>business</mat-icon>
+                        <p class="mb-0 ms-2">{{ hospital.address.city }}</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <mat-icon>map</mat-icon>
+                        <p class="mb-0 ms-2">{{ hospital.address.state }}</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <mat-icon>markunread_mailbox</mat-icon>
+                        <p class="mb-0 ms-2">{{ hospital.address.zip_code }}</p>
+                    </div>
+                </div>
+            </app-card>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <app-card>
+                <div class="row text-center">
+                    <div class="col-3">
+                        <app-icon [img]="'/recursos-web/incubator-rosa.png'" [size]="70"
+                            [backgroundColor]="'#ffff'"></app-icon>
+                        <h2 class="fw-bold mt-2">{{hospital.total_incubators}}</h2>
+                        <h5 class="fw-light">Total Incubators</h5>
+                    </div>
+                    <div class="col-3">
+                        <app-icon [img]="'/recursos-web/baby-icon-rosa.png'" [size]="70"
+                            [backgroundColor]="'#ffff'"></app-icon>
+                        <h2 class="fw-bold mt-2">{{hospital.total_babies}}</h2>
+                        <h5 class="fw-light">Total Babies</h5>
+                    </div>
+                    <div class="col-3">
+                        <app-icon [img]="'/recursos-web/room-icon-rosa.png'" [size]="70"
+                            [backgroundColor]="'#ffff'"></app-icon>
+                        <h2 class="fw-bold mt-2">{{hospital.total_rooms}}</h2>
+                        <h5 class="fw-light">Total Rooms</h5>
+                    </div>
+                    <div class="col-3">
+                        <app-icon [img]="'/recursos-web/nurse-icon-rosa.png'" [size]="70"
+                            [backgroundColor]="'#ffff'"></app-icon>
+                        <h2 class="fw-bold mt-2">{{hospital.total_nurses}}</h2>
+                        <h5 class="fw-light">Total Nurses</h5>
+                    </div>
+                </div>
+            </app-card>
+        </div>
+    </div>
+</div>
+}
+
+<p-toast position="bottom-right" key="br"></p-toast>

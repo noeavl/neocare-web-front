@@ -1,22 +1,37 @@
-<app-section-header
-  title="Address data"
-  [route]="'/dashboard/addresses/list'"
-  [imgRoute]="'/recursos-web/baby-icon.png'"
-></app-section-header>
+<app-section-header title="Address data" [route]="'/dashboard/addresses/list'"
+  [imgRoute]="'/recursos-web/list-text.png'"></app-section-header>
 @if (!addressLoaded) {
-  <div class="spinner">
-    <mat-spinner></mat-spinner>
-  </div>
+<div class="spinner">
+  <mat-spinner></mat-spinner>
+</div>
 }
 @if (addressLoaded) {
-  <div class="card-container">
-    <div class="card">
-      <div class="field"><p class="field-name">State: </p><p class="field">{{ state }}</p></div>
-      <div class="field"><p class="field-name">City: </p><p class="field">{{ city }}</p></div>
-      <div class="field"><p class="field-name">Neighbourhood: </p><p class="field">{{ neighbourhood }}</p></div>
-      <div class="field"><p class="field-name">Street: </p><p class="field">{{ street }}</p></div>
-      <div class="field"><p class="field-name">Number: </p><p class="field">{{ number }}</p></div>
-      <div class="field"><p class="field-name">Zip code: </p><p class="field">{{ zip_code }}</p></div>
+<div class="card-container">
+  <div class="card">
+    <div class="field">
+      <p class="field-name">State: </p>
+      <p class="field">{{ state }}</p>
+    </div>
+    <div class="field">
+      <p class="field-name">City: </p>
+      <p class="field">{{ city }}</p>
+    </div>
+    <div class="field">
+      <p class="field-name">Neighbourhood: </p>
+      <p class="field">{{ neighbourhood }}</p>
+    </div>
+    <div class="field">
+      <p class="field-name">Street: </p>
+      <p class="field">{{ street }}</p>
+    </div>
+    <div class="field">
+      <p class="field-name">Number: </p>
+      <p class="field">{{ number }}</p>
+    </div>
+    <div class="field">
+      <p class="field-name">Zip code: </p>
+      <p class="field">{{ zip_code }}</p>
     </div>
   </div>
+</div>
 }

@@ -4,10 +4,12 @@ h1 {
   margin: 0px;
   justify-content: center;
 }
+
 .title-container {
   display: flex;
   align-items: center;
 }
+
 .add-address-button {
   width: 4rem;
   height: 4rem;
@@ -19,12 +21,15 @@ h1 {
   justify-content: center;
   overflow: hidden;
 }
+
 img.button-img {
   width: auto;
   height: 100%;
+  padding: 10px;
   max-width: 100%;
   object-fit: contain;
 }
+
 div.header-content {
   display: flex;
   justify-content: space-between;
