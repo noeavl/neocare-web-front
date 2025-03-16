@@ -1,24 +1,63 @@
 <app-section-header title="Incubators" [route]="'/dashboard/incubators/create'"
-    [imgRoute]="'/crud-icons/plus-icon.png'"></app-section-header>
-@if (!incubatorsLoaded) {
-<div class="spinner">
+    [imgRoute]="'/crud-icons/plus-icon.png'">
+</app-section-header>
+
+<!-- Mostrar el spinner y ocultar el resto mientras se carga -->
+<div *ngIf="!dataLoaded" class="loading-container">
     <mat-spinner></mat-spinner>
 </div>
-}
-<div>
-    <div class="mt-3">
-        <div class="row">
-            @if (incubatorsLoaded) {
+
+<div *ngIf="dataLoaded" class="container">
+    <form [formGroup]="formFilter" class="row" (ngSubmit)="onSubmit($event)">
+        <div class="col-12 col-md-6 col-lg-3">
+            <label for="hospitalSelect" class="form-label">Select a Hospital:</label>
+            <select formControlName="hospital_id">
+                <option *ngFor="let hospital of hospitals" [value]="hospital.id">
+                    {{ hospital.name }}
+                </option>
+            </select>
+        </div>
+
+        <div class="col-12 col-md-4 col-lg-2 mt-3 mt-lg-0 d-flex align-items-end">
+            <app-button text="Search" class="btn-lg w-100" [disabled]="!formFilter.get('hospital_id')?.value"
+                (click)="loadIncubators()">
+            </app-button>
+        </div>
+    </form>
+</div>
+
+<div *ngIf="dataLoaded" class="mt-3">
+    <div class="row">
+        <ng-container *ngIf="incubators.length > 0; else noIncubators">
             <div *ngFor="let incubator of incubators" class="col-12 col-md-6 mb-4">
-                <app-incubator-card [id]="incubator.id">
+                <app-incubator-card
+                    [id]="incubator.id"
+                    [state]="incubator.state"
+                    [room_number]="incubator.room_number"
+                    [nurse]="incubator.nurse"
+                    [baby]="incubator.baby"
+                    [date]="incubator.date"
+                    (reloadIncubators)="loadIncubators()"
+                    (alertDelete)="manageDeletion($event)">
                 </app-incubator-card>
             </div>
-            
-            <mat-paginator [length]="totalItems" [pageSize]="pageSize" (page)="onPageChange($event)"
-                aria-label="Select page">
+
+            <mat-paginator
+                [length]="totalItems"
+                [pageSize]="pageSize"
+                [pageIndex]="currentPage"
+                (page)="onPageChange($event)"
+                aria-label="Select page"
+            >
             </mat-paginator>
-            }
-        </div>
+        </ng-container>
+
+        <ng-template #noIncubators>
+            <div class="col-12 text-center mt-4">
+                <p class="text-muted fw-bold fs-5">No incubators available in this hospital.</p>
+            </div>
+        </ng-template>
     </div>
 </div>
+
 <p-toast position="bottom-right" key="br"></p-toast>

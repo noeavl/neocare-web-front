@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -9,8 +9,17 @@ export class IncubatorsService {
 
   constructor(private http: HttpClient) { }
 
-  index(page: number = 1): Observable<any> {
-    return this.http.get(`${this.apiUrl}/incubators?page=${page}`)
+  index(page: number = 1, filtros: any): Observable<any> {
+    let params = new HttpParams().set('page', page.toString());
+  
+    Object.keys(filtros).forEach(key => {
+      if (filtros[key] !== undefined && filtros[key] !== null) {
+        params = params.set(key, filtros[key]);
+      }
+    });
+  
+  
+    return this.http.get(`${this.apiUrl}/incubators`, { params });
   }
 
   show(id: number): Observable<any> {
@@ -23,5 +32,9 @@ export class IncubatorsService {
 
   update(id: number, data: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/incubators/` + id, data)
+  }
+
+  delete(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/incubators/` + id)
   }
 }
