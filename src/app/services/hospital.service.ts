@@ -23,4 +23,8 @@ export class HospitalService {
   update(id: number, data: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/hospitals/` + id, data)
   }
+
+  delete(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/hospitals/` + id)
+  }
 }

@@ -29,6 +29,13 @@ export class HospitalsListComponent {
   ngOnInit() {
     this.getHospitals(this.currentPage)
   }
+  manageDeletion(event: any) {
+    if (event.status == 404) {
+      this.showAlert('error', 'Error', event.error.message)
+    } else {
+      this.showAlert('success', 'Success', event.message)
+    }
+  }
 
   getHospitals(page: number) {
     this.hospitalService.index(page + 1).subscribe({

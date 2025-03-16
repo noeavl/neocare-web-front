@@ -11,7 +11,8 @@
             @if (dataLoad) {
             <div *ngFor="let hospital of hospitals" class="col-12 col-md-6 mb-4">
                 <app-hospital-card [id]="hospital.id" [name]="hospital.name" [date]="hospital.created_at"
-                    [phone]="hospital.phone_number" [city]="hospital.city">
+                    [phone]="hospital.phone_number" [city]="hospital.city" (reloadData)="getHospitals(this.currentPage)"
+                    (alertDelete)="manageDeletion($event)">
                 </app-hospital-card>
             </div>
             <mat-paginator [length]="totalItems" [pageSize]="pageSize" (page)="onPageChange($event)"
