@@ -1,0 +1,48 @@
+<app-section-header title="Create Incubator" [route]="'/dashboard/incubators/list'"
+    [imgRoute]="'/recursos-web/list-text.png'"></app-section-header>
+@if (!dataLoaded) {
+<div class="spinner">
+    <mat-spinner></mat-spinner>
+</div>
+}
+
+@if(dataLoaded){
+<div class="container-fluid d-flex justify-content-center align-items-center mt-3">
+    <div class="row w-100">
+        <div class="col-12 col-md-8 col-lg-6 mx-auto">
+            <app-card class="p-4 rounded">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-100">
+
+                    <div class="form-group mb-4">
+                        <label for="hospital" class="form-label">Select a Hospital</label>
+                        <select id="hospital" formControlName="hospital_id" class="form-control">
+                            <option value="" disabled>Select a hospital</option>
+                            <option *ngFor="let hospital of hospitals; trackBy: trackById" [value]="hospital.id">
+                                {{ hospital.name }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="room" class="form-label">Select a Room</label>
+                        <select id="room" formControlName="room_id" class="form-control"
+                            [attr.disabled]="!rooms.length ? true : null">
+                            <option value="" disabled>Select a room</option>
+                            <option *ngFor="let room of rooms; trackBy: trackById" [value]="room.id">
+                                {{ room.name }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <app-button [text]="'Create'" [disabled]="!form.valid" class="btn-lg w-100" />
+                    </div>
+
+                </form>
+            </app-card>
+        </div>
+    </div>
+</div>
+}
+
+<p-toast position="bottom-right" key="br"></p-toast>

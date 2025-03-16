@@ -1,0 +1,36 @@
+select {
+    border-radius: 100px;
+    height: 50px;
+    border-color: var(--color-morado);
+    padding: 0 2rem;
+    color: var(--color-morado);
+    border: 1px solid var(--color-morado);
+    background-color: transparent;
+    font-family: inherit;
+    width: 100%;
+    appearance: none;
+}
+
+h2 {
+    color: var(--color-morado-form);
+}
+
+select::after {
+    font-size: 1rem;
+    color: var(--color-morado-form);
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+select option {
+    color: var(--color-morado-form);
+    background-color: #fff;
+}
+
+.form-label {
+    color: var(--color-morado-form);
+    font-weight: bold;
+}

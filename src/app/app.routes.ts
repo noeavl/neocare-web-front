@@ -15,6 +15,11 @@ import { HospitalsEditComponent } from './components/dashboard/hospitals/hospita
 import { HospitalsListComponent } from './components/dashboard/hospitals/hospitals-list/hospitals-list.component';
 import { HospitalsDetailComponent } from './components/dashboard/hospitals/hospitals-detail/hospitals-detail.component';
 import { HospitalsCreateComponent } from './components/dashboard/hospitals/hospitals-create/hospitals-create.component';
+import { IncubatorsComponent } from './components/dashboard/incubators/incubators.component';
+import { IncubatorsListComponent } from './components/dashboard/incubators/incubators-list/incubators-list.component';
+import { IncubatorsCreateComponent } from './components/dashboard/incubators/incubators-create/incubators-create.component';
+import { IncubatorsEditComponent } from './components/dashboard/incubators/incubators-edit/incubators-edit.component';
+import { IncubatorComponent } from './components/dashboard/incubators/incubator/incubator.component';
 
 
 export const routes: Routes = [
@@ -45,6 +50,16 @@ export const routes: Routes = [
           { path: ':id', component: HospitalsDetailComponent },
           { path: ':id/edit', component: HospitalsEditComponent }
 
+        ]
+      },
+      {
+        path: 'incubators',
+        component: IncubatorsComponent,
+        children: [
+          { path: 'list', component: IncubatorsListComponent },
+          { path: 'create', component: IncubatorsCreateComponent },
+          { path: ':id/edit', component: IncubatorsEditComponent },
+          { path: ':id', component: IncubatorComponent }
         ]
       }
     ]
