@@ -13,7 +13,7 @@ import { MessageService } from 'primeng/api';
   imports: [
     ReactiveFormsModule,
     SectionHeaderComponent,
-    ToastModule, 
+    ToastModule,
     ButtonModule,
     RippleModule
   ],
@@ -25,20 +25,20 @@ import { MessageService } from 'primeng/api';
 })
 export class AddressEditionComponent implements OnInit {
   form!: FormGroup;
-  
+
   constructor(
     private addressService: AddressService,
     private route: ActivatedRoute,
     private messageService: MessageService,
     private router: Router,
-  ) {}
-  
+  ) { }
+
   id!: number
 
   showAlert(severity: string, summary: string, detail: string) {
     this.messageService.add({ severity: severity, summary: summary, detail: detail, key: 'br', life: 3000 })
   }
-  
+
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.id = Number(params.get('id'))
@@ -74,7 +74,7 @@ export class AddressEditionComponent implements OnInit {
       ])
     })
   }
-  
+
   loadAddress(id: number) {
     this.addressService.showAddress(id).subscribe(
       (response) => {

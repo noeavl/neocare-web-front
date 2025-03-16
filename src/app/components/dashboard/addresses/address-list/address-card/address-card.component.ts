@@ -25,7 +25,7 @@ export class AddressCardComponent {
 
   constructor(
     private addressService: AddressService
-  ) {}
+  ) { }
 
   delete(addressId: number) {
     this.addressService.deleteAddress(this.id).subscribe(
