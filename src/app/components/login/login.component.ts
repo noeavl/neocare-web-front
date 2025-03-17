@@ -27,8 +27,7 @@ import { CommonModule } from '@angular/common';
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
-  providers: [MessageService],
-  standalone: true
+  providers: [MessageService]
 })
 
 export class LoginComponent {
@@ -50,7 +49,6 @@ export class LoginComponent {
     password: new FormControl('', {
       validators: [
         Validators.required,
-        Validators.minLength(8)
       ]
     }),
     rememberMe: new FormControl('',)
@@ -65,57 +63,56 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    if (this.form.invalid) {
-      console.log("Form invalido")
-    }
-
-    const formData = {
-      email: this.form.controls.email.value,
-      password: this.form.controls.password.value,
-    }
-
-    const rememberMe = this.form.controls.rememberMe.value
-
-    this.authService.login(formData).subscribe({
-      next: (response) => {
-        if (rememberMe) {
-          window.localStorage.setItem(
-            'token',
-            response.token
-          )
-        } else {
-          window.sessionStorage.setItem(
-            'token',
-            response.token
-          )
-        }
-        this.router.navigate(['/dashboard'])
-        this.form.reset()
-      },
-      error: (error) => {
-        if (error instanceof HttpErrorResponse) {
-          if (error.status === 0) {
-            this.showAlert('error', 'Error', 'Error de conexion al servidor');
-          }
-        } else {
-          this.handleLoginError(error.error);
-          this.showAlert('error', 'Error', error.error);
-        }
+    if (this.form.valid) {
+      const formData = {
+        email: this.form.controls.email.value,
+        password: this.form.controls.password.value,
       }
-    })
+
+      const rememberMe = this.form.controls.rememberMe.value
+
+      this.authService.login(formData).subscribe({
+        next: (response) => {
+          if (rememberMe) {
+            localStorage.setItem('token', response.token)
+          } else {
+            sessionStorage.setItem('token', response.token)
+          }
+          this.router.navigate(['/dashboard'])
+          this.form.reset()
+        },
+        error: (error) => {
+          if (error instanceof HttpErrorResponse) {
+            if (error.status === 0) {
+              this.showAlert('error', 'Error', 'Fail to connect to the server');
+            } else if (error.status === 404) {
+              this.showAlert('error', 'Error', '404 Not found');
+            } else if (error.status === 422) {
+              this.handleError(error.error);
+              this.showAlert('error', 'Error', 'Please check the form');
+            } else if (error.status === 401) {
+              this.showAlert('error', 'Error', error.error.message);
+            } else {
+              this.showAlert('error', 'Error', error.error.message);
+            }
+          }
+        }
+      })
+    }
   }
-  handleLoginError(error: any) {
+  handleError(error: any) {
     this.errorMessage = null;
     this.fieldErrors = {};
+
 
     if (error.message) {
       this.errorMessage = error.message;
     }
 
-    if (error.errors) {
-      for (const key in error.errors) {
-        if (error.errors.hasOwnProperty(key)) {
-          this.fieldErrors[key] = error.errors[key];
+    if (error) {
+      for (const key in error) {
+        if (error.hasOwnProperty(key)) {
+          this.fieldErrors[key] = error[key];
         }
       }
     }

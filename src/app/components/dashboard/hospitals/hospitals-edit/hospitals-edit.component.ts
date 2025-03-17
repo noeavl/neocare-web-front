@@ -110,7 +110,7 @@ export class HospitalsEditComponent {
         console.log(error)
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
-            this.showAlert('error', 'Error', 'Error de conexion al servidor');
+            this.showAlert('error', 'Error', 'Fail to connect to the server');
           }
         }
       }
@@ -128,7 +128,7 @@ export class HospitalsEditComponent {
         console.log(error)
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
-            this.showAlert('error', 'Error', 'Error de conexion al servidor');
+            this.showAlert('error', 'Error', 'Fail to connect to the server');
           }
         }
       }
