@@ -1,0 +1,49 @@
+.container {
+    max-width: 1200px;
+}
+
+.incubator-card {
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    min-height: 100px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.icon-container {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(128, 0, 128, 0.1);
+}
+
+.entry-icon {
+    font-size: 24px;
+}
+
+.purple-icon {
+    color: #6a0dad;
+}
+
+.entry-label {
+    font-size: 16px;
+}
+
+.entry-value {
+    font-size: 14px;
+}
+
+.row.align-items-stretch {
+    display: flex;
+}
+
+.custom-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}

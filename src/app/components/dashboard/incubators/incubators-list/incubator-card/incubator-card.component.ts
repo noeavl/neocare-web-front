@@ -23,7 +23,7 @@ export class IncubatorCardComponent {
   @Input() room_number!: number
   @Input() nurse!: string
   @Input() baby!: string
-  @Input() date!: Date | string
+  @Input() date!: Date 
   @Output() reloadIncubators = new EventEmitter()
   @Output() alertDelete = new EventEmitter()
 
@@ -40,7 +40,6 @@ export class IncubatorCardComponent {
       default: return 'help_outline'
     }
   }
-
 
   delete(incubator_id: number) {
     Swal.fire({

@@ -1,1 +1,31 @@
-<p>incubator works!</p>
+<app-section-header title="Incubator Detail" [route]="'/dashboard/incubators/list'"
+    [imgRoute]="'/recursos-web/list-text.png'">
+</app-section-header>
+
+@if (!dataLoaded) {
+<div class="spinner">
+    <mat-spinner></mat-spinner>
+</div>
+}
+
+<div class="row mt-4 justify-content-between">
+    <div class="col-12 col-lg-4 d-flex justify-content-start">
+        <app-card class="w-100">
+            <div class="row">
+                <div class="col-12 menu-container text-center" [routerLink]="['/dashboard/incubators/', id]">
+                    <p class="text-center fw-bold m-0">General Information</p>
+                </div>
+                <div *ngFor="let item of sensorsEntries" class="col-12 menu-container text-center mt-3"
+                    [routerLink]="['/dashboard/incubators/', id, item.url]">
+                    <p class="m-0 fw-bold text-center">{{ item.label }}</p>
+                </div>
+            </div>
+        </app-card>
+    </div>
+
+    <div class="col-12 col-lg-6 mx-auto">
+        <app-card class="custom-card d-flex flex-column justify-content-center align-items-center">
+            <app-incubator-detail [incubator]="incubator"></app-incubator-detail>
+        </app-card>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+.menu-container {
+    background-color: var(--color-morado);
+    color: white;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+}
+
+.menu-container:hover {
+    cursor: pointer;
+}
+
+.custom-card {
+    width: 100% !important;
+    max-width: 900px !important;
+    min-height: 700px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+app-incubator-detail {
+    width: 100% !important;
+    max-width: 600px !important;
+    text-align: center;
+}

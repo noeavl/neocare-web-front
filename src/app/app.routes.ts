@@ -21,7 +21,6 @@ import { IncubatorsCreateComponent } from './components/dashboard/incubators/inc
 import { IncubatorsEditComponent } from './components/dashboard/incubators/incubators-edit/incubators-edit.component';
 import { IncubatorComponent } from './components/dashboard/incubators/incubator/incubator.component';
 
-
 export const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'log-in', component: LoginComponent },
@@ -59,7 +58,10 @@ export const routes: Routes = [
           { path: 'list', component: IncubatorsListComponent },
           { path: 'create', component: IncubatorsCreateComponent },
           { path: ':id/edit', component: IncubatorsEditComponent },
-          { path: ':id', component: IncubatorComponent }
+          {
+            path: ':id',
+            component: IncubatorComponent,
+          }
         ]
       }
     ]

@@ -1,0 +1,26 @@
+<h1 class="fw-bold text-center mb-4">Incubator {{ incubator?.id }}</h1>
+
+<div class="container">
+  <div class="row g-2 m-0 p-0">
+    <div *ngFor="let item of incubatorEntries" class="col-12">
+      <div class="incubator-card p-3 d-flex align-items-center shadow-m">
+        <div class="icon-container">
+          <mat-icon
+            class="entry-icon"
+            [ngClass]="{
+              'text-success': item.label === 'Status' && item.value === 'available',
+              'text-danger': item.label === 'Status' && item.value === 'active',
+              'purple-icon': item.label !== 'Status'
+            }"
+          >
+            {{ item.icon }}
+          </mat-icon>
+        </div>
+        <div class="entry-content ms-3">
+          <p class="entry-label fw-bold mb-1">{{ item.label }}</p>
+          <p class="entry-value text-muted">{{ item.value }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
