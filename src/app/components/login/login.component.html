@@ -8,8 +8,7 @@
         <app-card>
           <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="mt-3">
-              <app-title class="text-center  fw-bold" title="NeoCare Account">
-              </app-title>
+              <app-title class="text-center  fw-bold" title="NeoCare Account" />
             </div>
             <div class="mt-2">
               <app-title class="text-center fs-3 fw-light" title="Login in to your account">
@@ -59,9 +58,6 @@
                     [style]="{'color':'var(--color-morado)'}" class="fw-bold text-decoration-none"
                     routerLink="/forgot-password">Change</a></p>
               </div>
-            </div>
-            <div *ngIf="errorMessage" class="success-message">
-              {{ errorMessage }}
             </div>
           </form>
         </app-card>

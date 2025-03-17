@@ -31,7 +31,6 @@ import { CommonModule } from '@angular/common';
 })
 
 export class LoginComponent {
-  errorMessage: string | null = null;
   fieldErrors: { [key: string]: string } = {};
   constructor(private authService: AuthService, private router: Router, private messageService: MessageService) { }
 
@@ -101,13 +100,7 @@ export class LoginComponent {
     }
   }
   handleError(error: any) {
-    this.errorMessage = null;
     this.fieldErrors = {};
-
-
-    if (error.message) {
-      this.errorMessage = error.message;
-    }
 
     if (error) {
       for (const key in error) {
