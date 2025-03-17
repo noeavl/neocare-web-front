@@ -5,7 +5,6 @@ import { RouterLink } from '@angular/router';
 import { InputComponent } from '../shared/input/input.component';
 import { ButtonComponent } from '../shared/button/button.component';
 import { CardComponent } from "../shared/card/card.component";
-import { ValidatorFn } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
