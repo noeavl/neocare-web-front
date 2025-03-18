@@ -2,7 +2,7 @@
     [imgRoute]="'/crud-icons/plus-icon.png'">
 </app-section-header>
 
-<!-- Mostrar el spinner y ocultar el resto mientras se carga -->
+
 <div *ngIf="!dataLoaded" class="loading-container">
     <mat-spinner></mat-spinner>
 </div>
@@ -30,25 +30,14 @@
     <div class="row">
         <ng-container *ngIf="incubators.length > 0; else noIncubators">
             <div *ngFor="let incubator of incubators" class="col-12 col-md-6 mb-4">
-                <app-incubator-card
-                    [id]="incubator.id"
-                    [state]="incubator.state"
-                    [room_number]="incubator.room_number"
-                    [nurse]="incubator.nurse"
-                    [baby]="incubator.baby"
-                    [date]="incubator.date"
-                    (reloadIncubators)="loadIncubators()"
-                    (alertDelete)="manageDeletion($event)">
+                <app-incubator-card [id]="incubator.id" [state]="incubator.state" [room_number]="incubator.room_number"
+                    [nurse]="incubator.nurse" [baby]="incubator.baby" [date]="incubator.date"
+                    (reloadIncubators)="loadIncubators()" (alertDelete)="manageDeletion($event)">
                 </app-incubator-card>
             </div>
 
-            <mat-paginator
-                [length]="totalItems"
-                [pageSize]="pageSize"
-                [pageIndex]="currentPage"
-                (page)="onPageChange($event)"
-                aria-label="Select page"
-            >
+            <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="currentPage"
+                (page)="onPageChange($event)" aria-label="Select page">
             </mat-paginator>
         </ng-container>
 
