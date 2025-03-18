@@ -4,7 +4,6 @@ import { RoomsService } from '../../../../services/rooms.service'
 import { HospitalService } from '../../../../services/hospital.service'
 import { SectionHeaderComponent } from '../../section-header/section-header.component'
 import { NgFor } from '@angular/common'
-import { InputComponent } from '../../../shared/input/input.component'
 import { CardComponent } from '../../../shared/card/card.component'
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms'
 import { MessageService } from 'primeng/api'
@@ -19,7 +18,6 @@ import { MatSpinner } from '@angular/material/progress-spinner'
   imports: [
     SectionHeaderComponent,
     NgFor,
-    InputComponent,
     CardComponent,
     ReactiveFormsModule,
     ButtonComponent,
