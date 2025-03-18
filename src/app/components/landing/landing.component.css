@@ -1,0 +1,61 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: black;
+  color: white;
+  overflow-x: hidden;
+}
+
+.spacer {
+  height: 100vh;
+  background-color: #7A1CAC;
+}
+
+.animated-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: top 0.5s ease, left 0.5s ease;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.text {
+  font-size: 10rem;
+  font-weight: bold;
+  color: white;
+}
+
+.image {
+  width: 20rem;
+}
+
+.slogan-text {
+  font-size: 4rem;
+  font-weight: bold;
+  color: white;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.slogan-text.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-content {
+  height: 200vh;
+  background-color: white;
+  color: black;
+  padding: 20px;
+}

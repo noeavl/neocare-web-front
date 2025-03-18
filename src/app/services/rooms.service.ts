@@ -20,12 +20,16 @@ export class RoomsService {
   show(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/rooms/` + id)
   }
-  
+
   create(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/rooms`, data)
   }
 
   update(id: number, data: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/rooms/` + id, data)
+  }
+
+  delete(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/rooms/` + id)
   }
 }

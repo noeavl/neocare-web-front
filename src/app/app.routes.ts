@@ -25,6 +25,12 @@ import { BabiesListComponent } from './components/dashboard/babies/babies-list/b
 import { BabiesCreateComponent } from './components/dashboard/babies/babies-create/babies-create.component';
 import { BabiesEditComponent } from './components/dashboard/babies/babies-edit/babies-edit.component';
 import { BabiesDetailComponent } from './components/dashboard/babies/babies-detail/babies-detail.component';
+import { RoomsComponent } from './components/dashboard/rooms/rooms.component';
+import { RoomsListComponent } from './components/dashboard/rooms/rooms-list/rooms-list.component';
+import { RoomsCreateComponent } from './components/dashboard/rooms/rooms-create/rooms-create.component';
+import { RoomsEditComponent } from './components/dashboard/rooms/rooms-edit/rooms-edit.component';
+import { RoomsDetailComponent } from './components/dashboard/rooms/rooms-detail/rooms-detail.component';
+
 export const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'log-in', component: LoginComponent },
@@ -75,7 +81,18 @@ export const routes: Routes = [
           { path: 'list', component: BabiesListComponent },
           { path: 'create', component: BabiesCreateComponent },
           { path: ':id/edit', component: BabiesEditComponent },
-          { path: ':id', component: BabiesDetailComponent }
+          { path: ':id', component: BabiesDetailComponent }]
+      }, {
+        path: 'rooms',
+        component: RoomsComponent,
+        children: [
+          { path: 'list', component: RoomsListComponent },
+          { path: 'create', component: RoomsCreateComponent },
+          { path: ':id/edit', component: RoomsEditComponent },
+          {
+            path: ':id',
+            component: RoomsDetailComponent,
+          }
         ]
       }
     ]

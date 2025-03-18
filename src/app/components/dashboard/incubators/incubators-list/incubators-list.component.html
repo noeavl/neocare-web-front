@@ -2,7 +2,7 @@
     [imgRoute]="'/crud-icons/plus-icon.png'">
 </app-section-header>
 
-<!-- Mostrar el spinner y ocultar el resto mientras se carga -->
+
 <div *ngIf="!dataLoaded" class="loading-container">
     <mat-spinner></mat-spinner>
 </div>
@@ -42,13 +42,8 @@
                 </app-incubator-card>
             </div>
 
-            <mat-paginator
-                [length]="totalItems"
-                [pageSize]="pageSize"
-                [pageIndex]="currentPage"
-                (page)="onPageChange($event)"
-                aria-label="Select page"
-            >
+            <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="currentPage"
+                (page)="onPageChange($event)" aria-label="Select page">
             </mat-paginator>
         </ng-container>
 

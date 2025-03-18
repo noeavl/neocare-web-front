@@ -12,6 +12,9 @@ export class HospitalService {
   index(page: number = 1): Observable<any> {
     return this.http.get(`${this.apiUrl}/hospitals?page=${page}`)
   }
+  indexNoPaginate(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/hospitalsNoPaginate`)
+  }
 
   show(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/hospitals/` + id)

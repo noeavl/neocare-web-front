@@ -1,0 +1,43 @@
+<app-section-header title="Rooms" [route]="'/dashboard/rooms/create'" [imgRoute]="'/crud-icons/plus-icon.png'" />
+@if (!dataLoad) {
+<div class="spinner">
+    <mat-spinner></mat-spinner>
+</div>
+}
+
+
+<form [formGroup]="formFilter" class="row" (ngSubmit)="onSubmit($event)">
+    <div class="col-12 col-md-6 col-lg-3">
+        <label for="hospitalSelect" class="form-label">Select a Hospital:</label>
+        <select formControlName="hospital_id">
+            <option *ngFor="let hospital of hospitals" [value]="hospital.id">
+                {{ hospital.name }}
+            </option>
+        </select>
+    </div>
+
+    <div class="col-12 col-md-4 col-lg-2 mt-3 mt-lg-0 d-flex align-items-end">
+        <app-button text="Search" class="btn-lg w-100" [disabled]="!formFilter.get('hospital_id')?.value"
+            (click)="getHospitals()">
+        </app-button>
+    </div>
+</form>
+
+
+<div>
+    <div class="mt-3">
+        <div class="row">
+            @if (dataLoad) {
+            <div *ngFor="let room of rooms" class="col-12 col-md-6 mb-4">
+                <app-room-card [id]="room.id" [name]="room.name" [date]="room.created_at" [number]="room.number"
+                    (reloadData)="getRooms(this.currentPage)" (alertDelete)="manageDeletion($event)">
+                </app-room-card>
+            </div>
+            <mat-paginator [length]="totalItems" [pageSize]="pageSize" (page)="onPageChange($event)"
+                aria-label="Select page">
+            </mat-paginator>
+            }
+        </div>
+    </div>
+</div>
+<p-toast position="bottom-right" key="br"></p-toast>
