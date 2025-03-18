@@ -19,6 +19,7 @@ import { MatIcon } from '@angular/material/icon'
     CardComponent,
     IncubatorDetailComponent,
     NgFor,
+    RouterOutlet
   ],
   templateUrl: './incubator.component.html',
   styleUrl: './incubator.component.css'

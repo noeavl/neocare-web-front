@@ -68,10 +68,7 @@ export const routes: Routes = [
           { path: 'list', component: IncubatorsListComponent },
           { path: 'create', component: IncubatorsCreateComponent },
           { path: ':id/edit', component: IncubatorsEditComponent },
-          {
-            path: ':id',
-            component: IncubatorComponent,
-          }
+          { path: ':id', component: IncubatorComponent }
         ]
       },
       {
