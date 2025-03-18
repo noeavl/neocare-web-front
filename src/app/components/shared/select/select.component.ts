@@ -19,6 +19,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class SelectComponent implements ControlValueAccessor {
   @Input() name: string = '';
   @Input() options: { value: string; label: string }[] = [];
+  @Input() placeholder: string = 'Select an option';
   @Output() selected = new EventEmitter<string>();
 
   value: string = '';

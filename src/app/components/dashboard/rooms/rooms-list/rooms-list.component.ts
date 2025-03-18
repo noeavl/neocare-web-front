@@ -13,9 +13,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HospitalService } from '../../../../services/hospital.service';
 import { ButtonComponent } from '../../../shared/button/button.component';
 import { SelectComponent } from '../../../shared/select/select.component';
+import { CardComponent } from '../../../shared/card/card.component';
 @Component({
   selector: 'app-rooms-list',
-  imports: [SectionHeaderComponent, ToastModule, MatProgressSpinner, MatPaginator, RoomCardComponent, CommonModule, ReactiveFormsModule, ButtonComponent, SelectComponent],
+  imports: [SectionHeaderComponent, ToastModule, MatProgressSpinner, MatPaginator, RoomCardComponent, CommonModule, ReactiveFormsModule, ButtonComponent, SelectComponent, CardComponent],
   templateUrl: './rooms-list.component.html',
   styleUrl: './rooms-list.component.css',
   providers: [MessageService]
@@ -24,15 +25,19 @@ import { SelectComponent } from '../../../shared/select/select.component';
 export class RoomsListComponent {
   hospitals: any[] = []
   rooms: Rooms[] = []
-  dataLoad = false
+  isSearching: boolean = false
   dataLoaded = false
   totalItems: number = 0
   pageSize: number = 9
   currentPage: number = 0
 
   formFilter = new FormGroup({
-    hospital_id: new FormControl(null, Validators.required)
+    hospital_id: new FormControl('', Validators.required)
   })
+
+  get hospital_id() {
+    return this.formFilter.get('hospital_id')
+  }
 
   constructor(private roomsService: RoomsService, private messageService: MessageService, private hospitalsService: HospitalService) { }
 
@@ -43,12 +48,13 @@ export class RoomsListComponent {
     this.getHospitals()
   }
   getRooms(page: number) {
-    this.roomsService.index(page + 1).subscribe({
+    this.isSearching = true
+    this.roomsService.index(page + 1, Number(this.formFilter.controls.hospital_id.value)).subscribe({
       next: (response) => {
         this.rooms = response.rooms.data
         this.totalItems = response.rooms.total
         this.currentPage = response.rooms.current_page - 1
-        this.dataLoad = true
+        this.isSearching = false
         console.log("Roooms", this.rooms)
       },
       error: (error) => {
@@ -56,19 +62,21 @@ export class RoomsListComponent {
           if (error.status === 0) {
             this.showAlert('error', 'Error', 'Fail to connect to the server');
           } else if (error.status === 404) {
-            this.showAlert('error', 'Error', '404 Not found');
+            this.rooms = []
+            this.showAlert('warn', 'Error', error.error.message);
           } else if (error.status === 401) {
             this.showAlert('error', 'Error', error.error.message);
           } else {
             this.showAlert('error', 'Error', error.error.message);
           }
+          this.isSearching = false
           this.totalItems = 0
           this.currentPage = 0
         }
       }
     })
   }
-  handleSelection(value: any): void {
+  handleSelection(value: string): void {
     this.formFilter.controls['hospital_id'].setValue(value)
   }
 

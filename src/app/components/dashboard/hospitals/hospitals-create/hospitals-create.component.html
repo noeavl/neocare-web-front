@@ -46,7 +46,7 @@
                 </div>
                 <div class="mt-4">
                     <app-select name="example" [options]="addresses" (selected)="handleSelection($event)"
-                        formControlName="address_id" />
+                        formControlName="address_id" [placeholder]="'Select an address'" />
                     @if(fieldErrors['address_id']) {
                     <small class="ms-3 text-danger">{{ fieldErrors['address_id'] }}</small>
                     }

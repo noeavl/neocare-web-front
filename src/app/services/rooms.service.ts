@@ -9,7 +9,7 @@ export class RoomsService {
 
   constructor(private http: HttpClient) { }
 
-  index(page: number = 1, hospital_id?: number): Observable<any> {
+  index(page: number = 1, hospital_id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/rooms?page=${page}&hospital_id=${hospital_id}`)
   }
 
