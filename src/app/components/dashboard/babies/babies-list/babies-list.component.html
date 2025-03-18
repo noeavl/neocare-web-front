@@ -1,5 +1,4 @@
-<app-section-header title="Babies" [route]="'/dashboard/babies/create'"
-    [imgRoute]="'/crud-icons/plus-icon.png'">
+<app-section-header title="Babies" [route]="'/dashboard/babies/create'" [imgRoute]="'/crud-icons/plus-icon.png'">
 </app-section-header>
 
 <div *ngIf="!dataLoaded" class="loading-container">
@@ -29,26 +28,15 @@
     <div class="row">
         <ng-container *ngIf="babies.length > 0; else noBabies">
             <div *ngFor="let baby of babies" class="col-12 col-md-6 mb-4">
-                <app-babies-card
-                    [id]="baby.id"
-                    [incubator_id]="baby.incubator_id ? baby.incubator_id : 'Sin asignar'"
-                    [birth_date]="baby.date_of_birth"
-                    [name]="baby.person.name"
-                    [last_name_1]="baby.person.last_name_1"
-                    [last_name_2]="baby.person.last_name_2"
-                    [created_at]="baby.created_at"
-                    (reloadBabies)="loadBabies()"
+                <app-babies-card [id]="baby.id" [incubator_id]="baby.incubator_id ? baby.incubator_id : 'Sin asignar'"
+                    [birth_date]="baby.date_of_birth" [name]="baby.person.name" [last_name_1]="baby.person.last_name_1"
+                    [last_name_2]="baby.person.last_name_2" (reloadBabies)="loadBabies()"
                     (alertDelete)="manageDeletion($event)">
                 </app-babies-card>
             </div>
 
-            <mat-paginator
-                [length]="totalItems"
-                [pageSize]="pageSize"
-                [pageIndex]="currentPage"
-                (page)="onPageChange($event)"
-                aria-label="Select page"
-            >
+            <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="currentPage"
+                (page)="onPageChange($event)" aria-label="Select page">
             </mat-paginator>
         </ng-container>
 
@@ -61,4 +49,3 @@
 </div>
 
 <p-toast position="bottom-right" key="br"></p-toast>
-
