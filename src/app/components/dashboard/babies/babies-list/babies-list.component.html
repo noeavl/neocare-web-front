@@ -36,7 +36,7 @@
                     [name]="baby.person.name"
                     [last_name_1]="baby.person.last_name_1"
                     [last_name_2]="baby.person.last_name_2"
-                    [created_at]="baby.created_at | date:'yyyy-MM-dd'"
+                    [created_at]="baby.created_at"
                     (reloadBabies)="loadBabies()"
                     (alertDelete)="manageDeletion($event)">
                 </app-babies-card>
