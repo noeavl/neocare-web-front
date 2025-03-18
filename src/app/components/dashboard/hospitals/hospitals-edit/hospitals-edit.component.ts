@@ -74,11 +74,9 @@ export class HospitalsEditComponent {
         address_id: this.form.controls['address_id'].value
       }
 
-      this.hospitalService.create(formData).subscribe({
+      this.hospitalService.update(this.id, formData).subscribe({
         next: (response) => {
           this.showAlert('success', 'Success', response.message)
-          this.form.reset()
-          this.form.controls['address_id'].setValue('');
         },
         error: (error) => {
           if (error instanceof HttpErrorResponse) {
@@ -111,6 +109,15 @@ export class HospitalsEditComponent {
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
             this.showAlert('error', 'Error', 'Fail to connect to the server');
+          } else if (error.status === 404) {
+            this.showAlert('error', 'Error', '404 Not found');
+          } else if (error.status === 422) {
+            this.handleError(error.error);
+            this.showAlert('error', 'Error', 'Please check the form');
+          } else if (error.status === 401) {
+            this.showAlert('error', 'Error', error.error.message);
+          } else {
+            this.showAlert('error', 'Error', error.error.message);
           }
         }
       }
@@ -122,7 +129,7 @@ export class HospitalsEditComponent {
       next: (response) => {
         this.form.controls['name'].setValue(response.hospital.name)
         this.form.controls['phone_number'].setValue(response.hospital.phone_number)
-        this.form.controls['address_id'].setValue(response.hospital.address_id)
+        this.form.controls['address_id'].setValue(response.hospital.address.id)
       },
       error: (error) => {
         console.log(error)

@@ -20,7 +20,11 @@ import { IncubatorsListComponent } from './components/dashboard/incubators/incub
 import { IncubatorsCreateComponent } from './components/dashboard/incubators/incubators-create/incubators-create.component';
 import { IncubatorsEditComponent } from './components/dashboard/incubators/incubators-edit/incubators-edit.component';
 import { IncubatorComponent } from './components/dashboard/incubators/incubator/incubator.component';
-
+import { BabiesComponent } from './components/dashboard/babies/babies/babies.component';
+import { BabiesListComponent } from './components/dashboard/babies/babies-list/babies-list.component';
+import { BabiesCreateComponent } from './components/dashboard/babies/babies-create/babies-create.component';
+import { BabiesEditComponent } from './components/dashboard/babies/babies-edit/babies-edit.component';
+import { BabiesDetailComponent } from './components/dashboard/babies/babies-detail/babies-detail.component';
 export const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'log-in', component: LoginComponent },
@@ -62,6 +66,16 @@ export const routes: Routes = [
             path: ':id',
             component: IncubatorComponent,
           }
+        ]
+      },
+      {
+        path: 'babies',
+        component: BabiesComponent,
+        children: [
+          { path: 'list', component: BabiesListComponent },
+          { path: 'create', component: BabiesCreateComponent },
+          { path: ':id/edit', component: BabiesEditComponent },
+          { path: ':id', component: BabiesDetailComponent }
         ]
       }
     ]
