@@ -64,6 +64,7 @@ export class RoomsCreateComponent {
         next: (response) => {
           this.form.reset()
           this.showAlert('success', 'Success', response.message)
+          this.fieldErrors = {};
         },
         error: (error) => {
           if (error instanceof HttpErrorResponse) {
