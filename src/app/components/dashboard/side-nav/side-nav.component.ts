@@ -43,11 +43,6 @@ export class SideNavComponent implements OnInit, OnChanges {
       routeLink: '/dashboard/babies/list',
       icon: '/recursos-web/baby-icon.png',
       label: 'Babies',
-    },
-    {
-      routeLink: '/dashboard/relatives/list',
-      icon: '/recursos-web/relatives-icon.png',
-      label: 'Relatives',
     }
   ];
 
