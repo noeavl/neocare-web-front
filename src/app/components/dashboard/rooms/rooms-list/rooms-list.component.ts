@@ -12,9 +12,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HospitalService } from '../../../../services/hospital.service';
 import { ButtonComponent } from '../../../shared/button/button.component';
+import { SelectComponent } from '../../../shared/select/select.component';
 @Component({
   selector: 'app-rooms-list',
-  imports: [SectionHeaderComponent, ToastModule, MatProgressSpinner, MatPaginator, RoomCardComponent, CommonModule, ReactiveFormsModule, ButtonComponent],
+  imports: [SectionHeaderComponent, ToastModule, MatProgressSpinner, MatPaginator, RoomCardComponent, CommonModule, ReactiveFormsModule, ButtonComponent, SelectComponent],
   templateUrl: './rooms-list.component.html',
   styleUrl: './rooms-list.component.css',
   providers: [MessageService]
@@ -39,7 +40,7 @@ export class RoomsListComponent {
     this.messageService.add({ severity: severity, summary: summary, detail: detail, key: 'br', life: 3000 });
   }
   ngOnInit() {
-
+    this.getHospitals()
   }
   getRooms(page: number) {
     this.roomsService.index(page + 1).subscribe({
@@ -67,6 +68,9 @@ export class RoomsListComponent {
       }
     })
   }
+  handleSelection(value: any): void {
+    this.formFilter.controls['hospital_id'].setValue(value)
+  }
 
   onSubmit(event: Event) {
     event.preventDefault()
@@ -76,7 +80,10 @@ export class RoomsListComponent {
   getHospitals() {
     this.hospitalsService.indexNoPaginate().subscribe({
       next: (response) => {
-        this.hospitals = response.hospitals
+        this.hospitals = response.hospitals.map((hospital: any) => ({
+          value: hospital.id.toString(),
+          label: hospital.name
+        }))
         this.dataLoaded = true
       },
       error: (error) => {
