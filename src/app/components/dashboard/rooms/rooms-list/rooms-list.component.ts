@@ -55,7 +55,6 @@ export class RoomsListComponent {
         this.totalItems = response.rooms.total
         this.currentPage = response.rooms.current_page - 1
         this.isSearching = false
-        console.log("Roooms", this.rooms)
       },
       error: (error) => {
         if (error instanceof HttpErrorResponse) {
@@ -95,7 +94,17 @@ export class RoomsListComponent {
         this.dataLoaded = true
       },
       error: (error) => {
-        this.showAlert("error", "Error", "Could not load hospitals.")
+        if (error instanceof HttpErrorResponse) {
+          if (error.status === 0) {
+            this.showAlert('error', 'Error', 'Fail to connect to the server');
+          } else if (error.status === 404) {
+            this.showAlert('warn', 'Error', error.error.message);
+          } else if (error.status === 401) {
+            this.showAlert('error', 'Error', error.error.message);
+          } else {
+            this.showAlert('error', 'Error', error.error.message);
+          }
+        }
       }
     })
   }
