@@ -26,8 +26,8 @@
                 </div>
                 <div class="mt-4">
                     <app-input [placeholder]="'Number'" formControlName="number" type="text" [maxlength]="10" />
-                    @if(fieldErrors['phone_number']) {
-                    <small class="ms-3 text-danger">{{ fieldErrors['phone_number'] }}</small>
+                    @if(fieldErrors['number']) {
+                    <small class="ms-3 text-danger">{{ fieldErrors['number'] }}</small>
                     }
                     @if(number?.invalid && (number?.dirty || number?.touched)){
                     @if (number?.errors) {

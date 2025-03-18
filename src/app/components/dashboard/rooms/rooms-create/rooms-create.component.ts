@@ -49,7 +49,7 @@ export class RoomsCreateComponent {
   }
 
   ngOnInit() {
-    this.getAddresses()
+    this.getHospitals()
   }
 
   sumbit() {
@@ -69,12 +69,17 @@ export class RoomsCreateComponent {
         error: (error) => {
           if (error instanceof HttpErrorResponse) {
             if (error.status === 0) {
-              this.showAlert('error', 'Error', 'Fail to connect to the server')
+              this.showAlert('error', 'Error', 'Fail to connect to the server');
+            } else if (error.status === 404) {
+              this.showAlert('error', 'Error', '404 Not found');
+            } else if (error.status === 422) {
+              this.handleError(error.error.errors);
+              console.log("Errores del formulario", error.error.errors)
+            } else if (error.status === 401) {
+              this.showAlert('error', 'Error', error.error.message);
+            } else {
+              this.showAlert('error', 'Error', error.error.message);
             }
-          }
-          if (error.error) {
-            this.handleError(error.error)
-            this.showAlert('error', 'Error', 'Please check the form')
           }
         }
       })
@@ -83,7 +88,7 @@ export class RoomsCreateComponent {
   handleSelection(value: string): void {
     this.form.controls['hospital_id'].setValue(value)
   }
-  getAddresses() {
+  getHospitals() {
     this.hospitalService.indexNoPaginate().subscribe({
       next: (response) => {
         this.hospitals = response.hospitals.map((hospital: any) => ({
@@ -93,7 +98,6 @@ export class RoomsCreateComponent {
         this.dataLoad = true
       },
       error: (error) => {
-        console.log(error)
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
             this.showAlert('error', 'Error', 'Fail to connect to the server');
