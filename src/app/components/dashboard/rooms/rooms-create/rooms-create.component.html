@@ -1,1 +1,65 @@
-<app-section-header title="Create Room" [route]="'/dashboard/rooms/list'" [imgRoute]="'/recursos-web/list-text.png'" />
+<app-section-header title="Create Room" [route]="'/dashboard/rooms/list'"
+    [imgRoute]="'/recursos-web/list-text.png'"></app-section-header>
+@if (!dataLoad) {
+<div class="spinner">
+    <mat-spinner></mat-spinner>
+</div>
+}
+
+@if(dataLoad){
+<div class="mt-3">
+    <div class="main-container d-flex align-items-center justify-content-center">
+        <app-card>
+            <form [formGroup]="form" (ngSubmit)="sumbit()">
+                <div>
+                    <app-input [placeholder]="'Name'" formControlName="name" type="text" />
+                    @if(fieldErrors['name']) {
+                    <small class="ms-3 text-danger">{{ fieldErrors['name'] }}</small>
+                    }
+                    @if(name?.invalid && (name?.dirty || name?.touched)){
+                    @if (name?.errors) {
+                    @if (name?.hasError('required')) {
+                    <small class="ms-3 text-danger">Name is required.</small>
+                    }
+                    }
+                    }
+                </div>
+                <div class="mt-4">
+                    <app-input [placeholder]="'Number'" formControlName="number" type="text" [maxlength]="10" />
+                    @if(fieldErrors['phone_number']) {
+                    <small class="ms-3 text-danger">{{ fieldErrors['phone_number'] }}</small>
+                    }
+                    @if(number?.invalid && (number?.dirty || number?.touched)){
+                    @if (number?.errors) {
+                    @if (number?.hasError('required')) {
+                    <small class="ms-3 text-danger">Number is required.</small>
+                    }
+                    @else if (number?.hasError('pattern')) {
+                    <small class="ms-3 text-danger">Number can only contain numbers.</small>
+                    }
+                    }
+                    }
+                </div>
+                <div class="mt-4">
+                    <app-select name="example" [options]="hospitals" (selected)="handleSelection($event)"
+                        formControlName="hospital_id" [placeholder]="'Select an hospital'" />
+                    @if(fieldErrors['hospital_id']) {
+                    <small class="ms-3 text-danger">{{ fieldErrors['hospital_id'] }}</small>
+                    }
+                    @if(hospital_id?.invalid && (hospital_id?.dirty || hospital_id?.touched)){
+                    @if (hospital_id?.errors) {
+                    @if (hospital_id?.hasError('required')) {
+                    <small class="text-danger">Hospital is required.</small>
+                    }
+                    }
+                    }
+                </div>
+                <div class="mt-4">
+                    <app-button [text]="'Create'" [disabled]="!form.valid" />
+                </div>
+            </form>
+        </app-card>
+    </div>
+</div>
+}
+<p-toast position="bottom-right" key="br"></p-toast>
