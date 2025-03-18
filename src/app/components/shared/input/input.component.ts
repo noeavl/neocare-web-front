@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, forwardRef, Input, ViewChild, ElementRef } from '@angular/core';
 import { ReactiveFormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
   ]
 })
 export class InputComponent {
+  @ViewChild('inputElement') inputElement!: ElementRef;
   @Input() type: string = 'text';
   @Input() placeholder: string = '';
   @Input() name: string = '';
@@ -27,8 +28,12 @@ export class InputComponent {
   onChange: any = () => { };
   onTouched: any = () => { };
 
+
   writeValue(value: any): void {
     this.value = value;
+    if (this.inputElement?.nativeElement) {
+      this.inputElement.nativeElement.value = value || '';
+    }
   }
 
   registerOnChange(fn: any): void {
