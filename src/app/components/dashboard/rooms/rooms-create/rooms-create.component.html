@@ -12,7 +12,7 @@
         <app-card>
             <form [formGroup]="form" (ngSubmit)="sumbit()">
                 <div>
-                    <app-input [placeholder]="'Name'" formControlName="name" type="text" />
+                    <app-input [placeholder]="'Name'" formControlName="name" type="text" name="name" />
                     @if(fieldErrors['name']) {
                     <small class="ms-3 text-danger">{{ fieldErrors['name'] }}</small>
                     }
@@ -25,7 +25,7 @@
                     }
                 </div>
                 <div class="mt-4">
-                    <app-input [placeholder]="'Number'" formControlName="number" type="text" [maxlength]="10" />
+                    <app-input [placeholder]="'Number'" formControlName="number" type="number" name="number" />
                     @if(fieldErrors['number']) {
                     <small class="ms-3 text-danger">{{ fieldErrors['number'] }}</small>
                     }
@@ -41,8 +41,8 @@
                     }
                 </div>
                 <div class="mt-4">
-                    <app-select name="example" [options]="hospitals" (selected)="handleSelection($event)"
-                        formControlName="hospital_id" [placeholder]="'Select an hospital'" />
+                    <app-select [options]="hospitals" (selected)="handleSelection($event)" formControlName="hospital_id"
+                        [placeholder]="'Select an hospital'" />
                     @if(fieldErrors['hospital_id']) {
                     <small class="ms-3 text-danger">{{ fieldErrors['hospital_id'] }}</small>
                     }

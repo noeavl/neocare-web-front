@@ -62,9 +62,8 @@ export class RoomsCreateComponent {
 
       this.roomsService.create(formData).subscribe({
         next: (response) => {
-          this.showAlert('success', 'Success', response.message)
           this.form.reset()
-          this.form.controls['hospital_id'].setValue('');
+          this.showAlert('success', 'Success', response.message)
         },
         error: (error) => {
           if (error instanceof HttpErrorResponse) {
@@ -74,7 +73,7 @@ export class RoomsCreateComponent {
               this.showAlert('error', 'Error', '404 Not found');
             } else if (error.status === 422) {
               this.handleError(error.error.errors);
-              console.log("Errores del formulario", error.error.errors)
+              this.showAlert('warn', 'Error', 'Please check the form');
             } else if (error.status === 401) {
               this.showAlert('error', 'Error', error.error.message);
             } else {

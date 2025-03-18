@@ -13,3 +13,7 @@
 .main-container {
     height: 80vh;
 }
+
+app-card {
+    width: 60%;
+}
