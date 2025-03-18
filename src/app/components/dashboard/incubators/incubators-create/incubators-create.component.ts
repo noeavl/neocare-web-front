@@ -69,12 +69,10 @@ export class IncubatorsCreateComponent {
 
     this.incubatorsService.create(this.form.value).subscribe(
       (response) => {
-        console.log(response)
         this.showAlert("success", "Incubadora creada", response.msg)
         this.form.reset()
       },
       (error) => {
-        console.log(error)
         this.showAlert("error", "Error", error.error.msg)
       }
     )
@@ -82,24 +80,9 @@ export class IncubatorsCreateComponent {
   }
 
   loadHospitals() {
-    this.hospitalsService.index().subscribe(
+    this.hospitalsService.indexNoPaginate().subscribe(
       (response) => {
-        const hospitalList = response.hospitals.data
-        let validHospitals: any[] = []
-
-        let requests = hospitalList.map((hospital: any) =>
-          this.roomsService.getRoomsByHospital(hospital.id).pipe(
-            catchError(() => of([]))
-          ).toPromise().then((res) => {
-            if (res.length > 0) {
-              validHospitals.push(hospital)
-            }
-          })
-        )
-
-        Promise.all(requests).then(() => {
-          this.hospitals = validHospitals
-        })
+        this.hospitals = response.hospitals
         this.dataLoaded = true
       },
       (error) => {
@@ -116,18 +99,11 @@ export class IncubatorsCreateComponent {
       return
     }
 
-    this.roomsService.getRoomsByHospital(id).pipe(
-      catchError((error) => {
-        this.showAlert("warn", "Atención", "No hay habitaciones disponibles.")
-        return of([])
-      })
-    ).subscribe((response) => {
-      this.rooms = response.length ? response : []
-      if (this.rooms.length > 0) {
-        this.form.get('room_id')?.enable()
-      } else {
-        this.form.get('room_id')?.disable()
-      }
+    this.roomsService.getRoomsByHospital(id).subscribe((response) => {
+      this.rooms = response.rooms.data
+      this.form.get('room_id')?.enable()
+    }, (error) => {
+      this.showAlert("error", "Error", "Could not load rooms.")
     })
   }
 
