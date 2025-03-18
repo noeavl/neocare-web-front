@@ -46,17 +46,12 @@
             <div>
               <app-button text="Login" [disabled]="!form.valid" />
             </div>
-            <div class="mt-3 d-flex justify-content-between">
+            <div class="mt-3 d-flex justify-content-center">
               <div>
                 <p class="fw-light" [style]="{'color':'var(--color-morado)'}">New user? <a
                     [style]="{'color':'var(--color-morado)'}" [routerLink]="['/sign-up']"
                     class="fw-bold text-decoration-none">Sign
                     up</a></p>
-              </div>
-              <div>
-                <p class="fw-light" [style]="{'color':'var(--color-morado)'}">Forgot your password? <a
-                    [style]="{'color':'var(--color-morado)'}" class="fw-bold text-decoration-none"
-                    routerLink="/forgot-password">Change</a></p>
               </div>
             </div>
           </form>
