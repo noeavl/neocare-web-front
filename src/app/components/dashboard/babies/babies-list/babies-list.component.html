@@ -1,0 +1,64 @@
+<app-section-header title="Babies" [route]="'/dashboard/babies/create'"
+    [imgRoute]="'/crud-icons/plus-icon.png'">
+</app-section-header>
+
+<div *ngIf="!dataLoaded" class="loading-container">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="dataLoaded" class="container">
+    <form [formGroup]="formFilter" class="row" (ngSubmit)="onSubmit($event)">
+        <div class="col-12 col-md-6 col-lg-3">
+            <label for="hospitalSelect" class="form-label">Select a Hospital:</label>
+            <select formControlName="hospital_id">
+                <option *ngFor="let hospital of hospitals" [value]="hospital.id">
+                    {{ hospital.name }}
+                </option>
+            </select>
+        </div>
+
+        <div class="col-12 col-md-4 col-lg-2 mt-3 mt-lg-0 d-flex align-items-end">
+            <app-button text="Search" class="btn-lg w-100" [disabled]="!formFilter.get('hospital_id')?.value"
+                (click)="loadBabies()">
+            </app-button>
+        </div>
+    </form>
+</div>
+
+<div *ngIf="dataLoaded" class="mt-3">
+    <div class="row">
+        <ng-container *ngIf="babies.length > 0; else noBabies">
+            <div *ngFor="let baby of babies" class="col-12 col-md-6 mb-4">
+                <app-babies-card
+                    [id]="baby.id"
+                    [incubator_id]="baby.incubator_id ? baby.incubator_id : 'Sin asignar'"
+                    [birth_date]="baby.date_of_birth"
+                    [name]="baby.person.name"
+                    [last_name_1]="baby.person.last_name_1"
+                    [last_name_2]="baby.person.last_name_2"
+                    [created_at]="baby.created_at | date:'yyyy-MM-dd'"
+                    (reloadBabies)="loadBabies()"
+                    (alertDelete)="manageDeletion($event)">
+                </app-babies-card>
+            </div>
+
+            <mat-paginator
+                [length]="totalItems"
+                [pageSize]="pageSize"
+                [pageIndex]="currentPage"
+                (page)="onPageChange($event)"
+                aria-label="Select page"
+            >
+            </mat-paginator>
+        </ng-container>
+
+        <ng-template #noBabies>
+            <div class="col-12 text-center mt-4">
+                <p class="text-muted fw-bold fs-5">No babies available in this hospital.</p>
+            </div>
+        </ng-template>
+    </div>
+</div>
+
+<p-toast position="bottom-right" key="br"></p-toast>
+
