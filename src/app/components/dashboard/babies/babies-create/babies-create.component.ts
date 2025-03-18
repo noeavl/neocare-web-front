@@ -129,7 +129,7 @@ export class BabiesCreateComponent {
         name: this.form.controls['name'].value,
         last_name_1: this.form.controls['last_name_1'].value,
         last_name_2: this.form.controls['last_name_2'].value,
-        date_of_birth: this.formatDate(this.form.controls['birth_date'].value),
+        date_of_birth: this.form.controls['birth_date'].value,
         hospital_id: this.form.controls['hospital_id'].value
       }
       
