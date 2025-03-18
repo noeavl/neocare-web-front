@@ -97,7 +97,6 @@ export class IncubatorsEditComponent {
 
           },
           (error) => {
-            console.error('Error updating incubator:', error)
             this.showAlert('error', 'Error', "Incubator couldn't be updated")
           }
         )
