@@ -71,7 +71,7 @@ export class BabiesListComponent implements OnInit {
     this.babiesService.index(this.currentPage + 1, filtros).subscribe(
       (response) => {
         console.log(response)
-        this.babies = response.babies || []
+        this.babies = response.data || []
         this.totalItems = response.total || 0
         this.pageSize = response.per_page || 6
         this.currentPage = response.current_page - 1
