@@ -30,7 +30,7 @@ select option {
 select:focus,
 select option:checked {
     font-weight: bold; 
-    color: var(--color-morado); /
+    color: var(--color-morado); 
 }
 
 .form-label {
@@ -46,7 +46,6 @@ select option:checked {
 
     .mt-3 {
         margin-top: 1rem !important;
-        /
     }
 }
 
