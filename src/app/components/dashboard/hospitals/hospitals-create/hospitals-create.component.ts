@@ -97,6 +97,15 @@ export class HospitalsCreateComponent {
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
             this.showAlert('error', 'Error', 'Fail to connect to the server');
+          } else if (error.status === 404) {
+            this.showAlert('error', 'Error', '404 Not found');
+          } else if (error.status === 422) {
+            this.handleError(error.error);
+            this.showAlert('error', 'Error', 'Please check the form');
+          } else if (error.status === 401) {
+            this.showAlert('error', 'Error', error.error.message);
+          } else {
+            this.showAlert('error', 'Error', error.error.message);
           }
         }
       }
