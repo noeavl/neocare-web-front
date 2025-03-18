@@ -1,12 +1,13 @@
 <app-section-header title="Edit Incubator" [route]="'/dashboard/incubators/list'"
     [imgRoute]="'/recursos-web/list-text.png'"></app-section-header>
+
 @if (!dataLoaded) {
 <div class="spinner">
     <mat-spinner></mat-spinner>
 </div>
 }
 
-@if(dataLoaded){
+@if (dataLoaded) {
 <div class="container-fluid d-flex justify-content-center align-items-center mt-3">
     <div class="row w-100">
         <div class="col-12 col-md-8 col-lg-6 mx-auto">
@@ -14,7 +15,23 @@
                 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-100">
 
                     <div class="form-group mb-4">
-                        
+                        <label for="baby" class="form-label">Select a Baby</label>
+                        <select id="baby" formControlName="baby_id" class="form-control">
+                            <option value="" disabled>Select a baby</option>
+                            <option *ngFor="let baby of babies; trackBy: trackById" [value]="baby.id">
+                                {{ baby.full_name }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="nurse" class="form-label">Select a Nurse</label>
+                        <select id="nurse" formControlName="nurse_id" class="form-control">
+                            <option value="" disabled>Select a nurse</option>
+                            <option *ngFor="let nurse of nurses; trackBy: trackById" [value]="nurse.id">
+                                {{ nurse.full_name }}
+                            </option>
+                        </select>
                     </div>
 
                     <div class="form-group mb-4">
@@ -37,7 +54,8 @@
                     </div>
 
                     <div class="text-center mt-4">
-                        <app-button [text]="'Save Changes'" [disabled]="!form.valid" class="btn-lg w-100" />
+                        <app-button *ngIf="isAssigned" [text]="'Save Changes'" [disabled]="!form.valid" class="btn-lg w-100" />
+                        <app-button *ngIf="!isAssigned" [text]="'Assign Baby to Incubator'" [disabled]="!form.valid" class="btn-lg w-100" />
                     </div>
 
                 </form>

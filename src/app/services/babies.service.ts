@@ -37,4 +37,20 @@ export class BabiesService {
   delete(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/babies/` + id)
   }
+
+  indexNoPaginate(filtros: any): Observable<any> {
+    let params = new HttpParams();
+  
+    Object.keys(filtros).forEach(key => {
+      if (filtros[key] !== undefined && filtros[key] !== null) {
+        params = params.set(key, filtros[key]);
+      }
+    });
+  
+    return this.http.get(`${this.apiUrl}/babiesNoPaginate`, { params });
+  }
+
+  assignBabyToIncubator(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/baby-to-incubator`, data)
+  }
 }

@@ -52,7 +52,6 @@ export class IncubatorsListComponent implements OnInit {
   ngOnInit(): void {
     this.loadHospitals();
 
-    // Recuperar la selección del hospital desde sessionStorage
     const savedHospitalId = sessionStorage.getItem('selectedHospitalId');
     const hospitalId = savedHospitalId !== null ? Number(savedHospitalId) : null;
 
@@ -85,20 +84,21 @@ export class IncubatorsListComponent implements OnInit {
       return;
     }
 
-    // Guardar en sessionStorage
     sessionStorage.setItem('selectedHospitalId', String(hospitalId));
 
     const filtros = { hospital_id: hospitalId };
 
     this.incubatorsService.index(this.currentPage + 1, filtros).subscribe(
       (response) => {
+        console.log(response);
         this.incubators = response.incubators || [];
         this.totalItems = response.total || 0;
         this.pageSize = response.per_page || 6;
         this.currentPage = response.current_page - 1;
         this.dataLoaded = true;
       },
-      () => {
+      (error) => {
+        console.log(error);
         this.showAlert("error", "Error", "Could not load incubators.");
         this.dataLoaded = true;
         this.incubators = [];

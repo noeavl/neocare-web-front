@@ -29,10 +29,6 @@ export class IncubatorCardComponent {
 
   constructor(private datePipe: DatePipe, private incubatorsService: IncubatorsService) { }
 
-  formatDate(date: Date | string): string {
-    return this.datePipe.transform(date, 'yyyy-MM-dd') || 'Invalid Date'
-  }
-
   getStateIcon(state: string): string {
     switch (state) {
       case 'available': return 'check_circle'
