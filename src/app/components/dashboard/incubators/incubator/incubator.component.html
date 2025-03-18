@@ -8,21 +8,26 @@
 </div>
 }
 
-<div class="row mt-4 justify-content-between">
-    <div class="col-12 col-lg-4 d-flex justify-content-start">
+<div class="row mt-4">
+    <div class="col-12 col-lg-4">
         <app-card class="w-100">
-            <div class="row">
-                <div class="col-12 menu-container text-center" [routerLink]="['/dashboard/incubators/', id]">
-                    <p class="text-center fw-bold m-0">General Information</p>
+            <div class="row gy-3 px-3"> 
+                <div class="col-12 d-flex align-items-center gap-2 menu-container p-2"
+                    [routerLink]="['/dashboard/incubators/', id]">
+                    <mat-icon>info</mat-icon>
+                    <p class="fw-bold m-0">General Information</p>
                 </div>
-                <div *ngFor="let item of sensorsEntries" class="col-12 menu-container text-center mt-3"
+
+                <div *ngFor="let item of sensorsEntries"
+                    class="col-12 d-flex align-items-center gap-2 menu-container p-2"
                     [routerLink]="['/dashboard/incubators/', id, item.url]">
-                    <p class="m-0 fw-bold text-center">{{ item.label }}</p>
+                    <mat-icon>{{ item.icon }}</mat-icon>
+                    <p class="fw-bold m-0">{{ item.label }}</p>
                 </div>
             </div>
         </app-card>
     </div>
-
+    
     <div class="col-12 col-lg-6 mx-auto">
         <app-card class="custom-card d-flex flex-column justify-content-center align-items-center">
             <router-outlet></router-outlet>

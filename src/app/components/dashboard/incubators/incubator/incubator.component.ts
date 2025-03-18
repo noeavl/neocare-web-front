@@ -13,13 +13,13 @@ import { MatIcon } from '@angular/material/icon'
 @Component({
   selector: 'app-incubator',
   imports: [
-    RouterLink, 
-    MatSpinner, 
+    RouterLink,
+    MatSpinner,
     SectionHeaderComponent,
     CardComponent,
-    IncubatorDetailComponent,
     NgFor,
-    RouterOutlet
+    RouterOutlet,
+    MatIcon
   ],
   templateUrl: './incubator.component.html',
   styleUrl: './incubator.component.css'
@@ -28,13 +28,13 @@ export class IncubatorComponent {
   id!: number
   dataLoaded: boolean = false
   incubator: any
-  sensorsEntries: { label: string; state: any; icon: string, url: string }[] = []
+  sensorsEntries: { label: string; icon: string, url: string | null; }[] = []
 
 
   constructor(
     private route: ActivatedRoute,
     private incubatorsService: IncubatorsService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -45,23 +45,22 @@ export class IncubatorComponent {
 
   loadIncubator(id: number) {
     this.incubatorsService.show(id).subscribe(
-        (response) => {
-            console.log(response.incubator)
-            this.incubator = response.incubator
-            this.sensorsEntries = [
-                { label: 'Temperature', state: this.incubator.temperature, icon: 'thermostat', url: 'temperature' },
-                { label: 'Humidity', state: this.incubator.humidity, icon: 'humidity', url: 'humidity' },
-                { label: 'Movement', state: this.incubator.co2, icon: 'movement', url: 'movement' },
-                { label: 'Sound', state: this.incubator.co2, icon: 'sound', url: 'sound' },
-                { label: 'Light', state: this.incubator.co2, icon: 'light', url: 'light' },
-                { label: 'Vibration', state: this.incubator.co2, icon: 'vibration', url: 'vibration' }
-            ];
-            this.dataLoaded = true;
-        },
-        (error) => {
-            console.log(error)
-            this.dataLoaded = true
-        }
+      (response) => {
+        this.incubator = response.incubator
+        this.sensorsEntries = [
+          { label: 'Temperature', icon: 'thermostat', url: 'temperature' },
+          { label: 'Humidity', icon: 'water_drop', url: 'humidity' },
+          { label: 'Movement', icon: 'directions_run', url: 'movement' },
+          { label: 'Sound', icon: 'graphic_eq', url: 'sound' },
+          { label: 'Light', icon: 'light_mode', url: 'light' },
+          { label: 'Vibration', icon: 'vibration', url: 'vibration' }
+        ]
+        this.dataLoaded = true
+      },
+      (error) => {
+        console.log(error)
+        this.dataLoaded = true
+      }
     )
-}
+  }
 }
