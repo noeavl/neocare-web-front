@@ -1,2 +1,12 @@
-404
-<a [routerLink]="['/']" routerLinkActive="router-link-active" >Return Home</a>
+<div class="not-found-container">
+    <div class="not-found-content text-center">
+        <h1 class="display-1 fw-bold">404</h1>
+        <h2 class="fs-3 fw-light">Page Not Found</h2>
+        <p class="mt-3 fw-light">The page you are looking for might have been removed, had its name changed, or is
+            temporarily unavailable.</p>
+        <a [routerLink]="['/']" class="btn btn-primary mt-4">Return Home</a>
+    </div>
+    <div class="logo-container">
+        <app-logo src="recursos-web/LOGOBLANCO.png" alt="NeoCare Logo"></app-logo>
+    </div>
+</div>
