@@ -19,7 +19,6 @@ import { MatSpinner } from '@angular/material/progress-spinner'
   imports: [
     SectionHeaderComponent,
     NgFor,
-    InputComponent,
     CardComponent,
     ReactiveFormsModule,
     ButtonComponent,

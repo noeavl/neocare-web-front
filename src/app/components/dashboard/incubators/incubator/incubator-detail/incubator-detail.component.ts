@@ -1,21 +1,20 @@
-import { NgClass, NgFor } from '@angular/common';
-import { Component, Input, OnChanges } from '@angular/core';
-import { MatIcon } from '@angular/material/icon';
-import { CardComponent } from '../../../../shared/card/card.component';
+import { NgClass, NgFor } from '@angular/common'
+import { Component, Input, OnChanges } from '@angular/core'
+import { MatIcon } from '@angular/material/icon'
 
 @Component({
   selector: 'app-incubator-detail',
   templateUrl: './incubator-detail.component.html',
   styleUrls: ['./incubator-detail.component.css'],
-  imports: [MatIcon, NgFor, NgClass, CardComponent]
+  imports: [MatIcon, NgFor, NgClass]
 })
 export class IncubatorDetailComponent implements OnChanges {
-  @Input() incubator: any;
-  incubatorEntries: { label: string; value: any; icon: string }[] = [];
+  @Input() incubator: any
+  incubatorEntries: { label: string; value: any; icon: string }[] = []
 
   ngOnChanges() {
     if (this.incubator) {
-      const formattedDate = new Date(this.incubator.created_at).toISOString().split('T')[0];
+      const formattedDate = new Date(this.incubator.created_at).toISOString().split('T')[0]
 
       this.incubatorEntries = [
         { label: 'Baby', value: this.incubator.baby, icon: 'child_friendly' },
@@ -23,11 +22,11 @@ export class IncubatorDetailComponent implements OnChanges {
         { label: 'Room Number', value: this.incubator.room_number, icon: 'meeting_room' },
         { label: 'Status', value: this.incubator.state, icon: 'check_circle' },
         { label: 'Assigned Date', value: formattedDate, icon: 'event' }
-      ];
+      ]
     }
   }
 
   getStatusClass(status: string): string {
-    return status === 'available' ? 'status-available' : status === 'active' ? 'status-active' : '';
+    return status === 'available' ? 'status-available' : status === 'active' ? 'status-active' : ''
   }
 }

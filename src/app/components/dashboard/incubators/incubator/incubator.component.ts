@@ -14,14 +14,11 @@ import { MatIcon } from '@angular/material/icon'
   selector: 'app-incubator',
   imports: [
     RouterLink, 
-    RouterOutlet,
     MatSpinner, 
-    MatPaginator,
     SectionHeaderComponent,
     CardComponent,
     IncubatorDetailComponent,
     NgFor,
-    MatIcon
   ],
   templateUrl: './incubator.component.html',
   styleUrl: './incubator.component.css'

@@ -1,1 +1,50 @@
-<p>incubators-edit works!</p>
+<app-section-header title="Edit Incubator" [route]="'/dashboard/incubators/list'"
+    [imgRoute]="'/recursos-web/list-text.png'"></app-section-header>
+@if (!dataLoaded) {
+<div class="spinner">
+    <mat-spinner></mat-spinner>
+</div>
+}
+
+@if(dataLoaded){
+<div class="container-fluid d-flex justify-content-center align-items-center mt-3">
+    <div class="row w-100">
+        <div class="col-12 col-md-8 col-lg-6 mx-auto">
+            <app-card class="p-4 rounded">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-100">
+
+                    <div class="form-group mb-4">
+                        
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="room" class="form-label">Select a Room</label>
+                        <select id="room" formControlName="room_id" class="form-control">
+                            <option value="" disabled>Select a room</option>
+                            <option *ngFor="let room of rooms; trackBy: trackById" [value]="room.id">
+                                {{ room.name }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="state" class="form-label">Select a State</label>
+                        <select id="state" formControlName="state" class="form-control">
+                            <option value="" disabled>Select a State</option>
+                            <option value="active">Active</option>
+                            <option value="available">Available</option>
+                        </select>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <app-button [text]="'Save Changes'" [disabled]="!form.valid" class="btn-lg w-100" />
+                    </div>
+
+                </form>
+            </app-card>
+        </div>
+    </div>
+</div>
+}
+
+<p-toast position="bottom-right" key="br"></p-toast>
