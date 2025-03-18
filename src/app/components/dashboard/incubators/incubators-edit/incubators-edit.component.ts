@@ -72,119 +72,117 @@ export class IncubatorsEditComponent {
   }
 
   onSubmit() {
-    this.form.markAllAsTouched();
-    if (this.form.invalid) return;
+    this.form.markAllAsTouched()
+    if (this.form.invalid) return
 
-    const baby_id = this.form.get('baby_id')?.value;
-    const nurse_id = this.form.get('nurse_id')?.value;
-    const room_id = this.form.get('room_id')?.value;
-    const incubator_id = this.route.snapshot.params['id'];
-    const hospital_id = this.hospital_id;
+    const baby_id = this.form.get('baby_id')?.value
+    const nurse_id = this.form.get('nurse_id')?.value
+    const room_id = this.form.get('room_id')?.value
+    const incubator_id = this.route.snapshot.params['id']
+    const hospital_id = this.hospital_id
 
     if (!baby_id || !nurse_id) {
-      this.showAlert('error', 'Error', 'Please select a baby and a nurse.');
-      return;
+      this.showAlert('error', 'Error', 'Please select a baby and a nurse.')
+      return
     }
 
-    // Primero asignamos el bebé y la enfermera
     this.babiesService.assignBabyToIncubator({ baby_id, nurse_id, room_id, incubator_id, hospital_id }).subscribe(
       () => {
-        this.showAlert('success', 'Success', 'Baby and Nurse assigned successfully');
-        this.isAssigned = true;
+        this.showAlert('success', 'Success', 'Baby and Nurse assigned successfully')
+        this.isAssigned = true
 
-        // Luego, actualizamos el estado de la incubadora
         this.incubatorsService.update(incubator_id, this.form.value).subscribe(
           (response) => {
-            console.log(response, this.form.value);
-            this.showAlert('success', 'Success', 'Incubator updated successfully');
-            this.loadIncubator(incubator_id); // Recargar los datos
+            this.showAlert('success', 'Success', 'Incubator updated successfully')
+
           },
           (error) => {
-            this.showAlert('error', 'Error', "Incubator couldn't be updated");
+            console.error('Error updating incubator:', error)
+            this.showAlert('error', 'Error', "Incubator couldn't be updated")
           }
-        );
+        )
       },
       () => {
-        this.showAlert('error', 'Error', "Couldn't assign baby and nurse to incubator");
+        this.showAlert('error', 'Error', "Couldn't assign baby and nurse to incubator")
       }
-    );
+    )
   }
 
   loadIncubator(id: number) {
     this.incubatorsService.show(id).subscribe(
       (response) => {
-        this.incubator = response.incubator;
+        this.incubator = response.incubator
         this.form.patchValue({
           baby_id: this.incubator.baby_id,
           nurse_id: this.incubator.nurse_id,
           room_id: this.incubator.room_id,
           state: this.incubator.state
-        });
+        })
 
-        this.isAssigned = !!(this.incubator.baby_id && this.incubator.nurse_id);
-        this.dataLoaded = true;
+        this.isAssigned = !!(this.incubator.baby_id && this.incubator.nurse_id)
+        this.dataLoaded = true
       },
       () => {
-        this.showAlert("error", "Error", "Could not load incubator data.");
+        this.showAlert("error", "Error", "Could not load incubator data.")
       }
-    );
+    )
   }
 
   loadRooms(hospitalId: number) {
     this.roomsService.getRoomsByHospital(Number(hospitalId)).subscribe(
       (response) => {
-        this.rooms = response.rooms.data;
+        this.rooms = response.rooms.data
       },
-    );
+    )
   }
 
   loadNurses(hospital_id: number) {
     this.nursesService.index(hospital_id).subscribe(
       (response) => {
-        this.nurses = response.data;
+        this.nurses = response.data
       },
       () => {
-        this.nurses = [];
+        this.nurses = []
       }
-    );
+    )
   }
 
   loadBabies(hospital_id: number) {
     this.babiesService.indexNoPaginate({ hospital_id }).subscribe(
       (response) => {
-        this.babies = response.babies || [];
+        this.babies = response.babies || []
       },
       () => {
-        this.showAlert("error", "Error", "Could not load babies.");
-        this.babies = [];
+        this.showAlert("error", "Error", "Could not load babies.")
+        this.babies = []
       }
-    );
+    )
   }
 
   assignBabyToIncubator() {
-    const baby_id = this.form.get('baby_id')?.value;
-    const nurse_id = this.form.get('nurse_id')?.value;
-    const room_id = this.form.get('room_id')?.value;
-    const incubator_id = this.route.snapshot.params['id'];
-    const hospital_id = this.hospital_id;
+    const baby_id = this.form.get('baby_id')?.value
+    const nurse_id = this.form.get('nurse_id')?.value
+    const room_id = this.form.get('room_id')?.value
+    const incubator_id = this.route.snapshot.params['id']
+    const hospital_id = this.hospital_id
 
     if (!baby_id || !nurse_id) {
-      this.showAlert('error', 'Error', 'Please select a baby and a nurse.');
-      return;
+      this.showAlert('error', 'Error', 'Please select a baby and a nurse.')
+      return
     }
 
     this.babiesService.assignBabyToIncubator({ baby_id, nurse_id, room_id, incubator_id, hospital_id }).subscribe(
       () => {
-        this.showAlert('success', 'Success', 'Baby assigned to incubator successfully');
-        this.isAssigned = true;
+        this.showAlert('success', 'Success', 'Baby assigned to incubator successfully')
+        this.isAssigned = true
       },
       () => {
-        this.showAlert('error', 'Error', "Couldn't assign baby to incubator");
+        this.showAlert('error', 'Error', "Couldn't assign baby to incubator")
       }
-    );
+    )
   }
 
   trackById(index: number, item: any): number {
-    return item.id;
+    return item.id
   }
 }

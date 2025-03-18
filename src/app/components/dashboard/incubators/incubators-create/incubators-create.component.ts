@@ -69,14 +69,13 @@ export class IncubatorsCreateComponent {
 
     this.incubatorsService.create(this.form.value).subscribe(
       (response) => {
-        this.showAlert("success", "Incubadora creada", response.msg)
+        this.showAlert("success", "Incubator Created", response.msg)
         this.form.reset()
       },
       (error) => {
         this.showAlert("error", "Error", error.error.msg)
       }
     )
-
   }
 
   loadHospitals() {
@@ -86,7 +85,7 @@ export class IncubatorsCreateComponent {
         this.dataLoaded = true
       },
       (error) => {
-        this.showAlert("error", "Error", "No se pudieron cargar los hospitales.")
+        this.showAlert("error", "Error", "Could not load hospitals.")
       }
     )
   }
@@ -103,6 +102,8 @@ export class IncubatorsCreateComponent {
       this.rooms = response.rooms.data
       this.form.get('room_id')?.enable()
     }, (error) => {
+      this.form.patchValue({ room_id: null })
+      this.rooms = []
       this.showAlert("error", "Error", "Could not load rooms.")
     })
   }
