@@ -2,13 +2,19 @@ import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { NavComponent } from "../nav/nav.component";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { CommonModule } from '@angular/common';
+import { FooterComponent } from "../footer/footer.component";
 
 gsap.registerPlugin(ScrollTrigger);
 
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [NavComponent],
+  imports: [
+    NavComponent,
+    CommonModule,
+    FooterComponent
+],
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css']
 })
@@ -18,25 +24,24 @@ export class LandingComponent implements AfterViewInit, OnDestroy {
 
   slogan: boolean = false;
   logoAnimationComplete: boolean = false;
+  animaitonComplete: boolean = false;
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'instant' });
-      this.slogan = false;
-    }, 0);
     this.setupAnimations();
+    this.trackScroll();
   }
 
   ngOnDestroy() {
     this.slogan = false;
+    window.removeEventListener('scroll', this.checkScrollLevel);
   }
 
   setupAnimations() {
     const logo = document.querySelector('.image');
     const text = document.querySelector('.text');
-    const slogan = document.querySelector('.slogan-text')
+    const slogan = document.querySelector('.slogan-text');
 
-    gsap.set(slogan, { display: 'none' })
+    gsap.set(slogan, { display: 'none' });
 
     gsap.to(text, {
       x: '100vw',
@@ -106,39 +111,6 @@ export class LandingComponent implements AfterViewInit, OnDestroy {
         }
       }
     });
-
-    gsap.to(logo, {
-      y: '-5vh',
-      scrollTrigger: {
-        trigger: logo,
-        start: '200% center',
-        end: '300% center',
-        scrub: true,
-        markers: false,
-        onEnterBack: () => {
-          gsap.to(logo, { y: '0' });
-        },
-        onLeaveBack: () => {
-          gsap.to(logo, { y: '0' });
-        }
-      }
-    });
-    gsap.to(logo, {
-      y: '-5vh',
-      scrollTrigger: {
-        trigger: logo,
-        start: '200% center',
-        end: '300% center',
-        scrub: true,
-        markers: false,
-        onEnterBack: () => {
-          gsap.to(logo, { y: '0' });
-        },
-        onLeaveBack: () => {
-          gsap.to(logo, { y: '0' });
-        }
-      }
-    });
   }
 
   finalAnimation() {
@@ -148,8 +120,8 @@ export class LandingComponent implements AfterViewInit, OnDestroy {
       y: '-200%',
       scrollTrigger: {
         trigger: animation,
-        start: '50% center',
-        end: '150% center',
+        start: '80% center',
+        end: '300% center',
         scrub: 1,
         onEnterBack: () => {
           gsap.to(animation, {
@@ -170,4 +142,21 @@ export class LandingComponent implements AfterViewInit, OnDestroy {
       }
     });
   }
+
+  scroll: number = 0;
+
+  trackScroll() {
+    window.addEventListener('scroll', this.checkScrollLevel);
+  }
+
+  checkScrollLevel = () => {
+    this.scroll = window.scrollY;
+
+    if (this.scroll > 1100) {
+      this.animaitonComplete = true;
+    } else if (this.scroll < 900) {
+      this.animaitonComplete = false;
+    }
+  };
+
 }
