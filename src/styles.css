@@ -16,7 +16,7 @@ html,
 
 body {
     height: 100%;
-    background-color: #EBD3F8;
+    background-color: var(--color-morado-form);
 }
 
 body {

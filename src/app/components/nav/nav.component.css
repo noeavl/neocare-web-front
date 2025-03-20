@@ -9,3 +9,9 @@ a {
 .navbarNav {
   align-items: end;
 }
+
+img.logo {
+  width: 5%;
+  height: 5%;
+  margin: 0;
+}
