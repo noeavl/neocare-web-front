@@ -1,5 +1,8 @@
-<app-section-header title="Incubator Detail" [route]="'/dashboard/incubators/list'"
-    [imgRoute]="'/recursos-web/list-text.png'">
+<app-section-header 
+    title="Incubator Detail" 
+    [route]="'/dashboard/incubators/list'"
+    [imgRoute]="'/recursos-web/list-text.png'"
+>
 </app-section-header>
 
 @if (!dataLoaded) {
@@ -11,16 +14,20 @@
 <div class="row mt-4">
     <div class="col-12 col-lg-4">
         <app-card class="w-100">
-            <div class="row gy-3 px-3"> 
-                <div class="col-12 d-flex align-items-center gap-2 menu-container p-2"
-                    [routerLink]="['/dashboard/incubators/', id]">
+            <div class="row gy-3 px-1"> 
+                <div 
+                    class="col-12 d-flex align-items-center gap-2 menu-container p-2"
+                    [routerLink]="['/dashboard/incubators/', id]"
+                >
                     <mat-icon>info</mat-icon>
                     <p class="fw-bold m-0">General Information</p>
                 </div>
 
-                <div *ngFor="let item of sensorsEntries"
+                <div
+                    *ngFor="let item of sensorsEntries"
                     class="col-12 d-flex align-items-center gap-2 menu-container p-2"
-                    [routerLink]="['/dashboard/incubators/', id, item.url]">
+                    [routerLink]="['/dashboard/incubators/', id, item.url]"
+                >
                     <mat-icon>{{ item.icon }}</mat-icon>
                     <p class="fw-bold m-0">{{ item.label }}</p>
                 </div>

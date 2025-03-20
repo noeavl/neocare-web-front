@@ -12,6 +12,7 @@ import { MatIcon } from '@angular/material/icon'
 
 @Component({
   selector: 'app-incubator',
+  standalone: true,
   imports: [
     RouterLink,
     MatSpinner,

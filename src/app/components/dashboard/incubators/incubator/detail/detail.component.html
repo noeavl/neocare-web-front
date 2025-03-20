@@ -1,1 +1,9 @@
-<p>detail works!</p>
+@if (!dataLoaded) {
+<div class="spinner">
+    <mat-spinner></mat-spinner>
+</div>
+}
+
+<app-incubator-detail [incubator]="incubator"></app-incubator-detail>
+
+<p-toast position="bottom-right" key="br"></p-toast>
