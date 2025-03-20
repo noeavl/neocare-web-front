@@ -196,7 +196,6 @@ body {
 }
 
 section {
-  margin: 2rem 0;
   width: 100%;
   padding: 0;
 }
@@ -207,7 +206,7 @@ section {
 
 .section-badge {
   display: inline-block;
-  background-color: rgba(255, 107, 157, 0.2);
+  background-color: var(--color-morado-oscuro);
   color: var(--color-rosa-claro);
   padding: 0.5rem 1.5rem;
   border-radius: 50px;
@@ -234,7 +233,7 @@ h2 {
 }
 
 .features-section {
-  background-color: rgba(90, 15, 132, 0.1);
+  background-color: var(--color-rosa-claro);
   width: 100%;
 }
 
@@ -340,9 +339,8 @@ h2 {
 }
 
 .how-it-works-section {
-  width: 90%;
-  max-width: 1400px;
-  padding: 0 1rem;
+  background-color: var(--color-rosa-claro);
+
 }
 
 .process-image {
@@ -422,9 +420,7 @@ h2 {
 }
 
 .team-section {
-  width: 90%;
-  max-width: 1400px;
-  padding: 0 1rem;
+  background-color: var(--color-morado-oscuro);
 }
 
 .team-image-container {
@@ -469,7 +465,7 @@ h2 {
 .cta-section {
   width: 100%;
   background: linear-gradient(135deg, var(--color-rosa-claro), var(--color-morado));
-  padding: 6rem 0;
+  padding: 5rem 0;
 }
 
 .cta-content h2 {

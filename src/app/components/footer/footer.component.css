@@ -1,13 +1,5 @@
-:root {
-  --color-morado: #492E87;
-  --color-rosa: #EBD3F8;
-  --color-rosa-claro: #AD49E1;
-  --color-violeta: #7A1CAC;
-  --color-morado-oscuro: #2E073F;
-}
-
 .footer-neocare {
-  background-color: var(--color-morado);
+  background-color: var(--color-morado-form);
   padding: 3.5rem 0 2rem;
 }
 
