@@ -17,7 +17,7 @@
 </div>
 @if (!isSearching && rooms.length === 0) {
 <div class="text-center mt-5">
-    <h4>Select a hospital to view rooms</h4>
+    <h4 [style]="{'color':'var(--color-morado)'}">Select a hospital to view rooms</h4>
 </div>
 }
 
@@ -35,7 +35,7 @@
                 </app-room-card>
             </div>
             <mat-paginator [length]="totalItems" [pageSize]="pageSize" (page)="onPageChange($event)"
-                aria-label="Select page">
+                aria-label="Select page" [pageIndex]="currentPage">
             </mat-paginator>
         </div>
     </div>
