@@ -1,10 +1,100 @@
-div.footer {
-  width: 100%;
-  height: 20rem;
-  background-color: #492E87;
+:root {
+  --color-morado: #492E87;
+  --color-rosa: #EBD3F8;
+  --color-rosa-claro: #AD49E1;
+  --color-violeta: #7A1CAC;
+  --color-morado-oscuro: #2E073F;
+}
+
+.footer-neocare {
+  background-color: var(--color-morado);
+  padding: 3.5rem 0 2rem;
+}
+
+.footer-neocare-title {
+  color: white;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.footer-neocare-description {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+  max-width: 95%;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.footer-neocare-subtitle {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.footer-neocare-contact-grid {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-neocare-contact-item {
+  display: flex;
+}
+
+.footer-neocare-contact-label {
+  display: block;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+
+.footer-neocare-contact-text {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}
+
+.footer-neocare-social-container {
+  margin-top: 1.5rem;
+}
+
+.footer-neocare-social-icons {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.footer-neocare-social-icon {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.footer-neocare-social-icon:hover {
   color: white;
+}
+
+.footer-neocare-divider {
+  border-color: rgba(255, 255, 255, 0.1);
+  margin: 2rem 0;
+}
+
+.footer-neocare-copyright {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .footer-neocare {
+    padding: 2.5rem 0 1.5rem;
+  }
+
+  .footer-neocare-description {
+    max-width: 100%;
+  }
 }
