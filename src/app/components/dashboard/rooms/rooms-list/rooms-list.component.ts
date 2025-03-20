@@ -82,6 +82,7 @@ export class RoomsListComponent {
   onSubmit(event: Event) {
     event.preventDefault()
     window.scrollTo(0, 0)
+    this.currentPage = 0
     this.getHospitals()
   }
   getHospitals() {
