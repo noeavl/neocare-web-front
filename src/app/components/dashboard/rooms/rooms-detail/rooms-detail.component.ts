@@ -10,9 +10,10 @@ import { CommonModule } from '@angular/common';
 import { RoomIncubatorCardComponent } from './room-incubator-card/room-incubator-card.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { SectionHeaderComponent } from '../../section-header/section-header.component';
 @Component({
   selector: 'app-rooms-detail',
-  imports: [CardComponent, IconComponent, MatIconModule, ToastModule, RoomIncubatorCardComponent, CommonModule, NgxPaginationModule, MatProgressSpinner],
+  imports: [CardComponent, IconComponent, MatIconModule, ToastModule, RoomIncubatorCardComponent, CommonModule, NgxPaginationModule, MatProgressSpinner, SectionHeaderComponent],
   templateUrl: './rooms-detail.component.html',
   styleUrl: './rooms-detail.component.css',
   providers: [MessageService]
