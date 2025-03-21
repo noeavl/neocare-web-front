@@ -11,4 +11,5 @@ import { CommonModule } from '@angular/common';
 export class
   CardComponent {
   @Input() customClass?: string;
+  @Input() backgroundColor?: string = 'white';
 }

@@ -1,0 +1,48 @@
+mat-icon {
+    color: var(--color-rosa-claro);
+}
+
+.id {
+    background-color: var(--color-rosa);
+    color: var(--color-morado);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+::ng-deep .ngx-pagination {
+    background: none !important; /* Elimina cualquier fondo predeterminado */
+    border: none !important; /* Evita que tenga bordes predeterminados */
+    box-shadow: none !important;
+    padding: 0;
+}
+
+::ng-deep .ngx-pagination .current {
+    color: var(--color-rosa-claro) !important;
+    background-color: transparent !important;
+    font-weight: bold !important;
+}
+
+::ng-deep .ngx-pagination li {
+    margin: 0 5px;
+    color: var(--color-morado) !important;
+    cursor: pointer;
+    background: none !important;
+    border: none !important;
+}
+
+::ng-deep .ngx-pagination li:hover {
+    background-color: var(--color-rosa) !important;
+    border-radius: 20px !important;
+}
+
+::ng-deep .ngx-pagination a {
+    text-decoration: none !important;
+    color: var(--color-morado) !important;
+    background: none !important;
+    border: none !important;
+}
+
+::ng-deep .ngx-pagination a:hover {
+    background-color: var(--color-rosa) !important;
+    border-radius: 20px !important;
+}
