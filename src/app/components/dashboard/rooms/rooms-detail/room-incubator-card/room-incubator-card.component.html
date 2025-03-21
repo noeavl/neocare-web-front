@@ -1,16 +1,16 @@
-<app-card [backgroundColor]="'#2E073F'">
+<app-card [backgroundColor]="'var(--color-rosa)'">
         <div class="row">
             <div class="d-flex align-items-center ms-3">
-                <mat-icon class="text-white">tag</mat-icon>
-                <p class="text-white mb-0 ms-2">{{ id }}</p>
+                <mat-icon >tag</mat-icon>
+                <p class="mb-0 ms-2">{{ id }}</p>
             </div>
             <div class="d-flex align-items-center ms-3">
-                <mat-icon class="text-white">child_friendly</mat-icon>
-                <p class="text-white mb-0 ms-2">{{ baby_full_name }}</p>
+                <mat-icon>child_friendly</mat-icon>
+                <p class="mb-0 ms-2">{{ baby_full_name }}</p>
             </div>
             <div class="d-flex align-items-center ms-3 mt-2">
-                <mat-icon class="text-white">medical_services</mat-icon>
-                <p class="text-white mb-0 ms-2">{{ nurse_full_name }}</p>
+                <mat-icon >medical_services</mat-icon>
+                <p class="mb-0 ms-2">{{ nurse_full_name }}</p>
             </div>
             <div class="d-flex align-items-center ms-3 mt-2">
                 <mat-icon [ngClass]="{
@@ -19,7 +19,7 @@
                   }">
                     {{ getStateIcon(state) }}
                 </mat-icon>
-                <p class="text-white mb-0 ms-2">{{ state }}</p>
+                <p class="mb-0 ms-2">{{ state }}</p>
             </div>
         </div>
 </app-card>

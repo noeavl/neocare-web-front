@@ -46,3 +46,16 @@ mat-icon {
     background-color: var(--color-rosa) !important;
     border-radius: 20px !important;
 }
+
+
+.spinner {
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+::ng-deep mat-spinner circle {
+    stroke: var(--color-violeta) !important;
+}

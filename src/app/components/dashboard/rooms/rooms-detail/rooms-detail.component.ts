@@ -9,9 +9,10 @@ import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
 import { RoomIncubatorCardComponent } from './room-incubator-card/room-incubator-card.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-rooms-detail',
-  imports: [CardComponent, IconComponent, MatIconModule, ToastModule, RoomIncubatorCardComponent, CommonModule, NgxPaginationModule],
+  imports: [CardComponent, IconComponent, MatIconModule, ToastModule, RoomIncubatorCardComponent, CommonModule, NgxPaginationModule, MatProgressSpinner],
   templateUrl: './rooms-detail.component.html',
   styleUrl: './rooms-detail.component.css',
   providers: [MessageService]
@@ -20,6 +21,7 @@ export class RoomsDetailComponent {
   page: number = 1; 
   id:number
   room!:Room
+  dataLoaded: boolean = false
   incubators:Incubator[] = []
   total_incubators!: number
   total_babies!: number
@@ -32,15 +34,17 @@ export class RoomsDetailComponent {
   }
 
   getRoom() {
+    this.dataLoaded = false
     this.roomsService.show(this.id).subscribe({
       next: (response) => {
         this.room = response.room
         this.total_babies = response.total_babies
         this.total_incubators = response.total_incubators
         this.incubators = response.incubators
-        console.log(response)
+        this.dataLoaded = true
       },
       error: (error) => {
+        this.dataLoaded = true
         this.showAlert('error', 'Error', error.error.message)
       } 
     })
