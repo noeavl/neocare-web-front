@@ -22,7 +22,6 @@ import { HttpErrorResponse } from '@angular/common/http';
     CommonModule,
     InputComponent,
     ButtonComponent,
-    SelectComponent,
     ToastModule,
     MatProgressSpinner,
     RouterModule

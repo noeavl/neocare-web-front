@@ -43,9 +43,9 @@ export class BabiesListComponent implements OnInit {
  }
  
   loadHospitals() {
-    this.hospitalsService.index().subscribe(
+    this.hospitalsService.indexNoPaginate().subscribe(
       (response) => {
-        this.hospitals = response.hospitals?.data || []
+        this.hospitals = response.hospitals || []
         this.dataLoaded = true
       },
       (error) => {

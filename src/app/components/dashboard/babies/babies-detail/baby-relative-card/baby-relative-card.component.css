@@ -1,0 +1,26 @@
+mat-icon {
+    color: var(--color-rosa-claro);
+}
+
+.icon{
+    color: white;
+}
+
+p{
+    color: var(--color-morado-oscuro);
+}
+
+.custom-purple-button {
+    background-color: var(--color-rosa-claro);
+    border-radius: 50%; 
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .custom-purple-button:hover {
+    background-color: #5a2ca0;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  }
