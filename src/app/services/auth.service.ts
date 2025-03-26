@@ -23,7 +23,7 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/sessions/login/web`, data)
   }
 
-  userRole() {
+  userRole():Observable<any> {
     return this.http.get(`${this.apiUrl}/sessions/role`)
   }
   logout() {
