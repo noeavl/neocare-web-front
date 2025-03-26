@@ -6,14 +6,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        @if (!isAuthenticated) {
+        @if (!isAuthenticated && rol == "guest") {
           <li class="nav-item">
             <a class="nav-link active" [routerLink]="'log-in'" routerLinkActive="router-link-active">Log in</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" [routerLink]="'sign-up'" routerLinkActive="router-link-active">Sign up</a>
           </li>
-        } @else if (isAuthenticated) {
+        } @else if (isAuthenticated && rol != "guest") {
           <li class="nav-item">
             <a class="nav-link active" [routerLink]="'dashboard'" routerLinkActive="router-link-active">Dashboard</a>
           </li>
