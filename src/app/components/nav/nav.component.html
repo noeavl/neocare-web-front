@@ -6,7 +6,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        @if (!isAuthenticated && rol == "guest") {
+        @if (!isAuthenticated) {
           <li class="nav-item">
             <a class="nav-link active" [routerLink]="'log-in'" routerLinkActive="router-link-active">Log in</a>
           </li>
