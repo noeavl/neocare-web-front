@@ -60,8 +60,9 @@ export const routes: Routes = [
       {
         path: 'hospitals',
         component: HospitalsComponent,
+        
         children: [
-          { path: '', component: HospitalsListComponent },
+          { path: '', component: HospitalsListComponent, canActivate: [authGuardGuard], },
           { path: 'create', component: HospitalsCreateComponent },
           { path: ':id', component: HospitalsDetailComponent },
           { path: ':id/edit', component: HospitalsEditComponent }
