@@ -66,10 +66,11 @@ export class BabiesDetailComponent {
         this.relatives = response.relatives.data
         this.totalItems = response.relatives.total; 
         this.currentPage = response.relatives.current_page;
-        console.log(this.currentPage)
-        console.log(this.totalItems) 
       },
-      error: (error) => console.error('Error fetching relatives:', error),
+      error: (error) => 
+      {
+
+      }
     });
   }
   

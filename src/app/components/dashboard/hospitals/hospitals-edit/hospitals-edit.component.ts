@@ -105,7 +105,6 @@ export class HospitalsEditComponent {
         this.dataLoad = true
       },
       error: (error) => {
-        console.log(error)
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
             this.showAlert('error', 'Error', 'Fail to connect to the server');
@@ -132,7 +131,6 @@ export class HospitalsEditComponent {
         this.form.controls['address_id'].setValue(response.hospital.address.id)
       },
       error: (error) => {
-        console.log(error)
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
             this.showAlert('error', 'Error', 'Fail to connect to the server');

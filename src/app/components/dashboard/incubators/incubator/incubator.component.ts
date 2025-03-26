@@ -59,7 +59,6 @@ export class IncubatorComponent {
         this.dataLoaded = true
       },
       (error) => {
-        console.log(error)
         this.dataLoaded = true
       }
     )

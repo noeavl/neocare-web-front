@@ -78,7 +78,6 @@ export class AddressEditionComponent implements OnInit {
   loadAddress(id: number) {
     this.addressService.showAddress(id).subscribe(
       (response) => {
-        console.log(response)
         this.form.patchValue({
           state: response.address.state,
           city: response.address.city,
@@ -89,7 +88,6 @@ export class AddressEditionComponent implements OnInit {
         })
       },
       (error) => {
-        console.error('Error fetching address:', error)
       }
     )
   }
@@ -112,7 +110,6 @@ export class AddressEditionComponent implements OnInit {
         }, 3000)
       },
       (error) => {
-        console.log(error)
       }
     );
   }

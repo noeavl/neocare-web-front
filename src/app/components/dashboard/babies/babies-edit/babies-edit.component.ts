@@ -92,11 +92,11 @@ export class BabiesEditComponent {
     if (!date) return null;
     const d = new Date(date);
     if (isNaN(d.getTime())) {
-      return null; 
+      return null;
     }
     return `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')}`;
   }
-  
+
   handleSelection(value: string): void {
     this.form.controls['hospital_id'].setValue(value)
   }
@@ -141,7 +141,6 @@ export class BabiesEditComponent {
         this.dataLoad = true
       },
       error: (error) => {
-        console.log(error)
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
             this.showAlert('error', 'Error', 'Fail to connect to the server');
@@ -159,7 +158,7 @@ export class BabiesEditComponent {
       }
     })
   }
-  
+
   getBaby() {
     this.babiesService.show(this.id).subscribe({
       next: (response) => {
@@ -170,7 +169,6 @@ export class BabiesEditComponent {
         this.form.controls['hospital_id'].setValue(response.baby.hospital_id)
       },
       error: (error) => {
-        console.log(error)
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
             this.showAlert('error', 'Error', 'Fail to connect to the server');
