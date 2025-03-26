@@ -37,6 +37,7 @@ import { SoundComponent } from './components/dashboard/incubators/incubator/sens
 import { LightComponent } from './components/dashboard/incubators/incubator/sensors/light/light.component'
 import { VibrationComponent } from './components/dashboard/incubators/incubator/sensors/vibration/vibration.component'
 import { DetailComponent } from './components/dashboard/incubators/incubator/detail/detail.component'
+import { MainDashboardComponent } from './components/dashboard/main-dashboard/main-dashboard.component'
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -47,6 +48,10 @@ export const routes: Routes = [
     component: DashboardComponent,
     canActivate: [authGuardGuard],
     children: [
+      {
+        path: '',
+        component: MainDashboardComponent
+      },
       {
         path: 'addresses',
         component: AddressesComponent,
