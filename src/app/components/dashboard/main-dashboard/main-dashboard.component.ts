@@ -19,19 +19,16 @@ export class MainDashboardComponent {
     {
       img: '/recursos-web/address.png',
       title: 'Addresses',
-      size: 90,
       route: '/dashboard/addresses/list'
     },
     {
       img: '/recursos-web/users-icon.png',
       title: 'Users',
-      size: 90,
       routes: '/dashboard/users'
     },
     {
       img: '/recursos-web/checks-icon.png',
       title: 'Checks',
-      size: 90,
       route: '/dashboard/checks'
     }
   ]
