@@ -4,6 +4,7 @@ body {
   background-color: black;
   color: white;
   overflow-x: hidden;
+  background-color: #7A1CAC;
 }
 
 .spacer {
@@ -40,6 +41,7 @@ body {
 }
 
 .slogan-text {
+  text-align: center;
   font-size: 4rem;
   font-weight: bold;
   color: white;
