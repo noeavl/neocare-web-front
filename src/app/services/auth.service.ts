@@ -20,7 +20,7 @@ export class AuthService {
 
   login(data: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
-    return this.http.post(`${this.apiUrl}/sessions/login/web`, data)
+    return this.http.post(`${this.apiUrl}/sessions/login`, data)
   }
 
   userRole():Observable<any> {
