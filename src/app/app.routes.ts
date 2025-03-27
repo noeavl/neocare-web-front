@@ -50,48 +50,52 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: MainDashboardComponent
+        component: MainDashboardComponent,
+        canActivate: [authGuardGuard],
       },
       {
         path: 'addresses',
         component: AddressesComponent,
+        canActivate: [authGuardGuard],
         children: [
-          { path: 'list', component: AddressListComponent },
-          { path: 'registration', component: AddressRegistrationComponent },
-          { path: 'update/:id', component: AddressEditionComponent },
-          { path: 'address/:id', component: AddressComponent }
+          { path: 'list', component: AddressListComponent, canActivate: [authGuardGuard], },
+          { path: 'registration', component: AddressRegistrationComponent, canActivate: [authGuardGuard], },
+          { path: 'update/:id', component: AddressEditionComponent, canActivate: [authGuardGuard], },
+          { path: 'address/:id', component: AddressComponent, canActivate: [authGuardGuard], }
         ]
       },
       {
         path: 'hospitals',
         component: HospitalsComponent,
-        
+        canActivate: [authGuardGuard],
         children: [
           { path: '', component: HospitalsListComponent, canActivate: [authGuardGuard], },
-          { path: 'create', component: HospitalsCreateComponent },
-          { path: ':id', component: HospitalsDetailComponent },
-          { path: ':id/edit', component: HospitalsEditComponent }
+          { path: 'create', component: HospitalsCreateComponent, canActivate: [authGuardGuard], },
+          { path: ':id', component: HospitalsDetailComponent, canActivate: [authGuardGuard], },
+          { path: ':id/edit', component: HospitalsEditComponent, canActivate: [authGuardGuard], }
 
         ]
       },
       {
         path: 'incubators',
         component: IncubatorsComponent,
+        canActivate: [authGuardGuard],
         children: [
-          { path: 'list', component: IncubatorsListComponent },
-          { path: 'create', component: IncubatorsCreateComponent },
-          { path: ':id/edit', component: IncubatorsEditComponent },
+          { path: 'list', component: IncubatorsListComponent, canActivate: [authGuardGuard], },
+          { path: 'create', component: IncubatorsCreateComponent, canActivate: [authGuardGuard], },
+          { path: ':id/edit', component: IncubatorsEditComponent, canActivate: [authGuardGuard], },
           { 
             path: ':id', 
             component: IncubatorComponent, 
+            canActivate: [authGuardGuard],
             children: [
-              {path: '', component: DetailComponent},
-              { path: 'temperature', component: TemperatureComponent },
-              { path: 'humidity', component: HumidityComponent },
-              { path: 'movement', component: MovementComponent },
-              { path: 'sound', component: SoundComponent },
-              { path: 'light', component: LightComponent },
-              { path: 'vibration', component: VibrationComponent }
+              { path: '', component: DetailComponent, canActivate: [authGuardGuard], },
+              { path: 'temperature', component: TemperatureComponent, canActivate: [authGuardGuard], },
+              { path: 'humidity', component: HumidityComponent, canActivate: [authGuardGuard], },
+              { path: 'movement', component: MovementComponent, canActivate: [authGuardGuard], },
+              { path: 'sound', component: SoundComponent, canActivate: [authGuardGuard], },
+              { path: 'light', component: LightComponent, canActivate: [authGuardGuard], },
+              { path: 'vibration', component: VibrationComponent, canActivate: [authGuardGuard], }
             ]
           }
         ]
@@ -99,21 +103,24 @@ export const routes: Routes = [
       {
         path: 'babies',
         component: BabiesComponent,
+        canActivate: [authGuardGuard],
         children: [
-          { path: 'list', component: BabiesListComponent },
-          { path: 'create', component: BabiesCreateComponent },
-          { path: ':id/edit', component: BabiesEditComponent },
-          { path: ':id', component: BabiesDetailComponent }]
+          { path: 'list', component: BabiesListComponent, canActivate: [authGuardGuard], },
+          { path: 'create', component: BabiesCreateComponent, canActivate: [authGuardGuard], },
+          { path: ':id/edit', component: BabiesEditComponent, canActivate: [authGuardGuard], },
+          { path: ':id', component: BabiesDetailComponent, canActivate: [authGuardGuard], }]
       }, {
         path: 'rooms',
         component: RoomsComponent,
+        canActivate: [authGuardGuard],
         children: [
-          { path: 'list', component: RoomsListComponent },
-          { path: 'create', component: RoomsCreateComponent },
-          { path: ':id/edit', component: RoomsEditComponent },
+          { path: 'list', component: RoomsListComponent, canActivate: [authGuardGuard], },
+          { path: 'create', component: RoomsCreateComponent, canActivate: [authGuardGuard], },
+          { path: ':id/edit', component: RoomsEditComponent, canActivate: [authGuardGuard], },
           {
             path: ':id',
             component: RoomsDetailComponent,
+            canActivate: [authGuardGuard],
           }
         ]
       }

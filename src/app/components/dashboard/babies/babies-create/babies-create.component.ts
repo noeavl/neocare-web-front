@@ -22,8 +22,19 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-babies-create',
-  imports: [SectionHeaderComponent, CardComponent, ReactiveFormsModule, CommonModule, InputComponent, ButtonComponent,
-     SelectComponent, ToastModule, MatProgressSpinner, MatInputModule, MatDatepickerModule, MatNativeDateModule],
+  imports: [
+    SectionHeaderComponent, 
+    CardComponent, 
+    ReactiveFormsModule, 
+    CommonModule, 
+    InputComponent, 
+    ButtonComponent,
+    ToastModule, 
+    MatProgressSpinner, 
+    MatInputModule, 
+    MatDatepickerModule, 
+    MatNativeDateModule
+  ],
   templateUrl: './babies-create.component.html',
   styleUrl: './babies-create.component.css',
   providers: [MessageService]

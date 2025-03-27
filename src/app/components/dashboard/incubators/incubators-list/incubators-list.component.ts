@@ -62,9 +62,9 @@ export class IncubatorsListComponent implements OnInit {
   }
 
   loadHospitals() {
-    this.hospitalsService.index().subscribe(
+    this.hospitalsService.indexNoPaginate().subscribe(
       (response) => {
-        this.hospitals = response.hospitals?.data || []
+        this.hospitals = response.hospitals || []
         this.dataLoaded = true
       },
       () => {

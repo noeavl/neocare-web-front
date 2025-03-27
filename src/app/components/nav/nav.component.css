@@ -10,8 +10,7 @@ a {
   align-items: end;
 }
 
-img.logo {
-  width: 5%;
-  height: 5%;
-  margin: 0;
+.logo {
+  width: auto;
+  height: 40px;            
 }

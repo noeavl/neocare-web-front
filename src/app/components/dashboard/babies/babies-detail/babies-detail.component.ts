@@ -17,9 +17,18 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-babies-detail',
-  imports: [IconComponent, MatIconModule, ToastModule, CommonModule, 
-    NgxPaginationModule, MatProgressSpinner, SectionHeaderComponent, MatPaginatorModule,
-    CardComponent, BabyRelativeCardComponent],
+  imports: [
+    IconComponent, 
+    MatIconModule, 
+    ToastModule, 
+    CommonModule, 
+    NgxPaginationModule, 
+    MatProgressSpinner, 
+    SectionHeaderComponent, 
+    MatPaginatorModule,
+    CardComponent, 
+    BabyRelativeCardComponent
+  ],
   templateUrl: './babies-detail.component.html',
   styleUrl: './babies-detail.component.css',
   providers: [MessageService]
