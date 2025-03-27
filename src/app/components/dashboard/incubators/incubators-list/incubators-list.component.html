@@ -1,29 +1,28 @@
-<app-section-header title="Incubators" [route]="'/dashboard/incubators/create'"
-    [imgRoute]="'/crud-icons/plus-icon.png'">
-</app-section-header>
-
+<app-section-header title="Incubators" [route]="'/dashboard/incubators/create'" [imgRoute]="'/crud-icons/plus-icon.png'" />
+<app-card class="mt-5">
+    <div class="container">
+        <form [formGroup]="formFilter" class="row w-100" (ngSubmit)="onSubmit($event)">
+            <div class="col-12 col-md-6 col-lg-3">
+                <label for="hospitalSelect" class="form-label">Select a Hospital:</label>
+                <select formControlName="hospital_id">
+                    <option value="" disabled>Select a hospital</option>
+                    <option *ngFor="let hospital of hospitals" [value]="hospital.id">
+                        {{ hospital.name }}
+                    </option>
+                </select>
+            </div>
+    
+            <div class="col-12 col-md-4 col-lg-2 mt-3 mt-lg-0 d-flex align-items-end">
+                <app-button text="Search" class="btn-lg w-100" [disabled]="!formFilter.get('hospital_id')?.value"
+                    (click)="loadIncubators()">
+                </app-button>
+            </div>
+        </form>
+    </div>
+</app-card>
 
 <div *ngIf="!dataLoaded" class="spinner">
     <mat-spinner></mat-spinner>
-</div>
-
-<div *ngIf="dataLoaded" class="container">
-    <form [formGroup]="formFilter" class="row" (ngSubmit)="onSubmit($event)">
-        <div class="col-12 col-md-6 col-lg-3">
-            <label for="hospitalSelect" class="form-label">Select a Hospital:</label>
-            <select formControlName="hospital_id">
-                <option *ngFor="let hospital of hospitals" [value]="hospital.id">
-                    {{ hospital.name }}
-                </option>
-            </select>
-        </div>
-
-        <div class="col-12 col-md-4 col-lg-2 mt-3 mt-lg-0 d-flex align-items-end">
-            <app-button text="Search" class="btn-lg w-100" [disabled]="!formFilter.get('hospital_id')?.value"
-                (click)="loadIncubators()">
-            </app-button>
-        </div>
-    </form>
 </div>
 
 <div *ngIf="dataLoaded" class="mt-3">

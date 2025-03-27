@@ -5,32 +5,10 @@ select {
     padding: 0 2rem;
     color: var(--color-morado);
     border: 1px solid var(--color-morado);
-    background-color: white;
+    background-color: transparent;
     font-family: inherit;
     width: 100%;
     appearance: none;
-}a
-
-select::after {
-    font-size: 1rem;
-    color: var(--color-morado-form);
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-}
-
-select option {
-    color: var(--color-morado-form);
-    background-color: #fff;
-}
-
-/* 🔹 Estilos específicos para la opción seleccionada */
-select:focus,
-select option:checked {
-    font-weight: bold; /* Se puede agregar negrita si se desea */
-    color: var(--color-morado); /* Color del texto */
 }
 
 .form-label {
