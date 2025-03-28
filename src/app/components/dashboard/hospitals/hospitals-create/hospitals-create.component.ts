@@ -93,7 +93,6 @@ export class HospitalsCreateComponent {
         this.dataLoad = true
       },
       error: (error) => {
-        console.log(error)
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
             this.showAlert('error', 'Error', 'Fail to connect to the server');

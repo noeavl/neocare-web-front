@@ -22,8 +22,19 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-babies-create',
-  imports: [SectionHeaderComponent, CardComponent, ReactiveFormsModule, CommonModule, InputComponent, ButtonComponent,
-     SelectComponent, ToastModule, MatProgressSpinner, MatInputModule, MatDatepickerModule, MatNativeDateModule],
+  imports: [
+    SectionHeaderComponent, 
+    CardComponent, 
+    ReactiveFormsModule, 
+    CommonModule, 
+    InputComponent, 
+    ButtonComponent,
+    ToastModule, 
+    MatProgressSpinner, 
+    MatInputModule, 
+    MatDatepickerModule, 
+    MatNativeDateModule
+  ],
   templateUrl: './babies-create.component.html',
   styleUrl: './babies-create.component.css',
   providers: [MessageService]
@@ -104,7 +115,6 @@ export class BabiesCreateComponent {
         this.dataLoad = true
       },
       error: (error) => {
-        console.log(error)
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
             this.showAlert('error', 'Error', 'Fail to connect to the server');

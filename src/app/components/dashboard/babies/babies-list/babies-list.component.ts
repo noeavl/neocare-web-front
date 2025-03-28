@@ -69,7 +69,6 @@ export class BabiesListComponent implements OnInit {
 
     this.babiesService.index(this.currentPage + 1, filtros).subscribe(
       (response) => {
-        console.log(response)
         this.babies = response.data || []
         this.totalItems = response.total || 0
         this.pageSize = response.per_page || 6
@@ -77,7 +76,6 @@ export class BabiesListComponent implements OnInit {
         this.dataLoaded = true
       },
       (error) => {
-        console.log(error)
         this.showAlert("error", "Error", "Could not load babies.")
         this.dataLoaded = true
         this.babies = []

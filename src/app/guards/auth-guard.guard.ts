@@ -19,7 +19,6 @@ export const authGuardGuard: CanActivateFn = (route, state) => {
       }
     }),
     catchError((error) => {
-      console.error('Error fetching user role:', error);
       router.navigate(['/']);
       return of(false);
     })

@@ -29,7 +29,7 @@
                         <div class="d-flex align-items-center ms-3 mt-4">
                             <mat-icon>meeting_room</mat-icon>
                             <p class="mb-0 ms-2">
-                                {{ baby?.baby_incubator?.length ? 'Room ' + baby.baby_incubator[0]?.incubator?.room_id : 'No Room Assigned' }}
+                                {{ baby.baby_incubator.length ? 'Room ' + baby.baby_incubator[0].incubator.room_id : 'No Room Assigned' }}
                             </p>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                     <div class="d-flex flex-column align-items-center justify-content-center text-center p-4">
                         <mat-icon class="big-icon">domain</mat-icon>
                         <h5 class="fw-light mt-1">Hospital</h5>
-                        <h2 class="fw-bold mt-2">{{ baby?.hospital?.name }}</h2>
+                        <h2 class="fw-bold mt-2">{{ baby.hospital.name }}</h2>
                     </div>
                 </app-card>
             </div>

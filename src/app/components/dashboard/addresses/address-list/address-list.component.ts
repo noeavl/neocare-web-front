@@ -67,7 +67,6 @@ export class AddressListComponent implements OnInit {
         this.addressesLoaded = true
       },
       (error) => {
-        console.log(error)
         this.addresses = []
         this.totalItems = 0
         this.currentPage = 0

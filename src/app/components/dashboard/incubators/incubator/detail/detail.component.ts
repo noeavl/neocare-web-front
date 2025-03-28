@@ -34,7 +34,6 @@ export class DetailComponent {
   ngOnInit() {
     this.incubatorsService.show(this.router.snapshot.params['id']).subscribe(
       (response) => {
-        console.log(response)
         this.incubator = response.incubator
         this.dataLoaded = true
       },
