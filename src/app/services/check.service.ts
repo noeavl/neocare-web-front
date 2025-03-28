@@ -25,4 +25,8 @@ export class CheckService {
   index(filters: indexFilters, page: number): Observable<any> {
     return this.http.get(`${this.URL}?page=${page}&hospital_id=${filters.hospital_id}&nurse_id=${filters.nurse_id}&baby_id=${filters.baby_id}&incubator_id=${filters.incubator_id}&date1=${filters.date1}&date2=${filters.date2}`)
   }
+
+  get(id: number): Observable<any> {
+    return this.http.get(`${this.URL}/${id}`)
+  }
 }

@@ -1,0 +1,30 @@
+.icons {
+  width: 2rem;
+  height: 2rem;
+}
+.icon-title-container {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+.icon-title-container p {
+  margin: 0;
+  margin-left: 1rem;
+}
+.description {
+  margin-top: 1rem;
+}
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.head p, h3 {
+  margin: auto;
+}
+.check-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 79vh;
+}

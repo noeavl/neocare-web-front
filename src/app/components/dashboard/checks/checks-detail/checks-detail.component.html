@@ -1,1 +1,33 @@
-<p>checks-detail works!</p>
+<app-section-header 
+  title="Check Detail" 
+  [route]="'/dashboard/checks/list'"
+  [imgRoute]="'/recursos-web/list-text.png'"
+></app-section-header>
+<div class="check-card">
+  <app-card>
+    <div class="row">
+      <div class="col-md-9 head">
+        <h3>{{ title }}</h3>
+      </div>
+      <div class="col-md-3 head">
+        <p class="text-end">{{ date }}</p>
+      </div>
+    </div>
+    <div class="icon-title-container">
+      <img src="recursos-web/incubator-rosa.png" class="icons">
+      <p>Incubator {{ incubator }}</p>
+    </div>
+    <div class="icon-title-container">
+      <img src="recursos-web/baby-icon-rosa.png" class="icons">
+      <p>{{ baby }}</p>
+    </div>
+    <div class="icon-title-container">
+      <img src="recursos-web/nurse-icon-rosa.png" class="icons">
+      <p>{{ nurse }}</p>
+    </div>
+    <div class="description">
+      <h5>Description</h5>
+      <p>{{ description }}</p>
+    </div>
+  </app-card>
+</div>
