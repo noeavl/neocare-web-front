@@ -1,0 +1,30 @@
+<app-section-header
+  title="Checks"
+  [route]="'/dashboard/checks/create'"
+  [imgRoute]="'/crud-icons/plus-icon.png'"
+></app-section-header>
+
+@if (!dataLoaded) {
+  <div class="spinner">
+    <mat-spinner></mat-spinner>
+</div>
+} @else {
+  <div class="row">
+    <ng-container *ngFor="let check of checks">
+      <div class="col-lg-6 col-sm-12 mt-3">
+        <app-check-card
+          [baby]="check.baby"
+          [checkid]="check.check_id"
+          [date]="check.created_at"
+          [description]="check.description"
+          [incubator]="check.incubator"
+          [nurse]="check.nurse"
+          [title]="check.title"
+        ></app-check-card>
+      </div>
+    </ng-container>
+    <mat-paginator [length]="totalItems" [pageSize]="pageSize" (page)="onPageChange($event)"
+        aria-label="Select page">
+    </mat-paginator>
+  </div>
+}

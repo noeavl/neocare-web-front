@@ -38,6 +38,10 @@ import { LightComponent } from './components/dashboard/incubators/incubator/sens
 import { VibrationComponent } from './components/dashboard/incubators/incubator/sensors/vibration/vibration.component'
 import { DetailComponent } from './components/dashboard/incubators/incubator/detail/detail.component'
 import { MainDashboardComponent } from './components/dashboard/main-dashboard/main-dashboard.component'
+import { ChecksComponent } from './components/dashboard/checks/checks.component'
+import { ChecksListComponent } from './components/dashboard/checks/checks-list/checks-list.component'
+import { ChecksCreateComponent } from './components/dashboard/checks/checks-create/checks-create.component'
+import { ChecksDetailComponent } from './components/dashboard/checks/checks-detail/checks-detail.component'
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -114,6 +118,15 @@ export const routes: Routes = [
             path: ':id',
             component: RoomsDetailComponent,
           }
+        ]
+      },
+      {
+        path: 'checks',
+        component: ChecksComponent,
+        children: [
+          { path: 'list', component: ChecksListComponent },
+          { path: 'create', component: ChecksCreateComponent },
+          { path: 'detail/:id', component: ChecksDetailComponent }
         ]
       }
     ]

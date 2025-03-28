@@ -1,0 +1,39 @@
+<app-card>
+  <div class="row card-head">
+    <div class="col-2 col-md-1 p-0 text-start">
+      <div class="rounded-circle d-flex justify-content-center align-items-center"
+        [style]="{'height':'40px','width':'40px','background-color':'var(--color-morado)'}">
+        <span class="fw-bold text-white">{{ checkid }}</span>
+      </div>
+    </div>
+    <div class="col-7 col-md-7 p-0 text-start d-flex align-items-center">
+      <h5 class="fw-bold ms-3 text-truncate-2line">{{ title }}</h5>
+    </div>
+    <div class="col-3 col-md-4 p-0 text-end">
+      {{ date }}
+    </div>
+  </div>
+  <div class="row p-0 mt-3 card-body">
+    <div class="col-12 col-md-10 p-0">
+      <div class="d-flex align-items-center ms-3">
+        <img class="icons" src="/recursos-web/incubator-rosa.png">
+        <p class="mb-0 ms-3">Incubadora {{ incubator }}</p>
+      </div>
+      <div class="d-flex align-items-center ms-3 mt-2">
+        <img class="icons" src="/recursos-web/baby-icon-rosa.png">
+        <p class="mb-0 ms-3">{{ baby }}</p>
+      </div>
+      <div class="d-flex align-items-center ms-3 mt-2">
+        <img class="icons" src="/recursos-web/nurse-icon-rosa.png">
+        <p class="mb-0 ms-3">{{ nurse }}</p>
+      </div>
+    </div>
+    <div class="col-12 col-md-2 p-0 mt-3 mt-md-0">
+      <div class="d-flex justify-content-end gap-2 p-0">
+        <button mat-fab color="primary" [routerLink]="['/dashboard/checks/detail', checkid]">
+          <mat-icon>visibility</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</app-card>

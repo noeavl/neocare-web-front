@@ -16,6 +16,12 @@
       </li>
     </ul>
     <ul class="container-fluid list-unstyled p-0">
+      <li class="mb-3">
+        <a class=" sidenav-nav-link text-decoration-none" [routerLink]="['/']">
+          <img [src]="'/recursos-web/home.png'" class="nav-item me-4">
+          <span *ngIf="showText" class="sidenav-link-text delayed-fade-in text-white">Home</span>
+        </a>
+      </li>
       <li>
         <a class=" sidenav-nav-link text-decoration-none" (click)=" logout()" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">

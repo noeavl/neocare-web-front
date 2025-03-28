@@ -56,19 +56,6 @@ p {
     box-shadow: -4px 6px 10px rgba(0, 0, 0, 0.4);
   }
 }
-@media (max-width: 768px) {
-  .street-container, .neighbourhood-container {
-    display: flex;
-    align-items: center;
-    margin: 0.75rem 0;
-  }
-  .link-buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-}
 .link-buttons button {
   background-color: #7A1CAC;
   border: none;
@@ -82,4 +69,13 @@ p {
 }
 .link-buttons button img.icons {
   margin: 0;
+}
+@media (max-width: 768px) {
+  .link-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
 }

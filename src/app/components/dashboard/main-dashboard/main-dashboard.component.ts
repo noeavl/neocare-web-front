@@ -29,7 +29,7 @@ export class MainDashboardComponent {
     {
       img: '/recursos-web/checks-icon.png',
       title: 'Checks',
-      route: '/dashboard/checks'
+      route: '/dashboard/checks/list'
     }
   ]
 }
