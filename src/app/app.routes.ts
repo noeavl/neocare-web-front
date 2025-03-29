@@ -45,6 +45,7 @@ import { ChecksDetailComponent } from './components/dashboard/checks/checks-deta
 import { RelativesComponent } from './components/dashboard/relatives/relatives.component'
 import { RelativesEditComponent } from './components/dashboard/relatives/relatives-edit/relatives-edit.component'
 import { RelativesCreateComponent } from './components/dashboard/relatives/relatives-create/relatives-create.component'
+import { UsersManagementsComponent } from './components/dashboard/users-managements/users-managements.component'
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -70,6 +71,11 @@ export const routes: Routes = [
           { path: 'update/:id', component: AddressEditionComponent, canActivate: [authGuardGuard], },
           { path: 'address/:id', component: AddressComponent, canActivate: [authGuardGuard], }
         ]
+      },
+      {
+        path: 'users',
+        component: UsersManagementsComponent,
+        canActivate: [authGuardGuard],
       },
       {
         path: 'hospitals',

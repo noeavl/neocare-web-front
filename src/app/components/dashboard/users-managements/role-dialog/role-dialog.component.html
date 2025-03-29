@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Cambiar Rol de Usuario</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="roleForm">
+    <p><strong>Usuario:</strong> {{ data.user.name }}</p>
+    <p><strong>Email:</strong> {{ data.user.email }}</p>
+    <p><strong>Rol actual:</strong> {{ data.user.role }}</p>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nuevo rol</mat-label>
+      <mat-select formControlName="role">
+        <mat-option *ngFor="let role of availableRoles" [value]="role">
+          {{ role }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="requiresHospitalId()" 
+                   appearance="fill" class="full-width">
+      <mat-label>ID del Hospital (Obligatorio para nurse)</mat-label>
+      <input matInput type="number" formControlName="hospitalId">
+      <mat-error *ngIf="roleForm.get('hospitalId')?.invalid">
+        Debe ingresar un ID de hospital válido
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary" 
+  [disabled]="!isFormValid()" 
+  (click)="onSubmit()">
+Actualizar Rol
+</button>
+</mat-dialog-actions>
