@@ -110,7 +110,6 @@ export class BabiesEditComponent {
         date_of_birth: this.form.controls['birth_date'].value,
         hospital_id: this.form.controls['hospital_id'].value
       }
-      debugger;
       this.babiesService.update(this.id, formData).subscribe({
         next: (response) => {
           this.showAlert('success', 'Success', response.message)

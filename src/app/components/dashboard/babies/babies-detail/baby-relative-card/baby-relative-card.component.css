@@ -10,17 +10,22 @@ p{
     color: var(--color-morado-oscuro);
 }
 
-.custom-purple-button {
-    background-color: var(--color-rosa-claro);
-    border-radius: 50%; 
-    width: 40px;
-    height: 40px;
+button {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 10px;
+    background-color: #7A1CAC;
+    border: none;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
   
-  .custom-purple-button:hover {
-    background-color: #5a2ca0;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  img.button-img {
+    width: auto;
+    height: 100%;
+    padding: 10px;
+    max-width: 100%;
+    object-fit: contain;
   }

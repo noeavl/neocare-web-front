@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { BabiesService } from '../../../../services/babies.service';
 import { RelativesService } from '../../../../services/relatives.service';
 import { MessageService } from 'primeng/api';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -27,7 +27,8 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
     SectionHeaderComponent, 
     MatPaginatorModule,
     CardComponent, 
-    BabyRelativeCardComponent
+    BabyRelativeCardComponent,
+    RouterLink
   ],
   templateUrl: './babies-detail.component.html',
   styleUrl: './babies-detail.component.css',

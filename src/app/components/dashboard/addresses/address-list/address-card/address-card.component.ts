@@ -8,8 +8,7 @@ import { CardComponent } from "../../../../shared/card/card.component";
   selector: 'app-address-card',
   imports: [
     RouterLink,
-    SweetAlert2Module,
-    CardComponent
+    SweetAlert2Module
 ],
   templateUrl: './address-card.component.html',
   styleUrls: ['./address-card.component.css']

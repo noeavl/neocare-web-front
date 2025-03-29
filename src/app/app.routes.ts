@@ -42,6 +42,9 @@ import { ChecksComponent } from './components/dashboard/checks/checks.component'
 import { ChecksListComponent } from './components/dashboard/checks/checks-list/checks-list.component'
 import { ChecksCreateComponent } from './components/dashboard/checks/checks-create/checks-create.component'
 import { ChecksDetailComponent } from './components/dashboard/checks/checks-detail/checks-detail.component'
+import { RelativesComponent } from './components/dashboard/relatives/relatives.component'
+import { RelativesEditComponent } from './components/dashboard/relatives/relatives-edit/relatives-edit.component'
+import { RelativesCreateComponent } from './components/dashboard/relatives/relatives-create/relatives-create.component'
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -135,6 +138,15 @@ export const routes: Routes = [
           { path: 'list', component: ChecksListComponent },
           { path: 'create', component: ChecksCreateComponent },
           { path: 'detail/:id', component: ChecksDetailComponent }
+        ]
+      },
+      {
+        path: 'relatives',
+        component: RelativesComponent,
+        canActivate: [authGuardGuard],
+        children:[
+          {path: ':id/edit', component: RelativesEditComponent, canActivate: [authGuardGuard], },
+          {path: 'create/:id', component: RelativesCreateComponent, canActivate: [authGuardGuard], }
         ]
       }
     ]

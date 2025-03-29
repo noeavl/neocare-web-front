@@ -1,0 +1,81 @@
+<app-section-header title="Create Family Member" [route]="'/dashboard/babies/' + id"
+    [imgRoute]="'/recursos-web/list-text.png'"></app-section-header>
+
+<div class="mt-3">
+        <div class="main-container d-flex align-items-center justify-content-center">
+            <app-card>
+                <form [formGroup]="form" (ngSubmit)="submit()">
+                    <div>
+                        <app-input [placeholder]="'Name'" name="name" formControlName="name" type="text" />
+                        @if(fieldErrors['name']) {
+                        <small class="ms-3 text-danger">{{ fieldErrors['name'] }}</small>
+                        }
+                        @if(name?.invalid && (name?.dirty || name?.touched)){
+                        @if (name?.hasError('required')) {
+                        <small class="ms-3 text-danger">Name is required.</small>
+                        }
+                        }
+                    </div>
+
+                    <div class="mt-4">
+                        <app-input [placeholder]="'Last Name 1'" name="last_name_1" formControlName="last_name_1" type="text" />
+                        @if(fieldErrors['last_name_1']) {
+                        <small class="ms-3 text-danger">{{ fieldErrors['last_name_1'] }}</small>
+                        }
+                        @if(last_name_1?.invalid && (last_name_1?.dirty || last_name_1?.touched)){
+                        @if (last_name_1?.hasError('required')) {
+                        <small class="ms-3 text-danger">Last name 1 is required.</small>
+                        }
+                        }
+                    </div>
+
+                    <div class="mt-4">
+                        <app-input [placeholder]="'Last Name 2'" name="last_name_2" formControlName="last_name_2" type="text" />
+                        @if(fieldErrors['last_name_2']) {
+                        <small class="ms-3 text-danger">{{ fieldErrors['last_name_2'] }}</small>
+                        }
+                        @if(last_name_2?.invalid && (last_name_2?.dirty || last_name_2?.touched)){
+                        @if (last_name_2?.hasError('required')) {
+                        <small class="ms-3 text-danger">Last name 2 is required.</small>
+                        }
+                        }
+                    </div>
+                    
+                    <div class="mt-4">
+                        <app-input [placeholder]="'Phone Number'" name="phone_number" formControlName="phone_number" type="text" />
+                        @if(fieldErrors['phone_number']) {
+                        <small class="ms-3 text-danger">{{ fieldErrors['phone_number'] }}</small>
+                        }
+                        @if(phone_number?.invalid && (phone_number?.dirty || phone_number?.touched)){
+                        @if (phone_number?.hasError('required')) {
+                        <small class="ms-3 text-danger">Phone number is required.</small>
+                        }
+                        @if (phone_number?.hasError('pattern')) {
+                        <small class="ms-3 text-danger">Invalid phone number format.</small>
+                        }
+                        }
+                    </div>
+                    
+                    <div class="mt-4">
+                        <app-input [placeholder]="'Email'" name="email" formControlName="email" type="email" />
+                        @if(fieldErrors['email']) {
+                        <small class="ms-3 text-danger">{{ fieldErrors['email'] }}</small>
+                        }
+                        @if(email?.invalid && (email?.dirty || email?.touched)){
+                        @if (email?.hasError('required')) {
+                        <small class="ms-3 text-danger">Email is required.</small>
+                        }
+                        @if (email?.hasError('email')) {
+                        <small class="ms-3 text-danger">Invalid email format.</small>
+                        }
+                        }
+                    </div>
+                    
+                    <div class="mt-4">
+                        <app-button [text]="'Create'" [disabled]="!form.valid" />
+                    </div>
+                </form>
+            </app-card>
+        </div>
+    </div>
+<p-toast position="bottom-right" key="br"></p-toast>

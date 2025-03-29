@@ -16,4 +16,16 @@ export class RelativesService {
       delete(id: number): Observable<any> {
         return this.http.delete(`${this.apiUrl}/relatives/${id}`)
       }
+
+      create(relatives: any): Observable<any> {
+        return this.http.post(`${this.apiUrl}/relatives`, relatives)
+      }
+
+      update(id: number, relatives: any): Observable<any> {
+        return this.http.put(`${this.apiUrl}/relatives/${id}`, relatives)
+      }
+
+      show(id: number): Observable<any> {
+        return this.http.get(`${this.apiUrl}/relatives/${id}`)
+      }
 }

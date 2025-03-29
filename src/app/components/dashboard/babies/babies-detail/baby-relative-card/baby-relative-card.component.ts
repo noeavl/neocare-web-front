@@ -6,9 +6,14 @@ import { RelativesService } from '../../../../../services/relatives.service';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import Swal from 'sweetalert2';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-baby-relative-card',
-  imports: [CardComponent, CommonModule, MatIconModule, SweetAlert2Module],
+  imports: [CardComponent,
+     CommonModule, 
+     MatIconModule,
+      SweetAlert2Module,
+    RouterLink],
   templateUrl: './baby-relative-card.component.html',
   styleUrl: './baby-relative-card.component.css'
 })
