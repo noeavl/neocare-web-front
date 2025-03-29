@@ -29,3 +29,21 @@ button {
     max-width: 100%;
     object-fit: contain;
   }
+
+.nombre-completo, .email-texto {
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  @media (max-width: 767px) {
+    .custom-purple-button {
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+    }
+    
+    .custom-purple-button .icon {
+      font-size: 18px;
+    }
+  }

@@ -8,3 +8,51 @@ button:hover {
     color: var(--color-morado);
 }
 
+/* Estilos para mejorar responsividad */
+.nombre-completo {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+  
+  .fecha {
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+  
+  .detalle-texto {
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  @media (max-width: 767px) {
+    .action-button {
+      transform: scale(0.85); 
+    }
+    
+    .buttons-container {
+      justify-content: center; 
+      margin-top: 10px;
+    }
+    
+    .fecha {
+      font-size: 0.75rem; 
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .buttons-container {
+      justify-content: flex-end;
+    }
+    h5{
+        font-size: 1.2rem;
+    }
+  }

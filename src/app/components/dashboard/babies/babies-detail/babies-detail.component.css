@@ -84,3 +84,60 @@
 ::ng-deep mat-spinner circle {
     stroke: var(--color-violeta) !important;
 }
+
+/* Estilos para mejorar responsividad */
+.nombre-bebe {
+    word-break: break-word;
+    max-width: 100%;
+    font-size: 1.25rem;
+  }
+  
+  .hospital-name {
+    word-break: break-word;
+    max-width: 100%;
+  }
+  
+  .big-icon {
+    transform: scale(2);
+    margin-bottom: 10px;
+  }
+  
+  .add-relative-button {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #7A1CAC;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+  }
+  
+  .add-relative-button:hover {
+    background-color: var(--primary-color-dark, #303f9f);
+  }
+  
+  .button-img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  @media (max-width: 576px) {
+    .nombre-bebe {
+      font-size: 1.1rem;
+      text-align: center;
+      margin-top: 8px;
+    }
+    
+    .big-icon {
+      transform: scale(1.75);
+    }
+  }
+  
+  @media (min-width: 577px) and (max-width: 991px) {
+    .nombre-bebe {
+      font-size: 1.2rem;
+    }
+  }
