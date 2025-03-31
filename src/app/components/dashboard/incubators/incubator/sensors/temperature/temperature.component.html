@@ -8,20 +8,28 @@
     <div *ngIf="dataLoaded" class="row">
         <app-card [backgroundColor]="'var(--color-morado)'">
             <div class="card-title">Latest Reading</div>
-            <div class="d-flex align-items-center gap-3">
-                <div class="card-value">{{ lastData.value }} °C</div>
-                <div class="temperature-indicator"
-                     [ngClass]="{
-                        'indicator-danger': lastData.value > 37,
-                        'indicator-warning': lastData.value >= 35 && lastData.value <= 37,
-                        'indicator-success': lastData.value >= 20 && lastData.value < 35,
-                        'indicator-info': lastData.value < 20
-                     }">
-                    <div class="pulse"></div>
-                    <mat-icon class="indicator-icon">{{getTemperatureIcon(lastData.value)}}</mat-icon>
-                </div>
-            </div>
+            <div class="card-value">{{ lastData.value }} °C</div>
             <div class="card-date"><span class="fw-bold">Date: </span>{{ data.last_reading }}</div>
+            <div class="card-indicator d-flex align-items-center gap-2">
+                <div class="status-circle" [ngClass]="{
+                        'status-danger': lastData.value > 37,
+                        'status-warning': lastData.value >= 35 && lastData.value <= 37,
+                        'status-success': lastData.value >= 20 && lastData.value < 35,
+                        'status-info': lastData.value < 20
+                     }">
+                    <mat-icon class="status-icon">
+                        {{getTemperatureIcon(lastData.value)}}
+                    </mat-icon>
+                </div>
+                <span class="status-text" [ngClass]="{
+                        'text-danger': lastData.value > 37,
+                        'text-warning': lastData.value >= 35 && lastData.value <= 37,
+                        'text-success': lastData.value >= 20 && lastData.value < 35,
+                        'text-info': lastData.value < 20
+                      }">
+                    {{ getTemperatureStatus(lastData.value) }}
+                </span>
+            </div>
         </app-card>
 
         <div class="row m-0 p-0">

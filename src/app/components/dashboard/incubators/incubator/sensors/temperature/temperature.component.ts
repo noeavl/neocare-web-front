@@ -16,7 +16,7 @@ import { MatIconModule } from '@angular/material/icon'
     MatSpinner,
     MatIconModule,
     NgClass
-],
+  ],
   templateUrl: './temperature.component.html',
   styleUrl: './temperature.component.css'
 })
@@ -27,7 +27,7 @@ export class TemperatureComponent {
   dataLoaded: boolean = false
 
   constructor(
-    private dataSensorsService: DataSensorsService, 
+    private dataSensorsService: DataSensorsService,
     private route: ActivatedRoute,
     private echoService: EchoService,
   ) { }
@@ -47,7 +47,7 @@ export class TemperatureComponent {
   }
 
 
-  loadData (id: number) {
+  loadData(id: number) {
     this.dataSensorsService.index(id).subscribe((response) => {
       this.data = response.sensor_statistics.TAM
       this.dataLoaded = true
@@ -56,7 +56,7 @@ export class TemperatureComponent {
     })
   }
 
-  loadLatestData (id: number) {
+  loadLatestData(id: number) {
     this.dataSensorsService.lastData(id).subscribe((response) => {
       this.lastData = response.TAM
       this.dataLoaded = true
@@ -80,26 +80,26 @@ export class TemperatureComponent {
 
   getTemperatureIcon(value: number): string {
     if (value > 37) {
-        return 'whatshot';
+      return 'whatshot';
     } else if (value >= 35 && value <= 37) {
-        return 'thermostat';
+      return 'thermostat';
     } else if (value >= 20 && value < 35) {
-        return 'check_circle';
+      return 'check_circle';
     } else {
-        return 'ac_unit';
+      return 'ac_unit';
     }
   }
 
   getTemperatureStatus(value: number): string {
     if (value > 37) {
-        return 'High Temperature';
+      return 'High Temperature';
     } else if (value >= 35 && value <= 37) {
-        return 'Medium Temperature';
+      return 'Medium Temperature';
     } else if (value >= 20 && value < 35) {
-        return 'Normal Temperature';
+      return 'Normal Temperature';
     } else {
-        return 'Low Temperature';
+      return 'Low Temperature';
     }
   }
-  
+
 }
