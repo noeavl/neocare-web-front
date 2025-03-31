@@ -2,17 +2,20 @@ import { Component } from '@angular/core'
 import { CardComponent } from '../../../../../shared/card/card.component'
 import { DataSensorsService } from '../../../../../../services/data-sensors.service'
 import { ActivatedRoute } from '@angular/router'
-import { NgIf } from '@angular/common'
+import { NgClass, NgIf } from '@angular/common'
 import { MatSpinner } from '@angular/material/progress-spinner'
 import { EchoService } from '../../../../../../services/echo-data-sensors.service'
 import { Observable } from 'rxjs'
+import { MatIconModule } from '@angular/material/icon'
 
 @Component({
   selector: 'app-temperature',
   imports: [
     CardComponent,
     NgIf,
-    MatSpinner
+    MatSpinner,
+    MatIconModule,
+    NgClass
 ],
   templateUrl: './temperature.component.html',
   styleUrl: './temperature.component.css'
@@ -62,4 +65,41 @@ export class TemperatureComponent {
       this.dataLoaded = true
     })
   }
+
+  getBackgroundColor(temp: number): string {
+    if (temp >= 32) {
+      return 'red'
+    } else if (temp >= 25) {
+      return 'yellow'
+    } else if (temp >= 20) {
+      return 'green'
+    } else {
+      return 'red'
+    }
+  }
+
+  getTemperatureIcon(value: number): string {
+    if (value > 37) {
+        return 'whatshot';
+    } else if (value >= 35 && value <= 37) {
+        return 'thermostat';
+    } else if (value >= 20 && value < 35) {
+        return 'check_circle';
+    } else {
+        return 'ac_unit';
+    }
+  }
+
+  getTemperatureStatus(value: number): string {
+    if (value > 37) {
+        return 'High Temperature';
+    } else if (value >= 35 && value <= 37) {
+        return 'Medium Temperature';
+    } else if (value >= 20 && value < 35) {
+        return 'Normal Temperature';
+    } else {
+        return 'Low Temperature';
+    }
+  }
+  
 }

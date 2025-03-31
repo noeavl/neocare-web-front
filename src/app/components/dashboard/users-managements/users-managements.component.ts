@@ -20,7 +20,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatIconModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    RoleDialogComponent
   ],
   templateUrl: './users-managements.component.html',
   styleUrl: './users-managements.component.css'

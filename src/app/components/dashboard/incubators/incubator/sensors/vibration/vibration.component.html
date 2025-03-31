@@ -1,1 +1,15 @@
-<p>vibration works!</p>
+<div class="container d-flex flex-column justify-content-between">
+    <h1 class="text-center fw-bold">Vibration</h1>
+
+    <div *ngIf="!dataLoaded" class="spinner">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <div *ngIf="dataLoaded" class="row">
+        <app-card [backgroundColor]="'var(--color-morado)'">
+            <div class="card-title">Latest Reading</div>
+            <div class="card-value"><p *ngIf="lastData.value == 0">No vibration</p><p *ngIf="lastData.value == 1">Vibration detected</p></div>
+            <div class="card-date"><span class="fw-bold">Date: </span>{{ lastData.date }}</div>
+        </app-card>
+    </div>
+</div>
