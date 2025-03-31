@@ -11,7 +11,6 @@ import { HospitalService } from '../../../../services/hospital.service'
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ButtonComponent } from '../../../shared/button/button.component'
 import { CardComponent } from "../../../shared/card/card.component";
-import { SelectComponent } from '../../../shared/select/select.component'
 
 @Component({
   selector: 'app-incubators-list',
@@ -26,8 +25,7 @@ import { SelectComponent } from '../../../shared/select/select.component'
     ReactiveFormsModule,
     ButtonComponent,
     NgIf,
-    CardComponent,
-    SelectComponent
+    CardComponent
 ],
   templateUrl: './incubators-list.component.html',
   styleUrl: './incubators-list.component.css',

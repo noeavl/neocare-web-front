@@ -26,7 +26,9 @@
                 <div
                     *ngFor="let item of sensorsEntries"
                     class="col-12 d-flex align-items-center gap-2 menu-container p-2"
-                    [routerLink]="['/dashboard/incubators/', id, item.url]">
+                    [routerLink]="['/dashboard/incubators/', id, item.url]"
+                    [relativeTo]="route"
+                    >
                     <mat-icon>{{ item.icon }}</mat-icon>
                     <p class="fw-bold m-0">{{ item.label }}</p>
                 </div>

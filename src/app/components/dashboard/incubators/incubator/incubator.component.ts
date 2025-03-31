@@ -31,9 +31,8 @@ export class IncubatorComponent {
   incubator: any
   sensorsEntries: { label: string; icon: string, url: string | null; }[] = []
 
-
   constructor(
-    private route: ActivatedRoute,
+    protected route: ActivatedRoute,
     private incubatorsService: IncubatorsService
   ) { }
 
