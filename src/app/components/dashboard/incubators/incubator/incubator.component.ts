@@ -53,7 +53,8 @@ export class IncubatorComponent {
           { label: 'Movement', icon: 'directions_run', url: 'movement' },
           { label: 'Sound', icon: 'graphic_eq', url: 'sound' },
           { label: 'Light', icon: 'light_mode', url: 'light' },
-          { label: 'Vibration', icon: 'vibration', url: 'vibration' }
+          { label: 'Vibration', icon: 'vibration', url: 'vibration' },
+          { label: 'Temperature Baby', icon: 'thermostat', url: 'temperature-baby' }
         ]
         this.dataLoaded = true
       },

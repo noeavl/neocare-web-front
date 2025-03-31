@@ -46,6 +46,7 @@ import { RelativesComponent } from './components/dashboard/relatives/relatives.c
 import { RelativesEditComponent } from './components/dashboard/relatives/relatives-edit/relatives-edit.component'
 import { RelativesCreateComponent } from './components/dashboard/relatives/relatives-create/relatives-create.component'
 import { UsersManagementsComponent } from './components/dashboard/users-managements/users-managements.component'
+import { TemperatureBabyComponent } from './components/dashboard/incubators/incubator/sensors/temperature-baby/temperature-baby.component'
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -108,7 +109,8 @@ export const routes: Routes = [
               { path: 'movement', component: MovementComponent, canActivate: [authGuardGuard], },
               { path: 'sound', component: SoundComponent, canActivate: [authGuardGuard], },
               { path: 'light', component: LightComponent, canActivate: [authGuardGuard], },
-              { path: 'vibration', component: VibrationComponent, canActivate: [authGuardGuard], }
+              { path: 'vibration', component: VibrationComponent, canActivate: [authGuardGuard], },
+              { path: 'temperature-baby', component: TemperatureBabyComponent, canActivate: [authGuardGuard], },
             ]
           }
         ]
