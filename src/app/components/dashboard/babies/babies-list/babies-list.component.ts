@@ -10,9 +10,11 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ButtonComponent } from '../../../shared/button/button.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { HospitalService } from '../../../../services/hospital.service';
+import { CardComponent } from '../../../shared/card/card.component';
 @Component({
   selector: 'app-babies-list',
-  imports: [BabiesCardComponent, NgFor, ToastModule, MatSpinner, SectionHeaderComponent, MatPaginator, ReactiveFormsModule, ButtonComponent, NgIf, CommonModule],
+  imports: [BabiesCardComponent, NgFor, ToastModule, MatSpinner, SectionHeaderComponent,
+     MatPaginator, ReactiveFormsModule, ButtonComponent, NgIf, CommonModule, CardComponent],
   templateUrl: './babies-list.component.html',
   styleUrl: './babies-list.component.css',
   providers: [MessageService]
