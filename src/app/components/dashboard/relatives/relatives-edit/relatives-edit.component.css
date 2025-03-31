@@ -1,0 +1,14 @@
+.main-container {
+    height: 80vh;
+}
+
+.form-field-container {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .validation-message {
+    min-height: 20px; 
+    width: 100%;
+  }

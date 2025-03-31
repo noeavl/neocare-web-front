@@ -80,4 +80,22 @@ select {
     color: var(--color-morado);
   }
   
+  .form-field-container {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .validation-message {
+    min-height: 20px; 
+    width: 100%;
+  }
+  
+  app-input, select {
+    width: 100%;
+  }
+  
+  .custom-datepicker input {
+    width: 100%;
+  }
 
