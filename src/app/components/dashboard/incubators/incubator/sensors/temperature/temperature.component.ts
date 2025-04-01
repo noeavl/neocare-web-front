@@ -66,18 +66,6 @@ export class TemperatureComponent {
     })
   }
 
-  getBackgroundColor(temp: number): string {
-    if (temp >= 32) {
-      return 'red'
-    } else if (temp >= 25) {
-      return 'yellow'
-    } else if (temp >= 20) {
-      return 'green'
-    } else {
-      return 'red'
-    }
-  }
-
   getTemperatureIcon(value: number): string {
     if (value > 37) {
       return 'whatshot';
@@ -91,14 +79,14 @@ export class TemperatureComponent {
   }
 
   getTemperatureStatus(value: number): string {
-    if (value > 37) {
+    if (value >= 33) {
       return 'High Temperature';
-    } else if (value >= 35 && value <= 37) {
-      return 'Medium Temperature';
-    } else if (value >= 20 && value < 35) {
+    } else if (value >= 32 && value < 35) {
       return 'Normal Temperature';
-    } else {
+    } else if (value <= 31 ) {
       return 'Low Temperature';
+    } else {
+      return 'Unknown Temperature';
     }
   }
 

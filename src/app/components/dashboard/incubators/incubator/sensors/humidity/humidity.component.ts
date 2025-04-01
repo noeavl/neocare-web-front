@@ -2,16 +2,19 @@ import { Component } from '@angular/core'
 import { CardComponent } from '../../../../../shared/card/card.component'
 import { DataSensorsService } from '../../../../../../services/data-sensors.service'
 import { ActivatedRoute } from '@angular/router'
-import { NgIf } from '@angular/common'
+import { NgClass, NgIf } from '@angular/common'
 import { MatSpinner } from '@angular/material/progress-spinner'
 import { EchoService } from '../../../../../../services/echo-data-sensors.service'
+import { MatIcon } from '@angular/material/icon'
 
 @Component({
   selector: 'app-humidity',
   imports: [
     CardComponent,
     NgIf,
-    MatSpinner
+    MatSpinner,
+    MatIcon,
+    NgClass
 ],
   templateUrl: './humidity.component.html',
   styleUrl: './humidity.component.css'
@@ -59,5 +62,25 @@ export class HumidityComponent {
     }, (error) => {
       this.dataLoaded = true
     })
+  }
+
+  getHumidityIcon(humidity: number) {
+    if (humidity < 40) {
+      return 'water_drop'
+    } else if (humidity < 70) {
+      return 'cloud'
+    } else {
+      return 'ac_unit'
+    }
+  }
+
+  getHumidityStatus(humidity: number) {
+    if (humidity < 40) {
+      return 'Low'
+    } else if (humidity < 70) {
+      return 'Medium'
+    } else {
+      return 'High'
+    }
   }
 }

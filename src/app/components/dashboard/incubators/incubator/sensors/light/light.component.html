@@ -10,6 +10,26 @@
             <div class="card-title">Latest Reading</div>
             <div class="card-value">{{ lastData.value }} lumens</div>
             <div class="card-date"><span class="fw-bold">Date: </span>{{ data.last_reading }}</div>
+            
+            <!-- Agregar indicador de estatus con icono y texto -->
+            <div class="card-indicator d-flex align-items-center gap-2">
+                <div class="status-circle" [ngClass]="{
+                        'status-danger': lastData.value < 10,
+                        'status-warning': lastData.value >= 10 && lastData.value < 50,
+                        'status-success': lastData.value >= 50,
+                    }">
+                    <mat-icon class="status-icon">
+                        {{ getLightIcon(lastData.value) }}
+                    </mat-icon>
+                </div>
+                <span class="status-text fw-bold fs-3" [ngClass]="{
+                        'text-danger': lastData.value < 10,
+                        'text-warning': lastData.value >= 10 && lastData.value < 50,
+                        'text-success': lastData.value >= 50,
+                    }">
+                    {{ getLightStatus(lastData.value) }}
+                </span>
+            </div>
         </app-card>
 
         <div class="row m-0 p-0">

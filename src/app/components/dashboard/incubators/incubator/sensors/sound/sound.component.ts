@@ -2,16 +2,19 @@ import { Component } from '@angular/core'
 import { CardComponent } from '../../../../../shared/card/card.component'
 import { DataSensorsService } from '../../../../../../services/data-sensors.service'
 import { ActivatedRoute } from '@angular/router'
-import { NgIf } from '@angular/common'
+import { NgClass, NgIf } from '@angular/common'
 import { MatSpinner } from '@angular/material/progress-spinner'
 import { EchoService } from '../../../../../../services/echo-data-sensors.service'
+import { MatIcon } from '@angular/material/icon'
 
 @Component({
   selector: 'app-sound',
   imports: [
     CardComponent,
     NgIf,
-    MatSpinner
+    MatSpinner,
+    NgClass,
+    MatIcon
 ],
   templateUrl: './sound.component.html',
   styleUrl: './sound.component.css'
@@ -60,5 +63,19 @@ export class SoundComponent {
     }, (error) => {
       this.dataLoaded = true
     })
+  }
+
+  getSoundStatus(value: number): string {
+    if (value > 85) return 'Dangerous';
+    if (value >= 60) return 'Loud';
+    if (value >= 30) return 'Moderate';
+    return 'Quiet';
+  }
+
+  getSoundIcon(value: number): string {
+    if (value > 85) return 'warning';
+    if (value >= 60) return 'volume_up';
+    if (value >= 30) return 'volume_down';
+    return 'volume_mute';
   }
 }

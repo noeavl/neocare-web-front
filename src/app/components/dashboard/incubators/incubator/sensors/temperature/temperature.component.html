@@ -21,7 +21,7 @@
                         {{getTemperatureIcon(lastData.value)}}
                     </mat-icon>
                 </div>
-                <span class="status-text" [ngClass]="{
+                <span class="status-text fw-bold fs-3" [ngClass]="{
                         'text-danger': lastData.value > 37,
                         'text-warning': lastData.value >= 35 && lastData.value <= 37,
                         'text-success': lastData.value >= 20 && lastData.value < 35,
