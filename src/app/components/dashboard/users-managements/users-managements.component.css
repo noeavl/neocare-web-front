@@ -1,35 +1,129 @@
+/* Contenedor principal */
 .container {
-    padding: 20px;
-  }
-  
-  .loading-spinner {
-    display: flex;
-    justify-content: center;
-    padding: 50px;
-  }
-  
-  .users-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .user-card {
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .user-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .success-snackbar {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  .error-snackbar {
-    background-color: #f44336;
-    color: white;
-  }
+  padding: 20px;
+}
+
+h1{
+  color: #492E87;
+  font-weight: bold;
+  margin: 0px;
+  justify-content: center;
+}
+
+/* Spinner de carga */
+.spinner {
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  background-color: var(--color-morado);
+  color: white;
+}
+
+button:hover {
+  background-color: var(--color-rosa);
+  color: var(--color-morado)
+}
+
+/* Estilos de la card */
+.user-card {
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-content {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.card-actions {
+  padding: 0 16px 16px 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Filas de información */
+.info-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  min-height: 32px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.info-text {
+  font-size: 14px;
+  line-height: 24px;
+  word-break: break-word;
+}
+
+/* Colores de roles */
+.role-super-admin {
+  color: #7A1CAC; /* Morado principal */
+}
+
+.role-nurse-admin {
+  color: #FF6B6B; /* Rojo/rosa */
+}
+
+.role-nurse {
+  color: #4CAF50; /* Verde */
+}
+
+.role-user {
+  color: #2196F3; /* Azul */
+}
+
+/* Botón de acción */
+.action-button {
+  transform: scale(0.9);
+  transition: all 0.2s ease;
+}
+
+.action-button:hover {
+  transform: scale(1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Mensaje sin usuarios */
+.no-users-message {
+  color: var(--color-morado);
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+/* Paginador */
+::ng-deep .mat-mdc-paginator {
+  background-color: transparent !important;
+  margin-top: 20px;
+}
+
+::ng-deep .mat-mdc-paginator .mdc-button__label,
+::ng-deep .mat-mdc-paginator .mat-mdc-select-value-text {
+  color: var(--color-morado) !important;
+}
+
+::ng-deep .mat-mdc-paginator .mat-mdc-icon-button {
+  color: var(--color-morado) !important;
+}
+
+/* Efecto hover para la card */
+.user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(122, 28, 172, 0.2) !important;
+}

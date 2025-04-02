@@ -47,6 +47,8 @@ import { RelativesEditComponent } from './components/dashboard/relatives/relativ
 import { RelativesCreateComponent } from './components/dashboard/relatives/relatives-create/relatives-create.component'
 import { UsersManagementsComponent } from './components/dashboard/users-managements/users-managements.component'
 import { TemperatureBabyComponent } from './components/dashboard/incubators/incubator/sensors/temperature-baby/temperature-baby.component'
+import { UserDetailsComponent } from './components/dashboard/users-managements/user-details/user-details.component'
+import { UserEditComponent } from './components/dashboard/users-managements/user-edit/user-edit.component'
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -77,6 +79,10 @@ export const routes: Routes = [
         path: 'users',
         component: UsersManagementsComponent,
         canActivate: [authGuardGuard],
+        children: [
+          {path: ':id', component: UserDetailsComponent, canActivate: [authGuardGuard],},
+          { path: ':id/edit', component: UserEditComponent, canActivate: [authGuardGuard], }
+        ]
       },
       {
         path: 'hospitals',

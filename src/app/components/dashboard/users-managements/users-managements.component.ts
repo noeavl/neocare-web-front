@@ -1,40 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input, ViewChild } from '@angular/core';
 import { UsersManagementService } from '../../../services/users-management.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MessageService } from 'primeng/api';
 import { MatDialog } from '@angular/material/dialog';
-import { RoleDialogComponent } from './role-dialog/role-dialog.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ToastModule } from 'primeng/toast';
 import { MatCardModule } from '@angular/material/card';
-import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SectionHeaderComponent } from '../section-header/section-header.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-users-managements',
-  standalone: true, // ← Asegúrate de que esto está true
+  standalone: true,
   imports: [
     CommonModule,
     MatCardModule,
-    MatPaginatorModule,
+    MatPaginator,
     MatIconModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-  ],
+    ToastModule,
+    NgFor,
+    NgIf,
+    RouterLink
+    ],
   templateUrl: './users-managements.component.html',
-  styleUrl: './users-managements.component.css'
+  styleUrl: './users-managements.component.css',
+  providers: [MessageService]
 })
-export class UsersManagementsComponent implements OnInit{
-
+export class UsersManagementsComponent implements OnInit {
   users: any[] = [];
   totalItems = 0;
   pageSize = 9;
   currentPage = 0;
-  isLoading = false;
+  dataLoaded = false;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  @Input() id!: number
 
   constructor(
     private usersService: UsersManagementService,
-    private snackBar: MatSnackBar,
+    private messageService: MessageService,
     private dialog: MatDialog
   ) {}
 
@@ -42,66 +52,45 @@ export class UsersManagementsComponent implements OnInit{
     this.loadUsers();
   }
 
-  loadUsers(page: number = 1): void {
-    this.isLoading = true;
-    this.usersService.getUsers(page, this.pageSize).subscribe({
+  loadUsers(): void {
+    this.dataLoaded = false;
+    this.usersService.getUsers(this.currentPage + 1, this.pageSize).subscribe({
       next: (response: any) => {
-        this.users = response.data;
-        this.totalItems = response.total;
+        this.users = response.data || [];
+        this.totalItems = response.total || 0;
+        this.pageSize = response.per_page || 9;
         this.currentPage = response.current_page - 1;
-        this.isLoading = false;
+        this.dataLoaded = true;
       },
       error: (error) => {
-        this.showError('Error al cargar usuarios');
-        this.isLoading = false;
-      }
-    });
-  }
-
-  openRoleDialog(user: any): void {
-    const dialogRef = this.dialog.open(RoleDialogComponent, {
-      width: '400px',
-      data: { user }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.updateUserRole(user, result.role, result.hospitalId);
+        this.showAlert('error', 'Error', 'Could not load users');
+        this.dataLoaded = true;
       }
     });
   }
 
   updateUserRole(user: any, role: string, hospitalId?: number): void {
-    this.isLoading = true;
+    this.dataLoaded = false;
     this.usersService.updateUserRole(user.id, role, hospitalId).subscribe({
       next: () => {
-        this.showSuccess('Rol actualizado correctamente');
+        this.showAlert('success', 'Success', 'Role updated successfully');
         user.role = role;
-        this.isLoading = false;
+        this.dataLoaded = true;
       },
       error: (error) => {
-        this.showError(error.error?.message || 'Error al actualizar rol');
-        this.isLoading = false;
+        this.showAlert('error', 'Error', error.error?.message || 'Failed to update role');
+        this.dataLoaded = true;
       }
     });
   }
 
   onPageChange(event: PageEvent): void {
     this.currentPage = event.pageIndex;
-    this.loadUsers(event.pageIndex + 1);
+    this.pageSize = event.pageSize;
+    this.loadUsers();
   }
 
-  private showSuccess(message: string): void {
-    this.snackBar.open(message, 'Cerrar', {
-      duration: 3000,
-      panelClass: ['success-snackbar']
-    });
-  }
-
-  private showError(message: string): void {
-    this.snackBar.open(message, 'Cerrar', {
-      duration: 3000,
-      panelClass: ['error-snackbar']
-    });
+  showAlert(severity: string, summary: string, detail: string) {
+    this.messageService.add({ severity, summary, detail });
   }
 }
