@@ -84,3 +84,66 @@ h1::after {
 .status-text {
     font-weight: 500;
 }
+
+.temperature-indicator {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+
+    .indicator-icon {
+        color: white;
+        font-size: 24px;
+    }
+
+    .pulse {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        opacity: 0;
+        animation: pulse 2s infinite;
+    }
+}
+
+.indicator-danger {
+    background: linear-gradient(45deg, #ff4444, #cc0000);
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.5);
+    .pulse { background: rgba(255, 68, 68, 0.6); }
+}
+
+.indicator-warning {
+    background: linear-gradient(45deg, #ffbb33, #ff8800);
+    box-shadow: 0 0 15px rgba(255, 187, 51, 0.5);
+    .pulse { background: rgba(255, 187, 51, 0.6); }
+}
+
+.indicator-success {
+    background: linear-gradient(45deg, #00C851, #007E33);
+    box-shadow: 0 0 15px rgba(0, 200, 81, 0.5);
+}
+
+.indicator-info {
+    background: linear-gradient(45deg, #33b5e5, #0099CC);
+    box-shadow: 0 0 15px rgba(51, 181, 229, 0.5);
+    .pulse { background: rgba(51, 181, 229, 0.6); }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}

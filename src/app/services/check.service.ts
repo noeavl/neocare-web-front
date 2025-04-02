@@ -29,4 +29,8 @@ export class CheckService {
   get(id: number): Observable<any> {
     return this.http.get(`${this.URL}/${id}`)
   }
+
+  create(data: any): Observable<any> {
+    return this.http.post(this.URL, data)
+  }
 }

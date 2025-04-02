@@ -1,1 +1,43 @@
-<p>checks-create works!</p>
+<app-section-header 
+    title="Create Check" [route]="'/dashboard/checks/list'"
+    [imgRoute]="'/recursos-web/list-text.png'"
+></app-section-header>
+
+@if (!dataLoaded) {
+<div class="spinner">
+    <mat-spinner></mat-spinner>
+</div>
+}
+
+<div *ngIf="dataLoaded" class="container-fluid d-flex justify-content-center align-items-center mt-3">
+    <div class="row w-100">
+        <div class="col-12 col-md-8 col-lg-6 mx-auto">
+            <app-card class="p-4 rounded">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-100">
+
+                    <div class="form-group mb-4">
+                        <label for="title" class="form-label">Title</label>
+                        <app-input [formControlName]="'title'" [type]="'text'" [placeholder]="'Title'" />
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="description" class="form-label">Description</label>
+                        <app-input [formControlName]="'description'" [type]="'text'" [placeholder]="'Description'" />
+                    </div>
+
+                    <app-input [formControlName]="'baby_incubator_id'" [type]="'hidden'" />
+
+                    <app-input [formControlName]="'nurse_id'" [type]="'hidden'" />
+
+
+                    <div class="text-center mt-4">
+                        <app-button [text]="'Create'" [disabled]="!form.valid" class="btn-lg w-100" />
+                    </div>
+                </form>
+            </app-card>
+        </div>
+    </div>
+</div>
+
+
+<p-toast position="bottom-right" key="br"></p-toast>

@@ -1,16 +1,45 @@
-import { NgClass, NgFor } from '@angular/common'
+import { NgClass, NgFor, NgIf } from '@angular/common'
 import { Component, Input, OnChanges } from '@angular/core'
 import { MatIcon } from '@angular/material/icon'
+import { Router, RouterLink } from '@angular/router'
+import { ButtonComponent } from '../../../../shared/button/button.component'
+import { AuthService } from '../../../../../services/auth.service'
 
 @Component({
   selector: 'app-incubator-detail',
   templateUrl: './incubator-detail.component.html',
   styleUrls: ['./incubator-detail.component.css'],
-  imports: [MatIcon, NgFor, NgClass]
+  imports: [
+    MatIcon,
+    NgFor,
+    NgClass,
+    ButtonComponent,
+    NgIf
+  ]
 })
 export class IncubatorDetailComponent implements OnChanges {
   @Input() incubator: any
   incubatorEntries: { label: string; value: any; icon: string }[] = []
+  role: string = ''
+
+  constructor(private router: Router, private authService: AuthService) { }
+
+  ngOnInit() {
+    this.authService.userRole().subscribe(
+      (response) => {
+        console.log(response)
+        this.role = response.role
+      },
+      (error) => {
+      }
+    )
+  }
+
+  navigateToCreateCheck() {
+    this.router.navigate(['/dashboard/checks/create'], {
+      state: { incubator: this.incubator }
+    });
+  }
 
   ngOnChanges() {
     if (this.incubator) {

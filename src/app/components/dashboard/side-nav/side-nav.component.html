@@ -7,7 +7,7 @@
   </div>
   <div class="sidenav-nav d-flex justify-content-between">
     <ul class="container-fluid list-unstyled p-0">
-      <li *ngFor=" let item of items; trackBy: trackByFn" class="sidenav-nav-item">
+      <li *ngFor=" let item of filteredItems; trackBy: trackByFn" class="sidenav-nav-item">
         <a class="sidenav-nav-link" [routerLink]="item.routeLink" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">
           <img [src]="item.icon" class="nav-item">

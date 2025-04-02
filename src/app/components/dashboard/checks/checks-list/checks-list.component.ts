@@ -12,7 +12,6 @@ import { MatSpinner } from '@angular/material/progress-spinner';
   imports: [
     CheckCardComponent, 
     CommonModule, 
-    SectionHeaderComponent, 
     MatPaginator,
     MatSpinner
   ],

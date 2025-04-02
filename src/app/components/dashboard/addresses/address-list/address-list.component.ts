@@ -1,14 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { AddressService } from '../../../../services/address.service';
-import { AddressCardComponent } from "./address-card/address-card.component";
-import { SectionHeaderComponent } from '../../section-header/section-header.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { ToastModule } from 'primeng/toast';
-import { ButtonModule } from 'primeng/button';
-import { RippleModule } from 'primeng/ripple';
-import { MessageService } from 'primeng/api';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Component, OnInit, ViewChild } from '@angular/core'
+import { MatPaginator } from '@angular/material/paginator'
+import { AddressService } from '../../../../services/address.service'
+import { AddressCardComponent } from "./address-card/address-card.component"
+import { SectionHeaderComponent } from '../../section-header/section-header.component'
+import { MatPaginatorModule } from '@angular/material/paginator'
+import { ToastModule } from 'primeng/toast'
+import { ButtonModule } from 'primeng/button'
+import { RippleModule } from 'primeng/ripple'
+import { MessageService } from 'primeng/api'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { AuthService } from '../../../../services/auth.service'
+import { NgIf } from '@angular/common'
 
 @Component({
   selector: 'app-address-list',
@@ -20,7 +22,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ToastModule,
     ButtonModule,
     RippleModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgIf
   ],
   templateUrl: './address-list.component.html',
   styleUrls: ['./address-list.component.css'],
@@ -34,16 +37,18 @@ export class AddressListComponent implements OnInit {
   pageSize: number = 9
   currentPage: number = 0
   addressesLoaded: boolean = false
+  role: string = ''
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator
 
   constructor(
     private addressService: AddressService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private authService: AuthService
   ) { }
 
   showAlert(severity: string, summary: string, detail: string) {
-    this.messageService.add({ severity: severity, summary: summary, detail: detail, key: 'br', life: 3000 });
+    this.messageService.add({ severity: severity, summary: summary, detail: detail, key: 'br', life: 3000 })
   }
 
   manageDeletion(event: any) {
@@ -55,7 +60,16 @@ export class AddressListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadAddresses(this.currentPage);
+    this.loadAddresses(this.currentPage)
+
+    this.authService.userRole().subscribe(
+      (response) => {
+        this.role = response.role
+      },
+      (error) => {
+        
+      }
+    )
   }
 
   loadAddresses(page: number): void {

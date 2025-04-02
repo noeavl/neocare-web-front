@@ -1,5 +1,6 @@
-<app-section-header title="Incubators" [route]="'/dashboard/incubators/create'" [imgRoute]="'/crud-icons/plus-icon.png'"/>
-<app-card class="my-5">
+<app-section-header title="Incubators" [route]="'/dashboard/incubators/create'" *ngIf="role === 'admin' || role === 'super-admin'" [imgRoute]="'/crud-icons/plus-icon.png'"/>
+<h1 class="fw-bold mb-4" style="color: var(--color-morado);" *ngIf="role !== 'admin' && role !== 'super-admin'">Incubators</h1>
+<app-card *ngIf="role === 'admin' || role === 'super-admin'" class="my-5">
     <div class="container">
         <form [formGroup]="formFilter" class="row w-100" (ngSubmit)="onSubmit($event)">
             <div class="col-12 col-md-6 col-lg-3">
@@ -30,15 +31,17 @@
         <ng-container *ngIf="incubators.length > 0; else noIncubators">
             <div *ngFor="let incubator of incubators" class="col-12 col-md-6 mb-4">
                 <app-incubator-card
-                    [id]="incubator.id"
-                    [state]="incubator.state"
-                    [room_number]="incubator.room_number"
-                    [nurse]="incubator.nurse"
-                    [baby]="incubator.baby"
-                    [date]="incubator.created_at"
-                    (reloadIncubators)="loadIncubators()"
-                    (alertDelete)="manageDeletion($event)">
-                </app-incubator-card>
+                [id]="incubator.id"
+                [state]="incubator.state"
+                [room_number]="incubator.room_number"
+                [nurse]="incubator.nurse"
+                [baby]="incubator.baby"
+                [date]="incubator.created_at"
+                (reloadIncubators)="loadIncubators()"
+                (alertDelete)="manageDeletion($event)"
+                [showDeleteButton]="role !== 'nurse'"
+                [showEditButton]="role !== 'nurse'">
+            </app-incubator-card>
             </div>
 
             <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="currentPage"

@@ -49,6 +49,8 @@ import { UsersManagementsComponent } from './components/dashboard/users-manageme
 import { TemperatureBabyComponent } from './components/dashboard/incubators/incubator/sensors/temperature-baby/temperature-baby.component'
 import { UserDetailsComponent } from './components/dashboard/users-managements/user-details/user-details.component'
 import { UserEditComponent } from './components/dashboard/users-managements/user-edit/user-edit.component'
+import { nurseCheckGuard } from './guards/nurse-check.guard'
+import { nurseAdminCheckGuard } from './guards/nurse-admin-check.guard'
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -67,12 +69,12 @@ export const routes: Routes = [
       {
         path: 'addresses',
         component: AddressesComponent,
-        canActivate: [authGuardGuard],
+        canActivate: [authGuardGuard, nurseAdminCheckGuard, nurseCheckGuard],
         children: [
-          { path: 'list', component: AddressListComponent, canActivate: [authGuardGuard], },
-          { path: 'registration', component: AddressRegistrationComponent, canActivate: [authGuardGuard], },
-          { path: 'update/:id', component: AddressEditionComponent, canActivate: [authGuardGuard], },
-          { path: 'address/:id', component: AddressComponent, canActivate: [authGuardGuard], }
+          { path: 'list', component: AddressListComponent, canActivate: [authGuardGuard, nurseAdminCheckGuard, nurseCheckGuard], },
+          { path: 'registration', component: AddressRegistrationComponent, canActivate: [authGuardGuard, nurseCheckGuard, nurseAdminCheckGuard], },
+          { path: 'update/:id', component: AddressEditionComponent, canActivate: [authGuardGuard, nurseCheckGuard, nurseAdminCheckGuard], },
+          { path: 'address/:id', component: AddressComponent, canActivate: [authGuardGuard, nurseAdminCheckGuard], }
         ]
       },
       {
@@ -87,12 +89,12 @@ export const routes: Routes = [
       {
         path: 'hospitals',
         component: HospitalsComponent,
-        canActivate: [authGuardGuard],
+        canActivate: [authGuardGuard, nurseAdminCheckGuard, nurseCheckGuard],
         children: [
-          { path: '', component: HospitalsListComponent, canActivate: [authGuardGuard], },
-          { path: 'create', component: HospitalsCreateComponent, canActivate: [authGuardGuard], },
-          { path: ':id', component: HospitalsDetailComponent, canActivate: [authGuardGuard], },
-          { path: ':id/edit', component: HospitalsEditComponent, canActivate: [authGuardGuard], }
+          { path: '', component: HospitalsListComponent, canActivate: [authGuardGuard, nurseAdminCheckGuard, nurseCheckGuard] },
+          { path: 'create', component: HospitalsCreateComponent, canActivate: [authGuardGuard, nurseAdminCheckGuard, nurseCheckGuard] },
+          { path: ':id', component: HospitalsDetailComponent, canActivate: [authGuardGuard, nurseAdminCheckGuard, nurseCheckGuard] },
+          { path: ':id/edit', component: HospitalsEditComponent, canActivate: [authGuardGuard, nurseAdminCheckGuard, nurseCheckGuard] }
 
         ]
       },

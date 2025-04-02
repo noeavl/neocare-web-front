@@ -1,3 +1,174 @@
-app-card {
+.neocare-container {
+  background-color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+.neocare-title {
+  color: var(--color-morado);
+  font-weight: 700;
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+}
+
+.neocare-subtitle {
+  color: var(--color-morado-oscuro);
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.neocare-divider {
+  height: 4px;
+  width: 60px;
+  background-color: var(--color-violeta);
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.neocare-welcome-banner {
+  background: linear-gradient(135deg, var(--color-rosa) 0%, var(--color-rosa-claro) 100%);
+  border-radius: 16px;
+  padding: 2.5rem;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-title {
+  color: var(--color-morado-oscuro);
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.welcome-text {
+  color: var(--color-morado-oscuro);
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.welcome-icon-container {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.welcome-icon {
+  color: var(--color-morado-oscuro);
+}
+
+.neocare-button {
+  background-color: var(--color-morado);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
   cursor: pointer;
+}
+
+.neocare-button:hover {
+  background-color: var(--color-morado-oscuro);
+  transform: translateY(-2px);
+}
+
+.neocare-stat {
+  padding: 1.5rem;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-violeta);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.stat-text {
+  color: var(--color-morado-oscuro);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.section-title {
+  color: var(--color-morado);
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+.neocare-card {
+  padding: 2rem 1.5rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  background-color: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.neocare-card:hover {
+  transform: translateY(-5px);
+}
+
+.neocare-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-rosa);
+  border-radius: 50%;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.neocare-card-title {
+  color: var(--color-morado-oscuro);
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-top: 1rem;
+}
+
+.neocare-footer-banner {
+  background-color: var(--color-rosa);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--color-morado-oscuro);
+  font-size: 1.1rem;
+}
+
+.footer-link {
+  color: var(--color-violeta);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: var(--color-morado-oscuro);
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .welcome-icon-container {
+    margin-top: 2rem;
+    width: 120px;
+    height: 120px;
+  }
+  
+  .neocare-welcome-banner {
+    padding: 1.5rem;
+  }
+  
+  .welcome-title {
+    font-size: 1.5rem;
+  }
 }

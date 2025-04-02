@@ -149,9 +149,11 @@ export class IncubatorsEditComponent {
   loadBabies(hospital_id: number) {
     this.babiesService.indexNoPaginate({ hospital_id }).subscribe(
       (response) => {
-        this.babies = response.babies || []
+        console.log(response)
+        this.babies = response.data || []
       },
-      () => {
+      (error) => {
+        console.log('error', error)
         this.showAlert("error", "Error", "Could not load babies.")
         this.babies = []
       }

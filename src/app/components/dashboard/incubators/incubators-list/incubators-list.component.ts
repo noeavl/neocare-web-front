@@ -10,7 +10,8 @@ import { ToastModule } from 'primeng/toast'
 import { HospitalService } from '../../../../services/hospital.service'
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ButtonComponent } from '../../../shared/button/button.component'
-import { CardComponent } from "../../../shared/card/card.component";
+import { CardComponent } from "../../../shared/card/card.component"
+import { AuthService } from '../../../../services/auth.service'
 
 @Component({
   selector: 'app-incubators-list',
@@ -26,7 +27,7 @@ import { CardComponent } from "../../../shared/card/card.component";
     ButtonComponent,
     NgIf,
     CardComponent
-],
+  ],
   templateUrl: './incubators-list.component.html',
   styleUrl: './incubators-list.component.css',
   providers: [MessageService]
@@ -38,9 +39,13 @@ export class IncubatorsListComponent implements OnInit {
   currentPage: number = 0
   dataLoaded = false
   hospitals: any[] = []
+  role: string = ''
+  hospitalId: number = 0
+  showButton: boolean = false
 
   formFilter = new FormGroup({
-    hospital_id: new FormControl<number | null>(null, Validators.required)
+    hospital_id: new FormControl<number | null>(null, Validators.required),
+    room_id: new FormControl<number | null>(null, Validators.required)
   })
 
   @ViewChild(MatPaginator) paginator!: MatPaginator
@@ -48,47 +53,75 @@ export class IncubatorsListComponent implements OnInit {
   constructor(
     private incubatorsService: IncubatorsService,
     private messageService: MessageService,
-    private hospitalsService: HospitalService
-  ) {}
+    private hospitalsService: HospitalService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
-    this.loadHospitals()
-
-    const savedHospitalId = sessionStorage.getItem('selectedHospitalId')
-    const hospitalId = savedHospitalId !== null ? Number(savedHospitalId) : null
-
-    if (hospitalId) {
-      this.formFilter.get('hospital_id')?.setValue(hospitalId)
-      this.loadIncubators()
-    }
-  }
-
-  loadHospitals() {
-    this.hospitalsService.indexNoPaginate().subscribe(
+    // En el ngOnInit donde manejas el rol
+    this.authService.userRole().subscribe(
       (response) => {
-        this.hospitals = response.hospitals || []
-        this.dataLoaded = true
+        this.role = response.role
+        this.hospitalId = response.hospital_id
+
+        // Determinar si mostrar botones (mostrar para todos excepto nurse)
+        this.showButton = this.role !== 'nurse'
+
+        if (this.role === 'nurse') {
+          this.formFilter.get('hospital_id')?.setValue(this.hospitalId)
+          this.loadIncubators()
+        } else {
+          this.loadHospitals().then(() => {
+            const savedHospitalId = sessionStorage.getItem('selectedHospitalId')
+            const hospitalId = savedHospitalId ? Number(savedHospitalId) : null
+            if (hospitalId) {
+              this.formFilter.get('hospital_id')?.setValue(hospitalId)
+            }
+            this.loadIncubators()
+          })
+        }
       },
-      () => {
-        this.showAlert("error", "Error", "Could not load hospitals.")
+      (error) => {
+        console.error('Error al obtener el rol:', error)
       }
     )
+  }
+
+  loadHospitals(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.hospitalsService.indexNoPaginate().subscribe(
+        (response) => {
+          this.hospitals = response.hospitals || []
+          resolve()
+        },
+        (error) => {
+          this.showAlert("error", "Error", "Could not load hospitals.")
+          reject(error)
+        }
+      )
+    })
   }
 
   loadIncubators() {
     this.dataLoaded = false
     this.incubators = []
 
-    const hospitalId = this.formFilter.get('hospital_id')?.value
+    let filtros: any = {}
 
-    if (!hospitalId) {
-      this.dataLoaded = true
-      return
+    if (this.role === 'nurse' || this.role === 'nurse-admin') {
+      filtros.hospital_id = this.hospitalId
+      this.formFilter.get('hospital_id')?.setValue(this.hospitalId)
+    } else if (this.formFilter.value.hospital_id) {
+      filtros.hospital_id = this.formFilter.value.hospital_id
     }
 
-    sessionStorage.setItem('selectedHospitalId', String(hospitalId))
+    if (this.formFilter.value.room_id) {
+      filtros.room_id = this.formFilter.value.room_id
+    }
 
-    const filtros = { hospital_id: hospitalId }
+    if (this.role !== 'nurse' && this.role !== 'nurse-admin' && filtros.hospital_id) {
+      sessionStorage.setItem('selectedHospitalId', String(filtros.hospital_id))
+    }
 
     this.incubatorsService.index(this.currentPage + 1, filtros).subscribe(
       (response) => {
@@ -99,9 +132,9 @@ export class IncubatorsListComponent implements OnInit {
         this.dataLoaded = true
       },
       (error) => {
+        console.error('Error al cargar incubadoras:', error)
         this.showAlert("error", "Error", "Could not load incubators.")
         this.dataLoaded = true
-        this.incubators = []
       }
     )
   }

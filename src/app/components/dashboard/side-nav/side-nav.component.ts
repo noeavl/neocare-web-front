@@ -13,42 +13,69 @@ import { AuthService } from '../../../services/auth.service';
 export class SideNavComponent implements OnInit, OnChanges {
   @Input() isLeftSidebarCollapsed!: boolean;
   @Output() changeIsLeftSidebarCollapsed = new EventEmitter<boolean>();
+  role: string = '';
 
   constructor(private authService: AuthService) { }
   showText: boolean = false;
   isMobile: boolean = false;
 
-  items = [
+  // Todas las opciones posibles del menú
+  allMenuItems = [
     {
       routeLink: '/dashboard',
       icon: '/recursos-web/dashboard-icon.png',
       label: 'Dashboard',
+      roles: ['admin', 'super-admin', 'nurse', 'nurse-admin'] // Todos los roles pueden ver dashboard
     },
     {
       routeLink: '/dashboard/hospitals',
       icon: '/recursos-web/hospital-icon.png',
       label: 'Hospitals',
+      roles: ['admin', 'super-admin'] // Solo admin y super-admin
     },
     {
       routeLink: '/dashboard/rooms/list',
       icon: '/recursos-web/room-icon.png',
       label: 'Rooms',
+      roles: ['admin', 'super-admin', 'nurse', 'nurse-admin']
     },
     {
       routeLink: '/dashboard/incubators/list',
       icon: '/recursos-web/incubator-icon.png',
       label: 'Incubators',
+      roles: ['admin', 'super-admin', 'nurse', 'nurse-admin']
     },
     {
       routeLink: '/dashboard/babies/list',
       icon: '/recursos-web/baby-icon.png',
       label: 'Babies',
+      roles: ['admin', 'super-admin', 'nurse', 'nurse-admin']
     }
   ];
+
+  // Items filtrados según el rol
+  filteredItems: any[] = [];
 
   ngOnInit(): void {
     this.checkScreenSize();
     this.showText = !this.isLeftSidebarCollapsed;
+
+    this.authService.userRole().subscribe(
+      (response) => {
+        this.role = response.role;
+        this.filterMenuItems(); // Filtra los items cuando se obtiene el rol
+      },
+      (error) => {
+        console.error('Error al obtener el rol:', error);
+      }
+    );
+  }
+
+  // Filtra los items del menú según el rol del usuario
+  filterMenuItems(): void {
+    this.filteredItems = this.allMenuItems.filter(item => 
+      item.roles.includes(this.role)
+    );
   }
 
   @HostListener('window:resize', [])
@@ -69,7 +96,7 @@ export class SideNavComponent implements OnInit, OnChanges {
       if (!this.isLeftSidebarCollapsed) {
         setTimeout(() => {
           this.showText = true;
-        }, 500); // Delay the appearance of text by 500ms
+        }, 500);
       } else {
         this.showText = false;
       }
@@ -88,7 +115,6 @@ export class SideNavComponent implements OnInit, OnChanges {
   }
 
   logout() {
-
-    this.authService.logout()
+    this.authService.logout();
   }
 }

@@ -38,10 +38,20 @@
                 <button mat-fab color="primary" [routerLink]="['/dashboard/incubators',id]">
                     <mat-icon>visibility</mat-icon>
                 </button>
-                <button mat-fab color="accent" [routerLink]="['/dashboard/incubators',id ,'edit']">
+                
+                <!-- Botón de edición (oculto para nurse) -->
+                <button 
+                    *ngIf="showEditButton"
+                    mat-fab 
+                    color="accent" 
+                    [routerLink]="['/dashboard/incubators',id ,'edit']"
+                >   
                     <mat-icon>edit</mat-icon>
                 </button>
+                
+                <!-- Botón de eliminación (oculto para nurse) -->
                 <button
+                    *ngIf="showDeleteButton"
                     mat-fab
                     color="warn" 
                     (click)="delete(id)"

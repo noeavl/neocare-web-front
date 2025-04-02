@@ -5,16 +5,16 @@ import { AuthService } from '../services/auth.service'
 import { map, catchError } from 'rxjs/operators'
 import { of } from 'rxjs'
 
-export const authGuardGuard: CanActivateFn = (route, state) => {
+export const nurseCheckGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService)
   const router = inject(Router)
 
   return authService.userRole().pipe(
     map((response: any) => {
-      if (response.role) {
+      if (response.role !== 'nurse') {
         return true
       } else {
-        router.navigate(['/'])
+        router.navigate(['/dashboard'])
         return false
       }
     }),

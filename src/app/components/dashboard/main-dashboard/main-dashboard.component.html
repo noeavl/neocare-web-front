@@ -1,11 +1,37 @@
-<div class="row">
-  @for (directAccess of directAccesses; track directAccess.title) {
-    <app-card class="col-12 col-md-6 col-lg-4 text-center my-3" [routerLink]="[directAccess.route]">
-      <app-icon 
-        [size]="130"
-        [img]="directAccess.img"
-      ></app-icon>
-      <h4 class="fw-bold mt-4">{{directAccess.title}}</h4>
-    </app-card>
-  }
+<div class="neocare-container py-5">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="neocare-title">NeoCare</h2>
+        <div class="neocare-divider mx-auto"></div>
+        <p class="neocare-subtitle">Medical Grade Neonatal Incubators</p>
+      </div>
+    </div>
+    
+    <!-- Access Cards Section -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <h3 class="section-title text-center mb-4">Direct Access</h3>
+      </div>
+    </div>
+    
+    <div class="row">
+      @for (directAccess of filteredDirectAccesses; track directAccess.title) {
+        <app-card 
+          class="col-12 col-md-6 col-lg-4 text-center my-3" 
+          [routerLink]="directAccess.route"
+        >
+          <div class="neocare-card">
+            <app-icon 
+              [size]="100"
+              [img]="directAccess.img"
+              class="neocare-icon"
+            ></app-icon>
+            <h4 class="neocare-card-title mt-3">{{ directAccess.title }}</h4>
+          </div>
+        </app-card>
+      }
+    </div>
+  </div>
 </div>

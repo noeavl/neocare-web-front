@@ -5,14 +5,11 @@
     <div *ngFor="let item of incubatorEntries" class="col-12">
       <div class="incubator-card p-3 d-flex align-items-center shadow-m">
         <div class="icon-container">
-          <mat-icon
-            class="entry-icon"
-            [ngClass]="{
+          <mat-icon class="entry-icon" [ngClass]="{
               'text-success': item.label === 'Status' && item.value === 'available',
               'text-danger': item.label === 'Status' && item.value === 'active',
               'purple-icon': item.label !== 'Status'
-            }"
-          >
+            }">
             {{ item.icon }}
           </mat-icon>
         </div>
@@ -20,6 +17,19 @@
           <p class="entry-label fw-bold mb-1">{{ item.label }}</p>
           <p class="entry-value text-muted">{{ item.value }}</p>
         </div>
+      </div>
+    </div>
+    <div 
+      class="col-12"
+      *ngIf="role === 'nurse' || role === 'admin'"  
+    >
+      <div class="p-3 d-flex align-items-center shadow-m">
+        <app-button 
+          class="w-100" 
+          text="Add Check" 
+          (click)="navigateToCreateCheck()"
+        >
+        </app-button>
       </div>
     </div>
   </div>
