@@ -49,12 +49,9 @@ import { UsersManagementsComponent } from './components/dashboard/users-manageme
 import { TemperatureBabyComponent } from './components/dashboard/incubators/incubator/sensors/temperature-baby/temperature-baby.component'
 import { UserDetailsComponent } from './components/dashboard/users-managements/user-details/user-details.component'
 import { UserEditComponent } from './components/dashboard/users-managements/user-edit/user-edit.component'
-<<<<<<< HEAD
 import { nurseCheckGuard } from './guards/nurse-check.guard'
 import { nurseAdminCheckGuard } from './guards/nurse-admin-check.guard'
-=======
 import { roleEditGuard } from './guards/role-edit.guard'
->>>>>>> ba4f4bd0b0c9d59c6733bcbecc3d1a8232baea53
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },

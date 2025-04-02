@@ -30,7 +30,7 @@
                     <app-input [formControlName]="'nurse_id'" [type]="'hidden'" />
 
 
-                    <div class="text-center mt-4">
+                    <div class="text-center mt-4" *ngIf="incubatorData.baby_incubator_id !== null">
                         <app-button [text]="'Create'" [disabled]="!form.valid" class="btn-lg w-100" />
                     </div>
                 </form>
