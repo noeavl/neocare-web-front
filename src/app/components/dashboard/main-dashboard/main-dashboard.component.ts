@@ -30,8 +30,12 @@ export class MainDashboardComponent implements OnInit {
     {
       img: '/recursos-web/users-icon.png',
       title: 'Users',
+<<<<<<< HEAD
       route: '/dashboard/users',
       roles: ['admin', 'super-admin'] // Solo para admins
+=======
+      route: '/dashboard/users'
+>>>>>>> ba4f4bd0b0c9d59c6733bcbecc3d1a8232baea53
     },
     {
       img: '/recursos-web/checks-icon.png',

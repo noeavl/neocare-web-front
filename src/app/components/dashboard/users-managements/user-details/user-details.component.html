@@ -1,1 +1,65 @@
-<p>user-details works!</p>
+<app-section-header title="User Details" 
+                   [route]="'/dashboard/users'" 
+                   [imgRoute]="'/recursos-web/list-text.png'">
+</app-section-header>
+
+<div *ngIf="user; else loading" class="details-container">
+    <div class="row">
+        <!-- Primera Card - Información básica -->
+        <div class="col-12 col-md-6 mb-4">
+            <mat-card class="user-card">
+                <mat-card-header>
+                    <mat-card-title class="user-name">{{ user.name }}</mat-card-title>
+                </mat-card-header>
+                
+                <mat-card-content>
+                    <div class="info-row">
+                        <mat-icon class="icon">email</mat-icon>
+                        <span class="info-text">{{ user.email }}</span>
+                    </div>
+                    
+                    <div class="info-row">
+                        <mat-icon class="icon" [ngClass]="getRoleColorClass()">manage_accounts</mat-icon>
+                        <span class="info-text text-capitalize">{{ user.role }}</span>
+                    </div>
+                </mat-card-content>
+                
+                <mat-card-actions class="card-actions">
+                    <button *ngIf="shouldShowEditButton()"
+                            mat-fab color="accent" 
+                            [routerLink]="['/dashboard/users', user.id, 'edit']"
+                            matTooltip="Edit user">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+        
+        <!-- Segunda Card - Fechas -->
+        <div class="col-12 col-md-6 mb-4">
+            <mat-card class="user-card">
+                <mat-card-header>
+                    <mat-card-title>Account Details</mat-card-title>
+                </mat-card-header>
+                
+                <mat-card-content>
+                    <div class="info-row">
+                        <mat-icon class="icon">calendar_today</mat-icon>
+                        <span class="info-text">Created: {{ user.created_at | date:'mediumDate' }}</span>
+                    </div>
+                    
+                    <div class="info-row">
+                        <mat-icon class="icon">update</mat-icon>
+                        <span class="info-text">Last updated: {{ user.updated_at | date:'mediumDate' }}</span>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <div class="spinner">
+        <mat-spinner diameter="50"></mat-spinner>
+    </div>
+</ng-template>

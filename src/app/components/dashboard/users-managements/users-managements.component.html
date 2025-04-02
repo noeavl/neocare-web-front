@@ -42,12 +42,18 @@
                     <mat-card-actions class="card-actions">
                         <div class="col-12 col-6 p-0 mt-3 mt-md-0">
                             <div class="d-flex justify-content-end gap-3 p-0">
-                                <button mat-fab color="primary" [routerLink]="['/dashboard/users', user.id]">
-                                    <mat-icon>visibility</mat-icon>
-                                </button>
-                                <button mat-fab color="accent" [routerLink]="['/dashboard/users',user.id,'edit']">
-                                    <mat-icon>edit</mat-icon>
-                                </button>
+                                <button mat-fab color="primary" 
+                                [routerLink]="['/dashboard/users', user.id]"
+                                matTooltip="View details">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+
+                        <button *ngIf="currentUserRole !== 'admin' || user.role !== 'super-admin'"
+                                mat-fab color="accent" 
+                                [routerLink]="['/dashboard/users', user.id, 'edit']"
+                                matTooltip="Edit user">
+                            <mat-icon>edit</mat-icon>
+                        </button>
                             </div>
                         </div>
                     </mat-card-actions>

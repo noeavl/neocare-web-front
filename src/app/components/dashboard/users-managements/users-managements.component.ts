@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { SectionHeaderComponent } from '../section-header/section-header.component';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-users-managements',
@@ -37,6 +38,7 @@ export class UsersManagementsComponent implements OnInit {
   pageSize = 9;
   currentPage = 0;
   dataLoaded = false;
+  currentUserRole: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -45,12 +47,28 @@ export class UsersManagementsComponent implements OnInit {
   constructor(
     private usersService: UsersManagementService,
     private messageService: MessageService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.loadUsers();
+    this.getCurrentUserRole();
+    
   }
+
+  getCurrentUserRole(): void {
+    this.authService.userRole().subscribe({
+      next: (response: any) => {
+        this.currentUserRole = response.role || '';
+        this.loadUsers();
+      },
+      error: (error) => {
+        console.error('Error al obtener el rol del usuario:', error);
+        this.loadUsers(); 
+      }
+    });
+  }
+
 
   loadUsers(): void {
     this.dataLoaded = false;
@@ -58,7 +76,7 @@ export class UsersManagementsComponent implements OnInit {
       next: (response: any) => {
         this.users = response.data || [];
         this.totalItems = response.total || 0;
-        this.pageSize = response.per_page || 9;
+        this.pageSize = response.per_page || this.pageSize;
         this.currentPage = response.current_page - 1;
         this.dataLoaded = true;
       },
