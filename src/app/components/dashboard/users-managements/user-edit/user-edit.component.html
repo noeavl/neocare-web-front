@@ -1,1 +1,50 @@
-<p>user-edit works!</p>
+<app-section-header title="Edit User Role" 
+                   [route]="'/dashboard/users'" 
+                   [imgRoute]="'/recursos-web/list-text.png'">
+</app-section-header>
+
+<div class="container mt-4">
+  <app-card>
+    <form [formGroup]="roleForm" (ngSubmit)="onSubmit()">
+      <!-- Role Selection -->
+      <div class="mb-3">
+        <label class="form-label">User Role</label>
+        <select formControlName="role" class="form-select">
+          <option value="" disabled>Select a role</option>
+          <option *ngFor="let role of availableRoles" [value]="role.value">
+            {{ role.label }}
+          </option>
+        </select>
+        <div *ngIf="roleForm.get('role')?.invalid && roleForm.get('role')?.touched" 
+             class="text-danger small mt-1">
+          Role selection is required
+        </div>
+      </div>
+
+      <!-- Hospital Selection (Conditional) -->
+      <div class="mb-3" *ngIf="showHospitalField">
+        <label class="form-label">Assign Hospital</label>
+        <select formControlName="hospital_id" class="form-select">
+          <option value="" disabled>Select a hospital</option>
+          <option *ngFor="let hospital of hospitals" [value]="hospital.id">
+            {{ hospital.name }}
+          </option>
+        </select>
+        <div *ngIf="roleForm.get('hospital_id')?.invalid && roleForm.get('hospital_id')?.touched" 
+             class="text-danger small mt-1">
+          Hospital assignment is required for nurse roles
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="d-flex justify-content-end mt-4">
+        <button type="submit" class="btn btn-primary" [disabled]="roleForm.invalid || isLoading">
+          <span *ngIf="!isLoading">Update Role</span>
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+        </button>
+      </div>
+    </form>
+  </app-card>
+</div>
+
+<p-toast position="bottom-right" key="br"></p-toast>

@@ -1,0 +1,94 @@
+.details-container {
+    padding: 20px;
+}
+
+.user-card {
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.user-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(122, 28, 172, 0.2) !important;
+}
+
+.user-name {
+    color: #492E87;
+    font-weight: bold;
+    margin: 0;
+}
+
+mat-card-header {
+    padding: 16px 16px 0;
+}
+
+mat-card-content {
+    padding: 16px;
+    flex-grow: 1;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    min-height: 32px;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    margin-right: 16px;
+    flex-shrink: 0;
+}
+
+.info-text {
+    font-size: 16px;
+    line-height: 24px;
+    word-break: break-word;
+}
+
+.card-actions {
+    padding: 0 16px 16px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.spinner {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Role Colors */
+.role-super-admin {
+    color: #7A1CAC !important;
+}
+
+.role-nurse-admin {
+    color: #FF6B6B !important;
+}
+
+.role-nurse {
+    color: #4CAF50 !important;
+}
+
+.role-user {
+    color: #2196F3 !important;
+}
+
+@media (max-width: 768px) {
+    .details-container {
+        padding: 10px;
+    }
+    
+    .user-card {
+        margin-bottom: 20px;
+    }
+}

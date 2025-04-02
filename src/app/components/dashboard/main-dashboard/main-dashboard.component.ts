@@ -24,7 +24,7 @@ export class MainDashboardComponent {
     {
       img: '/recursos-web/users-icon.png',
       title: 'Users',
-      routes: '/dashboard/users'
+      route: '/dashboard/users'
     },
     {
       img: '/recursos-web/checks-icon.png',
