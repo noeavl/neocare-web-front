@@ -5,7 +5,13 @@
         <mat-spinner></mat-spinner>
     </div>
 
-    <div *ngIf="dataLoaded" class="row">
+    <div *ngIf="dataLoaded && (data == null || lastData == null)" class="row">
+        <app-card [backgroundColor]="'var(--color-morado)'">
+            <div class="card-title text-center">No Temperature Baby Data Available</div>
+        </app-card>
+    </div>
+
+    <div *ngIf="dataLoaded && data != null && lastData != null" class="row">
         <app-card [backgroundColor]="'var(--color-morado)'">
             <div class="card-title">Latest Reading</div>
             <div class="card-value">{{ lastData.value }} °C</div>

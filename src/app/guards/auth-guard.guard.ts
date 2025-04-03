@@ -11,7 +11,7 @@ export const authGuardGuard: CanActivateFn = (route, state) => {
 
   return authService.userRole().pipe(
     map((response: any) => {
-      if (response.role) {
+      if (response.role !== 'admin' && response.role !== 'super-admin' && response.role !== 'nurse-admin' && response.role !== 'nurse') {
         return true
       } else {
         router.navigate(['/'])

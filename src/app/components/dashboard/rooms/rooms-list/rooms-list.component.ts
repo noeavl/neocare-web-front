@@ -7,16 +7,29 @@ import { ToastModule } from 'primeng/toast';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatPaginator } from '@angular/material/paginator';
 import { RoomCardComponent } from './room-card/room-card.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HospitalService } from '../../../../services/hospital.service';
 import { ButtonComponent } from '../../../shared/button/button.component';
 import { SelectComponent } from '../../../shared/select/select.component';
 import { CardComponent } from '../../../shared/card/card.component';
+import { AuthService } from '../../../../services/auth.service';
 @Component({
   selector: 'app-rooms-list',
-  imports: [SectionHeaderComponent, ToastModule, MatProgressSpinner, MatPaginator, RoomCardComponent, CommonModule, ReactiveFormsModule, ButtonComponent, SelectComponent, CardComponent],
+  imports: [
+      SectionHeaderComponent, 
+      ToastModule, 
+      MatProgressSpinner, 
+      MatPaginator, 
+      RoomCardComponent, 
+      CommonModule, 
+      ReactiveFormsModule, 
+      ButtonComponent, 
+      SelectComponent, 
+      CardComponent,
+      NgIf
+    ],
   templateUrl: './rooms-list.component.html',
   styleUrl: './rooms-list.component.css',
   providers: [MessageService]
@@ -30,6 +43,8 @@ export class RoomsListComponent {
   totalItems: number = 0
   pageSize: number = 9
   currentPage: number = 0
+  role: string = ''
+  showButton: boolean = false
 
   formFilter = new FormGroup({
     hospital_id: new FormControl('', Validators.required)
@@ -39,14 +54,45 @@ export class RoomsListComponent {
     return this.formFilter.get('hospital_id')
   }
 
-  constructor(private roomsService: RoomsService, private messageService: MessageService, private hospitalsService: HospitalService) { }
+  constructor(
+    private roomsService: RoomsService,
+    private messageService: MessageService,
+    private hospitalsService: HospitalService,
+    private authService: AuthService
+  ) { }
 
   showAlert(severity: string, summary: string, detail: string) {
     this.messageService.add({ severity: severity, summary: summary, detail: detail, key: 'br', life: 3000 });
   }
+
   ngOnInit() {
     this.getHospitals()
+
+    this.authService.userRole().subscribe({
+      next: (response) => {
+        this.showButton = this.role !== 'nurse'
+        this.role = response.role
+        if (response.role === 'nurse-admin' || response.role === 'nurse') {
+          this.formFilter.controls['hospital_id'].setValue(response.hospital_id)
+          this.getRooms(0)
+        }
+      },
+      error: (error) => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.status === 0) {
+            this.showAlert('error', 'Error', 'Fail to connect to the server');
+          } else if (error.status === 404) {
+            this.showAlert('warn', 'Error', error.error.message);
+          } else if (error.status === 401) {
+            this.showAlert('error', 'Error', error.error.message);
+          } else {
+            this.showAlert('error', 'Error', error.error.message);
+          }
+        }
+      }
+    })
   }
+
   getRooms(page: number) {
     this.isSearching = true
     this.roomsService.index(page + 1, Number(this.formFilter.controls.hospital_id.value)).subscribe({

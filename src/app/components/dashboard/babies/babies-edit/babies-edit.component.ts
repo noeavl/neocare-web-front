@@ -1,18 +1,19 @@
-import { Component } from '@angular/core';
-import { SectionHeaderComponent } from '../../section-header/section-header.component';
-import { CardComponent } from '../../../shared/card/card.component';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { InputComponent } from '../../../shared/input/input.component';
-import { ButtonComponent } from '../../../shared/button/button.component';
-import { SelectComponent } from '../../../shared/select/select.component';
-import { ToastModule } from 'primeng/toast';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { MessageService } from 'primeng/api';
-import { HospitalService } from '../../../../services/hospital.service';
-import { BabiesService } from '../../../../services/babies.service';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
+import { Component } from '@angular/core'
+import { SectionHeaderComponent } from '../../section-header/section-header.component'
+import { CardComponent } from '../../../shared/card/card.component'
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { CommonModule } from '@angular/common'
+import { InputComponent } from '../../../shared/input/input.component'
+import { ButtonComponent } from '../../../shared/button/button.component'
+import { SelectComponent } from '../../../shared/select/select.component'
+import { ToastModule } from 'primeng/toast'
+import { MatProgressSpinner } from '@angular/material/progress-spinner'
+import { MessageService } from 'primeng/api'
+import { HospitalService } from '../../../../services/hospital.service'
+import { BabiesService } from '../../../../services/babies.service'
+import { ActivatedRoute, Router, RouterModule } from '@angular/router'
+import { HttpErrorResponse } from '@angular/common/http'
+import { AuthService } from '../../../../services/auth.service'
 
 @Component({
   selector: 'app-babies-edit',
@@ -34,22 +35,29 @@ export class BabiesEditComponent {
   id: number
   hospitals: any[] = []
   dataLoad = false
-  errorMessage: string | null = null;
-  fieldErrors: { [key: string]: string } = {};
-  maxDate: string;
+  errorMessage: string | null = null
+  fieldErrors: { [key: string]: string } = {}
+  maxDate: string
+  role: string = ''
 
-  constructor(private hospitalService: HospitalService, private babiesService: BabiesService, private messageService: MessageService, private route: ActivatedRoute, private router: Router) {
-    this.id = this.route.snapshot.params['id'];
-    this.maxDate = this.getTodayDate();
+  constructor(
+    private hospitalService: HospitalService,
+    private babiesService: BabiesService,
+    private messageService: MessageService,
+    private route: ActivatedRoute,
+    private authService: AuthService
+  ) {
+    this.id = this.route.snapshot.params['id']
+    this.maxDate = this.getTodayDate()
   }
 
   getTodayDate(): string {
-    const today = new Date();
-    return `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+    const today = new Date()
+    return `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`
   }
 
   showAlert(severity: string, summary: string, detail: string) {
-    this.messageService.add({ severity: severity, summary: summary, detail: detail, key: 'br', life: 3000 });
+    this.messageService.add({ severity: severity, summary: summary, detail: detail, key: 'br', life: 3000 })
   }
 
   form = new FormGroup({
@@ -86,15 +94,24 @@ export class BabiesEditComponent {
   ngOnInit() {
     this.loadHospitals()
     this.getBaby()
+
+    this.authService.userRole().subscribe(
+      (response) => {
+        this.role = response.role
+      },
+      (error) => {
+        
+      }
+    )
   }
 
   formatDate(date: string | null): string | null {
-    if (!date) return null;
-    const d = new Date(date);
+    if (!date) return null
+    const d = new Date(date)
     if (isNaN(d.getTime())) {
-      return null;
+      return null
     }
-    return `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')}`;
+    return `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')}`
   }
 
   handleSelection(value: string): void {
@@ -142,16 +159,16 @@ export class BabiesEditComponent {
       error: (error) => {
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
-            this.showAlert('error', 'Error', 'Fail to connect to the server');
+            this.showAlert('error', 'Error', 'Fail to connect to the server')
           } else if (error.status === 404) {
-            this.showAlert('error', 'Error', '404 Not found');
+            this.showAlert('error', 'Error', '404 Not found')
           } else if (error.status === 422) {
-            this.handleError(error.error);
-            this.showAlert('error', 'Error', 'Please check the form');
+            this.handleError(error.error)
+            this.showAlert('error', 'Error', 'Please check the form')
           } else if (error.status === 401) {
-            this.showAlert('error', 'Error', error.error.message);
+            this.showAlert('error', 'Error', error.error.message)
           } else {
-            this.showAlert('error', 'Error', error.error.message);
+            this.showAlert('error', 'Error', error.error.message)
           }
         }
       }
@@ -170,7 +187,7 @@ export class BabiesEditComponent {
       error: (error) => {
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
-            this.showAlert('error', 'Error', 'Fail to connect to the server');
+            this.showAlert('error', 'Error', 'Fail to connect to the server')
           }
         }
       }
@@ -178,17 +195,17 @@ export class BabiesEditComponent {
   }
 
   handleError(error: any) {
-    this.errorMessage = null;
-    this.fieldErrors = {};
+    this.errorMessage = null
+    this.fieldErrors = {}
 
     if (error.message) {
-      this.errorMessage = error.message;
+      this.errorMessage = error.message
     }
 
     if (error) {
       for (const key in error) {
         if (error.hasOwnProperty(key)) {
-          this.fieldErrors[key] = error[key];
+          this.fieldErrors[key] = error[key]
         }
       }
     }

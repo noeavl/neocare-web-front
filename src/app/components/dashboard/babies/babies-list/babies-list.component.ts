@@ -11,10 +11,11 @@ import { ButtonComponent } from '../../../shared/button/button.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { HospitalService } from '../../../../services/hospital.service';
 import { CardComponent } from '../../../shared/card/card.component';
+import { AuthService } from '../../../../services/auth.service';
 @Component({
   selector: 'app-babies-list',
   imports: [BabiesCardComponent, NgFor, ToastModule, MatSpinner, SectionHeaderComponent,
-     MatPaginator, ReactiveFormsModule, ButtonComponent, NgIf, CommonModule, CardComponent],
+    MatPaginator, ReactiveFormsModule, ButtonComponent, NgIf, CommonModule, CardComponent],
   templateUrl: './babies-list.component.html',
   styleUrl: './babies-list.component.css',
   providers: [MessageService]
@@ -27,23 +28,45 @@ export class BabiesListComponent implements OnInit {
   dataLoaded = false
   incubators: any[] = []
   hospitals: any[] = []
+  role: string = ''
+  hospitalId: number | null = 0
 
   formFilter = new FormGroup({
-    hospital_id: new FormControl(null, Validators.required)
-  })
-
+    hospital_id: new FormControl<number | null>(null)
+  });
+  
   @ViewChild(MatPaginator) paginator!: MatPaginator
 
- constructor(
-  private babiesService: BabiesService,
-  private messageService: MessageService,
-  private hospitalsService: HospitalService
- ) { }
+  constructor(
+    private babiesService: BabiesService,
+    private messageService: MessageService,
+    private hospitalsService: HospitalService,
+    private authService: AuthService
+  ) { }
 
- ngOnInit(): void {
-  this.loadHospitals()
- }
- 
+  ngOnInit(): void {
+    this.loadHospitals();
+
+    this.authService.userRole().subscribe(
+      (response) => {
+        this.role = response.role;
+        
+        // Solo asignar hospitalId para nurses
+        if (this.role === 'nurse' || this.role === 'nurse-admin') {
+          this.hospitalId = response.hospital_id;
+          this.formFilter.controls['hospital_id'].setValue(this.hospitalId);
+          this.formFilter.controls['hospital_id'].disable(); // Opcional: deshabilitar el control
+        }
+        
+        // Cargar bebés después de determinar el rol
+        this.loadBabies();
+      },
+      (error) => {
+        this.showAlert("error", "Error", "No se pudo obtener el rol del usuario.");
+      }
+    );
+  }
+
   loadHospitals() {
     this.hospitalsService.indexNoPaginate().subscribe(
       (response) => {
@@ -57,32 +80,36 @@ export class BabiesListComponent implements OnInit {
   }
 
   loadBabies() {
-    this.dataLoaded = false
-    this.babies = []
+    this.dataLoaded = false;
+    this.babies = [];
 
-    const hospitalId = this.formFilter.get('hospital_id')?.value
+    let filtros: any = {};
 
-    if (!hospitalId) {
-      this.dataLoaded = true
-      return
+    // Solo aplicar filtro de hospital para nurses
+    if (this.role === 'nurse' || this.role === 'nurse-admin') {
+      filtros.hospital_id = this.hospitalId;
+    } else {
+      // Para admin/super-admin, usar el filtro seleccionado (si existe)
+      const selectedHospitalId = this.formFilter.get('hospital_id')?.value;
+      if (selectedHospitalId) {
+        filtros.hospital_id = selectedHospitalId;
+      }
     }
-
-    const filtros = { hospital_id: hospitalId }
 
     this.babiesService.index(this.currentPage + 1, filtros).subscribe(
       (response) => {
-        this.babies = response.data || []
-        this.totalItems = response.total || 0
-        this.pageSize = response.per_page || 6
-        this.currentPage = response.current_page - 1
-        this.dataLoaded = true
+        this.babies = response.data || [];
+        this.totalItems = response.total || 0;
+        this.pageSize = response.per_page || 6;
+        this.currentPage = response.current_page - 1;
+        this.dataLoaded = true;
       },
       (error) => {
-        this.showAlert("error", "Error", "Could not load babies.")
-        this.dataLoaded = true
-        this.babies = []
+        this.showAlert("error", "Error", "No se pudieron cargar los bebés.");
+        this.dataLoaded = true;
+        this.babies = [];
       }
-    )
+    );
   }
 
   onSubmit(event: Event) {
@@ -100,7 +127,7 @@ export class BabiesListComponent implements OnInit {
   showAlert(severity: string, summary: string, detail: string) {
     this.messageService.add({ severity, summary, detail })
   }
-  
+
   manageDeletion(event: any) {
     if (event.status == 404) {
       this.showAlert('error', 'Error', event.error.msg)

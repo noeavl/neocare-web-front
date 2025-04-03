@@ -1,21 +1,21 @@
-import { Component } from '@angular/core';
-import { SectionHeaderComponent } from '../../section-header/section-header.component';
-import { CardComponent } from '../../../shared/card/card.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { InputComponent } from '../../../shared/input/input.component';
-import { ButtonComponent } from '../../../shared/button/button.component';
-import { SelectComponent } from '../../../shared/select/select.component';
-import { ToastModule } from 'primeng/toast';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { BabiesService } from '../../../../services/babies.service';
-import { MessageService } from 'primeng/api';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { HospitalService } from '../../../../services/hospital.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { MatInputModule } from '@angular/material/input';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { Component } from '@angular/core'
+import { SectionHeaderComponent } from '../../section-header/section-header.component'
+import { CardComponent } from '../../../shared/card/card.component'
+import { ReactiveFormsModule } from '@angular/forms'
+import { CommonModule } from '@angular/common'
+import { InputComponent } from '../../../shared/input/input.component'
+import { ButtonComponent } from '../../../shared/button/button.component'
+import { ToastModule } from 'primeng/toast'
+import { MatProgressSpinner } from '@angular/material/progress-spinner'
+import { BabiesService } from '../../../../services/babies.service'
+import { MessageService } from 'primeng/api'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { HospitalService } from '../../../../services/hospital.service'
+import { HttpErrorResponse } from '@angular/common/http'
+import { MatInputModule } from '@angular/material/input'
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatNativeDateModule } from '@angular/material/core'
+import { AuthService } from '../../../../services/auth.service'
 
 
 
@@ -23,16 +23,16 @@ import { MatNativeDateModule } from '@angular/material/core';
 @Component({
   selector: 'app-babies-create',
   imports: [
-    SectionHeaderComponent, 
-    CardComponent, 
-    ReactiveFormsModule, 
-    CommonModule, 
-    InputComponent, 
+    SectionHeaderComponent,
+    CardComponent,
+    ReactiveFormsModule,
+    CommonModule,
+    InputComponent,
     ButtonComponent,
-    ToastModule, 
-    MatProgressSpinner, 
-    MatInputModule, 
-    MatDatepickerModule, 
+    ToastModule,
+    MatProgressSpinner,
+    MatInputModule,
+    MatDatepickerModule,
     MatNativeDateModule
   ],
   templateUrl: './babies-create.component.html',
@@ -42,22 +42,28 @@ import { MatNativeDateModule } from '@angular/material/core';
 export class BabiesCreateComponent {
   hospitals: any[] = []
   dataLoad = false
-  errorMessage: string | null = null;
+  errorMessage: string | null = null
   fieldErrors: { [key: string]: string } = {}
-  maxDate: string;
+  maxDate: string
+  role: string = ''
+  hospitalId: number | null = 0
 
+  constructor(
+    private babiesService: BabiesService,
+    private messageService: MessageService, 
+    private hospitalsService: HospitalService,
+    private authService: AuthService
+  ) {
+    this.maxDate = this.getTodayDate()
+  }
 
-  constructor(private babiesService: BabiesService, private messageService: MessageService, private hospitalsService: HospitalService) {
-    this.maxDate = this.getTodayDate();
-   }
-
-   getTodayDate(): string {
-    const today = new Date();
-    return `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+  getTodayDate(): string {
+    const today = new Date()
+    return `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`
   }
 
   showAlert(severity: string, summary: string, detail: string) {
-    this.messageService.add({ severity: severity, summary: summary, detail: detail, key: 'br', life: 3000 });
+    this.messageService.add({ severity: severity, summary: summary, detail: detail, key: 'br', life: 3000 })
   }
 
   form = new FormGroup({
@@ -75,33 +81,47 @@ export class BabiesCreateComponent {
     return this.form.get('name')
   }
 
-  get last_name_1(){
+  get last_name_1() {
     return this.form.get('last_name_1')
   }
 
-  get last_name_2(){
+  get last_name_2() {
     return this.form.get('last_name_2')
   }
 
-  get birth_date(){
+  get birth_date() {
     return this.form.get('birth_date')
   }
 
-  get hospital_id(){
+  get hospital_id() {
     return this.form.get('hospital_id')
   }
-  
-  ngOnInit(){
+
+  ngOnInit() {
     this.loadHospitals()
+
+    this.authService.userRole().subscribe(
+      (response) => {
+        this.role = response.role
+
+        if (this.role === 'nurse' || this.role === 'nurse-admin') {
+          this.hospitalId = response.hospital_id;
+          this.form.controls['hospital_id'].setValue(this.hospitalId?.toString() ?? null);
+        }
+
+      },
+      (error) => {
+      }
+    )
   }
 
   formatDate(date: string | null): string | null {
-    if (!date) return null;
-    const d = new Date(date);
+    if (!date) return null
+    const d = new Date(date)
     if (isNaN(d.getTime())) {
-      return null; 
+      return null
     }
-    return `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')}`;
+    return `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')}`
   }
 
 
@@ -117,16 +137,16 @@ export class BabiesCreateComponent {
       error: (error) => {
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
-            this.showAlert('error', 'Error', 'Fail to connect to the server');
+            this.showAlert('error', 'Error', 'Fail to connect to the server')
           } else if (error.status === 404) {
-            this.showAlert('error', 'Error', '404 Not found');
+            this.showAlert('error', 'Error', '404 Not found')
           } else if (error.status === 422) {
-            this.handleError(error.error);
-            this.showAlert('error', 'Error', 'Please check the form');
+            this.handleError(error.error)
+            this.showAlert('error', 'Error', 'Please check the form')
           } else if (error.status === 401) {
-            this.showAlert('error', 'Error', error.error.message);
+            this.showAlert('error', 'Error', error.error.message)
           } else {
-            this.showAlert('error', 'Error', error.error.message);
+            this.showAlert('error', 'Error', error.error.message)
           }
         }
       }
@@ -142,12 +162,12 @@ export class BabiesCreateComponent {
         date_of_birth: this.form.controls['birth_date'].value,
         hospital_id: this.form.controls['hospital_id'].value
       }
-      
+
       this.babiesService.create(formData).subscribe({
         next: (response) => {
           this.showAlert('success', 'Success', response.message)
           this.form.reset()
-          this.form.controls['hospital_id'].setValue('');
+          this.form.controls['hospital_id'].setValue('')
         },
         error: (error) => {
           if (error instanceof HttpErrorResponse) {
@@ -167,24 +187,24 @@ export class BabiesCreateComponent {
   handleSelection(value: string): void {
     this.form.controls['hospital_id'].setValue(value)
   }
-  
+
 
 
 
   handleError(error: any) {
-    this.errorMessage = null;
-    this.fieldErrors = {};
+    this.errorMessage = null
+    this.fieldErrors = {}
 
     if (error.message) {
-      this.errorMessage = error.message;
+      this.errorMessage = error.message
     }
 
     if (error) {
       for (const key in error) {
         if (error.hasOwnProperty(key)) {
-          this.fieldErrors[key] = error[key];
+          this.fieldErrors[key] = error[key]
         }
-      } 
+      }
     }
   }
 }

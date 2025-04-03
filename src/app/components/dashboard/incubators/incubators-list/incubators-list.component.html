@@ -1,5 +1,6 @@
 <app-section-header title="Incubators" [route]="'/dashboard/incubators/create'" *ngIf="role === 'admin' || role === 'super-admin'" [imgRoute]="'/crud-icons/plus-icon.png'"/>
 <h1 class="fw-bold mb-4" style="color: var(--color-morado);" *ngIf="role !== 'admin' && role !== 'super-admin'">Incubators</h1>
+
 <app-card *ngIf="role === 'admin' || role === 'super-admin'" class="my-5">
     <div class="container">
         <form [formGroup]="formFilter" class="row w-100" (ngSubmit)="onSubmit($event)">

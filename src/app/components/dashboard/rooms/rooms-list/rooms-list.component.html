@@ -1,8 +1,19 @@
-<app-section-header title="Rooms" [route]="'/dashboard/rooms/create'" [imgRoute]="'/crud-icons/plus-icon.png'" />
-<div *ngIf="dataLoaded" class="container">
+<app-section-header 
+    title="Rooms" 
+    [route]="'/dashboard/rooms/create'" 
+    [imgRoute]="'/crud-icons/plus-icon.png'" 
+    *ngIf="role === 'admin' || role === 'super-admin'"
+/>
+<h1 class="fw-bold mb-4" style="color: var(--color-morado);" *ngIf="role !== 'admin' && role !== 'super-admin'">Rooms</h1>
+
+<div *ngIf="dataLoaded && role === 'admin' || role === 'admin' || role === 'super-admin'" class="my-5">
     <div class="mt-4">
         <app-card>
-            <form [formGroup]="formFilter" class="row" (ngSubmit)="onSubmit($event)">
+            <form 
+                [formGroup]="formFilter" 
+                class="row" 
+                (ngSubmit)="onSubmit($event)"
+            >
                 <div class="col-12 col-md-6 col-lg-3">
                     <app-select name="example" [options]="hospitals" (selected)="handleSelection($event)"
                         formControlName="hospital_id" [placeholder]="'Select a hospital'" />
@@ -15,6 +26,7 @@
         </app-card>
     </div>
 </div>
+
 @if (!isSearching && rooms.length === 0) {
 <div class="text-center mt-5">
     <h4 [style]="{'color':'var(--color-morado)'}">Select a hospital to view rooms</h4>
@@ -30,8 +42,15 @@
     <div class="mt-3">
         <div class="row">
             <div *ngFor="let room of rooms" class="col-12 col-md-6 mb-4">
-                <app-room-card [id]="room.id" [name]="room.name" [date]="room.created_at" [number]="room.number"
-                    (reloadData)="getRooms(this.currentPage)" (alertDelete)="manageDeletion($event)">
+                <app-room-card 
+                    [id]="room.id" 
+                    [name]="room.name" 
+                    [date]="room.created_at" 
+                    [number]="room.number"
+                    (reloadData)="getRooms(this.currentPage)" (alertDelete)="manageDeletion($event)"
+                    [showDeleteButton]="role !== 'nurse'"
+                    [showEditButton]="role !== 'nurse'">
+                >
                 </app-room-card>
             </div>
             <mat-paginator [length]="totalItems" [pageSize]="pageSize" (page)="onPageChange($event)"

@@ -47,15 +47,22 @@ export class ChecksCreateComponent implements OnInit {
 
   ngOnInit() {
     this.incubatorData = history.state?.['incubator'];
+    console.log('Incubator Data:', this.incubatorData);
   
     if (this.incubatorData) {
-      this.dataLoaded = true
+      this.dataLoaded = true;
+      console.log('Nurse ID:', this.incubatorData.nurse_id);
+      console.log('Baby Incubator ID:', this.incubatorData.baby_incubator_id); // This is the key field!
+      console.log('Incubator ID:', this.incubatorData.id);
+  
       this.form.patchValue({
-        nurse_id: this.incubatorData.nurse_id,
-        baby_incubator_id: this.incubatorData.id
-      })
+        nurse_id: this.incubatorData.nurse_id.toString(),
+        baby_incubator_id: this.incubatorData.baby_incubator_id.toString() // Use baby_incubator_id instead of id
+      });
+  
+      console.log('Form Values:', this.form.value);
     } else {
-      console.log('No se proporcionó la información de la incubadora.')
+      this.showAlert('error', 'Error', 'No incubator data provided');
     }
   }
 
@@ -72,7 +79,7 @@ export class ChecksCreateComponent implements OnInit {
       (error) => {
         console.log(error)
         this.dataLoaded = true
-        this.showAlert('error', 'Error', error.error.msg)
+        this.showAlert('error', 'Error', error.error.msg || 'No baby and nurse assigned')
       }
     )
   }

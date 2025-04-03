@@ -61,7 +61,6 @@ export class TemperatureBabyComponent {
       this.lastData = response.TBB
       this.dataLoaded = true
     }, (error) => {
-      console.log(error)
       this.dataLoaded = true
     })
   }
