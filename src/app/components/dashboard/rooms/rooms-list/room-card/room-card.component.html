@@ -25,14 +25,24 @@
                 <button mat-fab color="primary" [routerLink]="['/dashboard/rooms',id]">
                     <mat-icon>visibility</mat-icon>
                 </button>
-                <button mat-fab color="accent" [routerLink]="['/dashboard/rooms',id ,'edit']">
+                <button 
+                    mat-fab 
+                    color="accent" 
+                    [routerLink]="['/dashboard/rooms',id ,'edit']"
+                    *ngIf="showEditButton"
+                >
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-fab color="warn" [swal]="{
-                    title: 'Confirmation', 
-                    text: 'Are you sure you want to delete this room', 
-                    showCancelButton: true
-                }" (confirm)="delete(id)">
+                <button 
+                    mat-fab 
+                    color="warn" [swal]="{
+                        text: 'Are you sure you want to delete this room', 
+                        title: 'Confirmation', 
+                        showCancelButton: true
+                        }" 
+                    (confirm)="delete(id)"
+                    *ngIf="showDeleteButton"
+                >
                     <mat-icon>delete</mat-icon>
                 </button>
             </div>

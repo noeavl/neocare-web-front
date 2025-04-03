@@ -20,7 +20,6 @@ export class CheckCardComponent {
   @Input({ required: true }) date!: string
   @Input({ required: true }) description!: string
   @Input({ required: true }) incubator!: number
-  @Input({ required: true }) nurse!: string
   @Input({ required: true }) title!: string
 
   

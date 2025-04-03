@@ -116,8 +116,8 @@ export const routes: Routes = [
         canActivate: [authGuardGuard],
         children: [
           { path: 'list', component: IncubatorsListComponent, canActivate: [authGuardGuard], },
-          { path: 'create', component: IncubatorsCreateComponent, canActivate: [authGuardGuard], },
-          { path: ':id/edit', component: IncubatorsEditComponent, canActivate: [authGuardGuard], },
+          { path: 'create', component: IncubatorsCreateComponent, canActivate: [authGuardGuard, nurseCheckGuard], },
+          { path: ':id/edit', component: IncubatorsEditComponent, canActivate: [authGuardGuard, nurseCheckGuard], },
           { 
             path: ':id', 
             component: IncubatorComponent, 
@@ -150,8 +150,8 @@ export const routes: Routes = [
         canActivate: [authGuardGuard],
         children: [
           { path: 'list', component: RoomsListComponent, canActivate: [authGuardGuard], },
-          { path: 'create', component: RoomsCreateComponent, canActivate: [authGuardGuard], },
-          { path: ':id/edit', component: RoomsEditComponent, canActivate: [authGuardGuard], },
+          { path: 'create', component: RoomsCreateComponent, canActivate: [authGuardGuard, nurseCheckGuard], },
+          { path: ':id/edit', component: RoomsEditComponent, canActivate: [authGuardGuard, nurseCheckGuard], },
           {
             path: ':id',
             component: RoomsDetailComponent,

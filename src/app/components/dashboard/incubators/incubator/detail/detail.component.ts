@@ -7,6 +7,8 @@ import { MessageService } from 'primeng/api'
 import { ToastModule } from 'primeng/toast'
 import { MatSpinner } from '@angular/material/progress-spinner'
 import { MatPaginator } from '@angular/material/paginator'
+import { CardComponent } from '../../../../shared/card/card.component'
+import { NgIf } from '@angular/common'
 
 @Component({
   selector: 'app-detail',
@@ -15,7 +17,9 @@ import { MatPaginator } from '@angular/material/paginator'
     IncubatorDetailComponent,
     SweetAlert2Module,
     ToastModule,
-    MatSpinner
+    MatSpinner,
+    CardComponent,
+    NgIf
   ],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.css',
@@ -34,11 +38,11 @@ export class DetailComponent {
   ngOnInit() {
     this.incubatorsService.show(this.router.snapshot.params['id']).subscribe(
       (response) => {
-        console.log(response)
         this.incubator = response.incubator
         this.dataLoaded = true
       },
       (error) => {
+        this.incubator = null
         this.showAlert("error", "Error", "Could not load incubator data.")
         this.dataLoaded = true
       }

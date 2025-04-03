@@ -33,7 +33,6 @@ export class TemperatureComponent {
   ) { }
 
   ngOnInit() {
-    // Obtiene el id de la ruta padre
     this.route.parent?.paramMap.subscribe(params => {
       this.id = Number(params.get('id'))
       this.loadData(this.id)
@@ -61,7 +60,6 @@ export class TemperatureComponent {
       this.lastData = response.TAM
       this.dataLoaded = true
     }, (error) => {
-      console.log(error)
       this.dataLoaded = true
     })
   }

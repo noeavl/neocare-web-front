@@ -1,11 +1,15 @@
-<app-section-header title="Babies" [route]="'/dashboard/babies/create'" [imgRoute]="'/crud-icons/plus-icon.png'">
+<app-section-header 
+    title="Babies" 
+    [route]="'/dashboard/babies/create'" 
+    [imgRoute]="'/crud-icons/plus-icon.png'"
+>
 </app-section-header>
 
 <div *ngIf="!dataLoaded" class="loading-container">
     <mat-spinner></mat-spinner>
 </div>
 
-<div *ngIf="dataLoaded" class="container">
+<div *ngIf="dataLoaded && role == 'admin' || role == 'super-admin'" class="container">
     <div class="mt-4">
         <app-card>
             <form [formGroup]="formFilter" class="row" (ngSubmit)="onSubmit($event)">
