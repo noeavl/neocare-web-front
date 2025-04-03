@@ -1,7 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, HostListener } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
+import { CommonModule } from '@angular/common'
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, HostListener } from '@angular/core'
+import { RouterModule } from '@angular/router'
+import { AuthService } from '../../../services/auth.service'
 
 @Component({
   selector: 'app-side-nav',
@@ -11,13 +11,13 @@ import { AuthService } from '../../../services/auth.service';
   styleUrls: ['./side-nav.component.css'],
 })
 export class SideNavComponent implements OnInit, OnChanges {
-  @Input() isLeftSidebarCollapsed!: boolean;
-  @Output() changeIsLeftSidebarCollapsed = new EventEmitter<boolean>();
-  role: string = '';
+  @Input() isLeftSidebarCollapsed!: boolean
+  @Output() changeIsLeftSidebarCollapsed = new EventEmitter<boolean>()
+  role: string = ''
 
   constructor(private authService: AuthService) { }
-  showText: boolean = false;
-  isMobile: boolean = false;
+  showText: boolean = false
+  isMobile: boolean = false
 
   // Todas las opciones posibles del menú
   allMenuItems = [
@@ -51,43 +51,41 @@ export class SideNavComponent implements OnInit, OnChanges {
       label: 'Babies',
       roles: ['admin', 'super-admin', 'nurse', 'nurse-admin']
     }
-  ];
+  ]
 
-  // Items filtrados según el rol
-  filteredItems: any[] = [];
+  filteredItems: any[] = []
 
   ngOnInit(): void {
-    this.checkScreenSize();
-    this.showText = !this.isLeftSidebarCollapsed;
+    this.checkScreenSize()
+    this.showText = !this.isLeftSidebarCollapsed
 
     this.authService.userRole().subscribe(
       (response) => {
-        this.role = response.role;
-        this.filterMenuItems(); // Filtra los items cuando se obtiene el rol
+        this.role = response.role
+        this.filterMenuItems()
       },
       (error) => {
-        console.error('Error al obtener el rol:', error);
+
       }
-    );
+    )
   }
 
-  // Filtra los items del menú según el rol del usuario
   filterMenuItems(): void {
     this.filteredItems = this.allMenuItems.filter(item => 
       item.roles.includes(this.role)
-    );
+    )
   }
 
   @HostListener('window:resize', [])
   onResize(): void {
-    this.checkScreenSize();
+    this.checkScreenSize()
   }
 
   checkScreenSize(): void {
-    this.isMobile = window.innerWidth < 768;
+    this.isMobile = window.innerWidth < 768
     if (this.isMobile) {
-      this.isLeftSidebarCollapsed = true;
-      this.showText = false;
+      this.isLeftSidebarCollapsed = true
+      this.showText = false
     }
   }
 
@@ -95,26 +93,26 @@ export class SideNavComponent implements OnInit, OnChanges {
     if (changes['isLeftSidebarCollapsed']) {
       if (!this.isLeftSidebarCollapsed) {
         setTimeout(() => {
-          this.showText = true;
-        }, 500);
+          this.showText = true
+        }, 500)
       } else {
-        this.showText = false;
+        this.showText = false
       }
     }
   }
 
   toggleCollapse(): void {
-    if (this.isMobile) return;
+    if (this.isMobile) return
 
-    const newState = !this.isLeftSidebarCollapsed;
-    this.changeIsLeftSidebarCollapsed.emit(newState);
+    const newState = !this.isLeftSidebarCollapsed
+    this.changeIsLeftSidebarCollapsed.emit(newState)
   }
 
   trackByFn(index: number, item: any): number {
-    return index;
+    return index
   }
 
   logout() {
-    this.authService.logout();
+    this.authService.logout()
   }
 }

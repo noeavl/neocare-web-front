@@ -42,7 +42,6 @@ export class ChecksDetailComponent implements OnInit {
         this.dataLoaded = true
       }, 
       (error) => {
-        console.log(error)
         this.dataLoaded = true
       }
     )

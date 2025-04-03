@@ -58,7 +58,6 @@ export class ChecksListComponent implements OnInit {
     
     this.checksService.index(this.formData, this.currentPage + 1).subscribe(
       (response) => {
-        console.log(response)
         this.checks = response.data.data
         this.totalItems = response.data.total
         this.currentPage = response.data.current_page - 1

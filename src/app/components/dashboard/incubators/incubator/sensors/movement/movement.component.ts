@@ -54,7 +54,6 @@ export class MovementComponent {
 
   loadLatestData (id: number) {
     this.dataSensorsService.lastData(id).subscribe((response) => {
-      console.log(response)
       this.lastData = response.PRE
       this.dataLoaded = true
     }, (error) => {

@@ -57,7 +57,6 @@ export class SoundComponent {
 
   loadLatestData (id: number) {
     this.dataSensorsService.lastData(id).subscribe((response) => {
-      console.log(response)
       this.lastData = response.SON
       this.dataLoaded = true
     }, (error) => {

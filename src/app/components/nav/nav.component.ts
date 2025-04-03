@@ -35,7 +35,6 @@ export class NavComponent implements OnInit, OnDestroy {
   logout() {
     this.authService.logout().subscribe({
       error: (error) => {
-        console.error('Error al cerrar sesión:', error)
       }
     })
   }

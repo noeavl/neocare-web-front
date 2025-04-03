@@ -55,7 +55,6 @@ export class LightComponent {
 
   loadLatestData (id: number) {
     this.dataSensorsService.lastData(id).subscribe((response) => {
-      console.log(response)
       this.lastData = response.LDR
       this.dataLoaded = true
     }, (error) => {

@@ -53,7 +53,6 @@ export class VibrationComponent {
         this.dataLoaded = true;
       },
       error: (error) => {
-        console.error('Error loading vibration data:', error);
         this.error = 'Failed to load vibration data';
         this.lastData = null;
         this.dataLoaded = true;

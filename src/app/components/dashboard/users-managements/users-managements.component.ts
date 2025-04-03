@@ -63,7 +63,6 @@ export class UsersManagementsComponent implements OnInit {
         this.loadUsers();
       },
       error: (error) => {
-        console.error('Error al obtener el rol del usuario:', error);
         this.loadUsers(); 
       }
     });

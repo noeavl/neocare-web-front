@@ -27,7 +27,6 @@ export class IncubatorDetailComponent implements OnChanges {
   ngOnInit() {
     this.authService.userRole().subscribe(
       (response) => {
-        console.log(response)
         this.role = response.role
       },
       (error) => {

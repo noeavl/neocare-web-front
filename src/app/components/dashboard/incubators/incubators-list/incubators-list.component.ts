@@ -82,7 +82,6 @@ export class IncubatorsListComponent implements OnInit {
         }
       },
       (error) => {
-        console.error('Error al obtener el rol:', error)
       }
     )
   }
@@ -125,7 +124,6 @@ export class IncubatorsListComponent implements OnInit {
 
     this.incubatorsService.index(this.currentPage + 1, filtros).subscribe(
       (response) => {
-        console.log(response)
         this.incubators = response.incubators || []
         this.totalItems = response.total || 0
         this.pageSize = response.per_page || 6
@@ -133,7 +131,6 @@ export class IncubatorsListComponent implements OnInit {
         this.dataLoaded = true
       },
       (error) => {
-        console.error('Error al cargar incubadoras:', error)
         this.showAlert("error", "Error", "Could not load incubators.")
         this.dataLoaded = true
       }

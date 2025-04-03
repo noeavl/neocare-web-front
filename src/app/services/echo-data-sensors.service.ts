@@ -24,7 +24,6 @@ export class EchoService {
   }
 
   listen(channel: string, event: string, callback: (data: any) => void) {
-    console.log(channel, event)
     this.echo.channel(channel).listen(event, callback)
   }
 

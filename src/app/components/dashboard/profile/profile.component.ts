@@ -27,7 +27,6 @@ export class ProfileComponent implements OnInit {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error loading profile:', error);
         this.isLoading = false;
       }
     });

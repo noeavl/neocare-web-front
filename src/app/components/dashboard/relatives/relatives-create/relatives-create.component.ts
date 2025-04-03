@@ -37,7 +37,6 @@ export class RelativesCreateComponent {
 
   constructor(private relativesService: RelativesService, private messageService: MessageService, private route: ActivatedRoute) {
     this.id = Number(this.route.snapshot.params['id']);
-    console.log(this.id);
   }
 
   showAlert(severity: string, summary: string, detail: string) {

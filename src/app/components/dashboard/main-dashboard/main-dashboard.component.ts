@@ -51,7 +51,6 @@ export class MainDashboardComponent implements OnInit {
         this.filterAccesses(); // Filtra los accesos cuando se obtiene el rol
       },
       (error) => {
-        console.error('Error al obtener el rol:', error);
       }
     );
   }
