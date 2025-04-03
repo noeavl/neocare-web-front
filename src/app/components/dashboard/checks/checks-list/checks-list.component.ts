@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { SectionHeaderComponent } from "../../section-header/section-header.component";
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSpinner } from '@angular/material/progress-spinner';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-checks-list',
@@ -21,7 +22,8 @@ import { MatSpinner } from '@angular/material/progress-spinner';
 export class ChecksListComponent implements OnInit {
 
   constructor(
-    private checksService: CheckService
+    private checksService: CheckService,
+    private authService: AuthService
   ) { }
 
   formData: any = {}
