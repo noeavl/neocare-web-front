@@ -109,7 +109,7 @@ export class UserEditComponent implements OnInit {
         { value: 'super-admin', label: 'Super Admin' },
         { value: 'nurse-admin', label: 'Nurse Admin' },
         { value: 'nurse', label: 'Nurse' },
-        { value: '', label: 'Admin' }
+        { value: 'admin', label: 'Admin' }
       ];
     }
   }

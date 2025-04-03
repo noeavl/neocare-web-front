@@ -55,7 +55,8 @@
                       </button>
     
                       <!-- Botón Editar (oculto para super-admin si el usuario es admin) -->
-                      <button *ngIf="currentUserRole !== 'admin' || user.role !== 'super-admin'"
+                      <!-- Botón Editar (oculto para super-admin) -->
+                      <button *ngIf="user.role !== 'super-admin'"
                         mat-fab color="accent" 
                         [routerLink]="['/dashboard/users', user.id, 'edit']"
                         matTooltip="Edit user">
