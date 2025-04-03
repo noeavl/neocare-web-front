@@ -23,7 +23,6 @@ import { NgIf } from '@angular/common'
     ButtonModule,
     RippleModule,
     MatProgressSpinnerModule,
-    NgIf
   ],
   templateUrl: './address-list.component.html',
   styleUrls: ['./address-list.component.css'],
