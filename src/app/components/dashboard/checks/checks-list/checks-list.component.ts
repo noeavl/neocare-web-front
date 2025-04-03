@@ -66,6 +66,7 @@ export class ChecksListComponent implements OnInit {
         this.dataLoaded = true
       },
       (error) => {
+        this.dataLoaded = true
         this.totalItems = 0
         this.currentPage = 0
       }
