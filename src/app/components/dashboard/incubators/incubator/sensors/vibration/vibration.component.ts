@@ -34,7 +34,7 @@ export class VibrationComponent {
 
   ngOnInit() {
     this.route.parent?.paramMap.subscribe(params => {
-      this.id = Number(params.get('id'));
+      this.id = 1
       this.loadLatestData(this.id);
     });
 

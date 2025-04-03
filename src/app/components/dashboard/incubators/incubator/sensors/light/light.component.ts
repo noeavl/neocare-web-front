@@ -33,7 +33,7 @@ export class LightComponent {
 
   ngOnInit() {
     this.route.parent?.paramMap.subscribe(params => {
-      this.id = Number(params.get('id'))
+      this.id = 1
       this.loadData(this.id)
       this.loadLatestData(this.id)
     })
