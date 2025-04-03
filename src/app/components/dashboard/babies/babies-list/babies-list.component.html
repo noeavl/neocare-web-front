@@ -9,7 +9,7 @@
     <mat-spinner></mat-spinner>
 </div>
 
-<div *ngIf="dataLoaded && role == 'admin' || role == 'super-admin'" class="container">
+<div *ngIf="dataLoaded && role == 'admin' || role == 'super-admin'" >
     <div class="mt-4">
         <app-card>
             <form [formGroup]="formFilter" class="row" (ngSubmit)="onSubmit($event)">

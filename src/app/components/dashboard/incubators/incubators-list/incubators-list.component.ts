@@ -125,6 +125,7 @@ export class IncubatorsListComponent implements OnInit {
 
     this.incubatorsService.index(this.currentPage + 1, filtros).subscribe(
       (response) => {
+        console.log(response)
         this.incubators = response.incubators || []
         this.totalItems = response.total || 0
         this.pageSize = response.per_page || 6

@@ -32,17 +32,17 @@
         <ng-container *ngIf="incubators.length > 0; else noIncubators">
             <div *ngFor="let incubator of incubators" class="col-12 col-md-6 mb-4">
                 <app-incubator-card
-                [id]="incubator.id"
-                [state]="incubator.state"
-                [room_number]="incubator.room_number"
-                [nurse]="incubator.nurse"
-                [baby]="incubator.baby"
-                [date]="incubator.created_at"
-                (reloadIncubators)="loadIncubators()"
-                (alertDelete)="manageDeletion($event)"
-                [showDeleteButton]="role !== 'nurse'"
-                [showEditButton]="role !== 'nurse'">
-            </app-incubator-card>
+                    [id]="incubator.id"
+                    [state]="incubator.state"
+                    [room_number]="incubator.room_number"
+                    [nurse]="incubator.state === 'available' ? 'No Nurse' : incubator.nurse"
+                    [baby]="incubator.state === 'available' ? 'No Baby' : incubator.baby"
+                    [date]="incubator.created_at"
+                    (reloadIncubators)="loadIncubators()"
+                    (alertDelete)="manageDeletion($event)"
+                    [showDeleteButton]="role !== 'nurse'"
+                    [showEditButton]="role !== 'nurse'">
+                </app-incubator-card>
             </div>
 
             <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="currentPage"
