@@ -19,9 +19,9 @@
         </div>
       </div>
     </div>
-    <div 
+      <div 
       class="col-12"
-      *ngIf="role === 'nurse' || role === 'admin'"  
+      *ngIf="(role === 'nurse' || role === 'admin') && incubator?.state !== 'available'"  
     >
       <div class="p-3 d-flex align-items-center shadow-m">
         <app-button 
