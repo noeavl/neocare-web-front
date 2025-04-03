@@ -10,25 +10,16 @@ export const roleEditGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const userId = route.params['id'];
 
-  return authService.userRole().pipe(
-    switchMap(currentUser => {
-      // Si el usuario actual no es admin, permitir acceso
-      if (currentUser.role !== 'admin') {
-        return [true];
+  return usersService.getUserById(userId).pipe(
+    map(userToEdit => {
+      // Bloquear edición si el usuario a editar es super-admin
+      if (userToEdit.role === 'super-admin') {
+        router.navigate(['/dashboard/users']);
+        return false;
       }
-
-      // Si es admin, verificar el rol del usuario a editar
-      return usersService.getUserById(userId).pipe(
-        map(userToEdit => {
-          if (userToEdit.role === 'super-admin') {
-            // Redirigir a la lista de usuarios si intenta editar un super-admin
-            router.navigate(['/dashboard/users']);
-            return false;
-          }
-          // Permitir edición si no es super-admin
-          return true;
-        })
-      );
+      
+      // Permitir edición para otros roles
+      return true;
     })
   );
 };

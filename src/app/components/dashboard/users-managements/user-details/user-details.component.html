@@ -25,10 +25,10 @@
                 </mat-card-content>
                 
                 <mat-card-actions class="card-actions">
-                    <button *ngIf="shouldShowEditButton()"
-                            mat-fab color="accent" 
-                            [routerLink]="['/dashboard/users', user.id, 'edit']"
-                            matTooltip="Edit user">
+                    <button *ngIf="user.role !== 'super-admin'"
+                        mat-fab color="accent" 
+                        [routerLink]="['/dashboard/users', user.id, 'edit']"
+                        matTooltip="Edit user">
                         <mat-icon>edit</mat-icon>
                     </button>
                 </mat-card-actions>
