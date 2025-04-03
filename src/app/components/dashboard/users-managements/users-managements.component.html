@@ -3,76 +3,89 @@
     <h1>Users Management</h1>
   </div>
 </div>
-<div *ngIf="!dataLoaded" class="spinner">
-    <mat-spinner></mat-spinner>
-</div>
 
-<div *ngIf="dataLoaded" class="mt-3">
-    <div class="row">
-        <ng-container *ngIf="users.length > 0; else noUsers">
-            <div *ngFor="let user of users" class="col-12 col-md-6 col-lg-4 mb-4">
-                <mat-card class="user-card">
-                    <mat-card-content class="card-content">
-                        <!-- Nombre -->
-                        <div class="info-row">
-                            <mat-icon class="icon">person</mat-icon>
-                            <span class="info-text">{{ user.name }}</span>
-                        </div>
-                        
-                        <!-- Email -->
-                        <div class="info-row">
-                            <mat-icon class="icon">email</mat-icon>
-                            <span class="info-text">{{ user.email }}</span>
-                        </div>
-                        
-                        <!-- Rol -->
-                        <div class="info-row">
-                            <mat-icon class="icon" 
-                                [ngClass]="{
-                                    'role-super-admin': user.role === 'super-admin',
-                                    'role-nurse-admin': user.role === 'nurse-admin',
-                                    'role-nurse': user.role === 'nurse',
-                                    'role-user': user.role === 'user'
-                                }">manage_accounts
-                            </mat-icon>
-                            <span class="info-text text-capitalize">{{ user.role }}</span>
-                        </div>
-                    </mat-card-content>
-                    
-                    <mat-card-actions class="card-actions">
-                        <div class="col-12 col-6 p-0 mt-3 mt-md-0">
-                            <div class="d-flex justify-content-end gap-3 p-0">
-                                <button mat-fab color="primary" 
-                                [routerLink]="['/dashboard/users', user.id]"
-                                matTooltip="View details">
-                            <mat-icon>visibility</mat-icon>
-                        </button>
-
-                        <button *ngIf="currentUserRole !== 'admin' || user.role !== 'super-admin'"
-                                mat-fab color="accent" 
-                                [routerLink]="['/dashboard/users', user.id, 'edit']"
-                                matTooltip="Edit user">
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                            </div>
-                        </div>
-                    </mat-card-actions>
-                </mat-card>
-            </div>
-
-            <mat-paginator [length]="totalItems" 
-                          [pageSize]="pageSize" 
-                          (page)="onPageChange($event)"
-                          aria-label="Select page">
-            </mat-paginator>
-        </ng-container>
-
-        <ng-template #noUsers>
-            <div class="col-12 text-center mt-4">
-                <p class="no-users-message">No users available.</p>
-            </div>
-        </ng-template>
+@if (!dataLoad) {
+    <div class="spinner">
+      <mat-spinner></mat-spinner>
     </div>
-</div>
-
-<p-toast position="bottom-right" key="br"></p-toast>
+    }
+    
+    <div class="mt-3">
+      <div class="row">
+        @if (dataLoad) {
+          <ng-container *ngIf="users.length > 0; else noUsers">
+            <!-- Cards de Usuarios -->
+            <div *ngFor="let user of users" class="col-12 col-md-6 col-lg-4 mb-4">
+              <mat-card class="user-card">
+                <mat-card-content class="card-content">
+                  <!-- Nombre -->
+                  <div class="info-row">
+                    <mat-icon class="icon">person</mat-icon>
+                    <span class="info-text">{{ user.name }}</span>
+                  </div>
+                  
+                  <!-- Email -->
+                  <div class="info-row">
+                    <mat-icon class="icon">email</mat-icon>
+                    <span class="info-text">{{ user.email }}</span>
+                  </div>
+                  
+                  <!-- Rol -->
+                  <div class="info-row">
+                    <mat-icon class="icon" 
+                      [ngClass]="{
+                        'role-super-admin': user.role === 'super-admin',
+                        'role-nurse-admin': user.role === 'nurse-admin',
+                        'role-nurse': user.role === 'nurse',
+                        'role-user': user.role === 'user'
+                      }">manage_accounts
+                    </mat-icon>
+                    <span class="info-text text-capitalize">{{ user.role }}</span>
+                  </div>
+                </mat-card-content>
+                
+                <mat-card-actions class="card-actions">
+                  <div class="col-12 col-6 p-0 mt-3 mt-md-0">
+                    <div class="d-flex justify-content-end gap-3 p-0">
+                      <!-- Botón Ver Detalles -->
+                      <button mat-fab color="primary" 
+                        [routerLink]="['/dashboard/users', user.id]"
+                        matTooltip="View details">
+                        <mat-icon>visibility</mat-icon>
+                      </button>
+    
+                      <!-- Botón Editar (oculto para super-admin si el usuario es admin) -->
+                      <button *ngIf="currentUserRole !== 'admin' || user.role !== 'super-admin'"
+                        mat-fab color="accent" 
+                        [routerLink]="['/dashboard/users', user.id, 'edit']"
+                        matTooltip="Edit user">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+    
+            <!-- Paginador -->
+            <mat-paginator 
+              [length]="totalItems" 
+              [pageSize]="pageSize" 
+              [pageIndex]="currentPage"
+              (page)="onPageChange($event)"
+              aria-label="Select page">
+            </mat-paginator>
+          </ng-container>
+    
+          <!-- Mensaje cuando no hay usuarios -->
+          <ng-template #noUsers>
+            <div class="col-12 text-center mt-4">
+              <p class="no-users-message">No users available.</p>
+            </div>
+          </ng-template>
+        }
+      </div>
+    </div>
+    
+    <!-- Toast para notificaciones -->
+    <p-toast position="bottom-right" key="br"></p-toast>

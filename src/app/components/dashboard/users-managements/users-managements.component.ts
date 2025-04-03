@@ -34,10 +34,10 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class UsersManagementsComponent implements OnInit {
   users: any[] = [];
-  totalItems = 0;
-  pageSize = 9;
+  dataLoad = false; 
   currentPage = 0;
-  dataLoaded = false;
+  pageSize = 9;
+  totalItems = 0;
   currentUserRole: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -71,33 +71,33 @@ export class UsersManagementsComponent implements OnInit {
 
 
   loadUsers(): void {
-    this.dataLoaded = false;
+    this.dataLoad = false;
     this.usersService.getUsers(this.currentPage + 1, this.pageSize).subscribe({
       next: (response: any) => {
-        this.users = response.data || [];
+        this.users = response.data || []; // Asegurar compatibilidad con estructura paginada
         this.totalItems = response.total || 0;
         this.pageSize = response.per_page || this.pageSize;
-        this.currentPage = response.current_page - 1;
-        this.dataLoaded = true;
+        this.currentPage = response.current_page - 1; // Ajustar índice base 0
+        this.dataLoad = true;
       },
       error: (error) => {
         this.showAlert('error', 'Error', 'Could not load users');
-        this.dataLoaded = true;
+        this.dataLoad = true;
       }
     });
   }
 
   updateUserRole(user: any, role: string, hospitalId?: number): void {
-    this.dataLoaded = false;
+    this.dataLoad = false;
     this.usersService.updateUserRole(user.id, role, hospitalId).subscribe({
       next: () => {
         this.showAlert('success', 'Success', 'Role updated successfully');
         user.role = role;
-        this.dataLoaded = true;
+        this.dataLoad = true;
       },
       error: (error) => {
         this.showAlert('error', 'Error', error.error?.message || 'Failed to update role');
-        this.dataLoaded = true;
+        this.dataLoad = true;
       }
     });
   }

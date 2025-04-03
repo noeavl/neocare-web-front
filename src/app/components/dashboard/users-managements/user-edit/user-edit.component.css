@@ -1,115 +1,33 @@
-/* Estilos generales del contenedor */
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
-/* Estilos para la tarjeta */
-app-card {
-  display: block;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 25px;
-  margin-bottom: 20px;
-}
-
-/* Estilos para los formularios */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* Estilos para las etiquetas */
-.form-label {
-  font-weight: 600;
-  color: #492E87; /* Color morado principal */
-  margin-bottom: 8px;
-  display: block;
-}
-
-/* Estilos para los inputs y selects */
-.form-select {
+.spinner {
   width: 100%;
-  padding: 10px 15px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 16px;
-  transition: border-color 0.3s;
-  background-color: #f9f9f9;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.form-select:focus {
-  border-color: #7A1CAC; /* Color morado */
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(122, 28, 172, 0.2);
+::ng-deep mat-spinner circle {
+  stroke: var(--color-violeta) !important;
 }
 
-/* Estilos para los mensajes de error */
+.main-container {
+  height: 80vh;
+}
+
 .text-danger {
   color: #dc3545;
   font-size: 14px;
   margin-top: 5px;
 }
 
-.small {
-  font-size: 0.875em;
+.ms-3 {
+  margin-left: 1rem;
 }
 
-/* Estilos para el botón */
-.btn-primary {
-  background-color: #7A1CAC; /* Color morado */
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.mt-3 {
+  margin-top: 1rem;
 }
 
-.btn-primary:hover {
-  background-color: #5e1688; /* Morado más oscuro */
+.mt-4 {
+  margin-top: 1.5rem;
 }
-
-.btn-primary:disabled {
-  background-color: #a781be; /* Morado claro */
-  cursor: not-allowed;
-}
-
-/* Spinner para el estado de carga */
-.spinner-border {
-  display: inline-block;
-  width: 1rem;
-  height: 1rem;
-  vertical-align: text-bottom;
-  border: 0.2em solid currentColor;
-  border-right-color: transparent;
-  border-radius: 50%;
-  animation: spinner-border 0.75s linear infinite;
-}
-
-@keyframes spinner-border {
-  to { transform: rotate(360deg); }
-}
-
-  /* Estilos responsivos */
-  @media (max-width: 768px) {
-    .container {
-      padding: 0 10px;
-    }
-    
-    app-card {
-      padding: 15px;
-    }
-    
-    .form-select {
-      padding: 8px 12px;
-    }
-    
-    .btn-primary {
-      padding: 8px 16px;
-    }
-  }

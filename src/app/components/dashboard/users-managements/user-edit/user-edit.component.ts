@@ -10,6 +10,10 @@ import { CardComponent } from "../../../shared/card/card.component";
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
+import { SelectComponent } from "../../../shared/select/select.component";
+import { ButtonComponent } from "../../../shared/button/button.component";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Pipe, PipeTransform } from '@angular/core';
 
 interface Hospital {
   id: number;
@@ -21,12 +25,33 @@ interface RoleOption {
   label: string;
 }
 
+@Pipe({ name: 'mapToSelectOptions' })
+export class MapToSelectOptionsPipe implements PipeTransform {
+  transform(items: any[]): { value: string; label: string }[] {
+    return items?.map(item => ({
+      value: item.id.toString(),
+      label: item.name
+    })) || [];
+  }
+}
+
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.css'],
   providers: [MessageService],
-  imports: [SectionHeaderComponent, CardComponent, ReactiveFormsModule, ToastModule, CommonModule]
+  standalone: true,
+  imports: [
+    SectionHeaderComponent,
+    CardComponent,
+    ReactiveFormsModule,
+    ToastModule,
+    CommonModule,
+    SelectComponent,
+    ButtonComponent,
+    MatProgressSpinnerModule,
+    MapToSelectOptionsPipe
+  ]
 })
 export class UserEditComponent implements OnInit {
   userId: number;
@@ -37,6 +62,7 @@ export class UserEditComponent implements OnInit {
   currentRole = '';
   availableRoles: RoleOption[] = [];
   isAdminUser: boolean = false;
+  fieldErrors: { [key: string]: string } = {};
 
   roleForm = new FormGroup({
     role: new FormControl('', [Validators.required]),
@@ -137,17 +163,24 @@ export class UserEditComponent implements OnInit {
     hospitalControl?.updateValueAndValidity();
   }
 
+  handleRoleSelection(value: string): void {
+    this.roleForm.controls['role'].setValue(value);
+    this.updateHospitalFieldVisibility(value);
+  }
+
+  handleHospitalSelection(value: string): void {
+    this.roleForm.controls['hospital_id'].setValue(Number(value)); 
+  }
+
   onSubmit(): void {
     if (this.roleForm.invalid || this.isLoading) return;
   
-    const { role, hospital_id } = this.roleForm.value;
-    if (!role) return;
-  
     this.isLoading = true;
-  
+    const { role, hospital_id } = this.roleForm.value;
+
     this.usersService.updateUserRole(
       this.userId, 
-      role, 
+      role!, 
       this.showHospitalField ? hospital_id ?? undefined : undefined
     ).subscribe({
       next: () => {
@@ -180,6 +213,14 @@ export class UserEditComponent implements OnInit {
   }
 
   private handleError(error: any): void {
+    this.fieldErrors = {};
+    if (error.error) {
+      for (const key in error.error) {
+        if (error.error.hasOwnProperty(key)) {
+          this.fieldErrors[key] = error.error[key];
+        }
+      }
+    }
     const errorMessage = error.error?.message || 'An unexpected error occurred';
     this.showError(errorMessage);
   }
