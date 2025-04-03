@@ -8,14 +8,19 @@
       <ul class="navbar-nav ms-auto">
         @if (!isAuthenticated) {
           <li class="nav-item">
-            <a class="nav-link active" [routerLink]="'log-in'" routerLinkActive="router-link-active">Log in</a>
+            <a class="nav-link active" [routerLink]="'/log-in'" routerLinkActive="router-link-active">Log in</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" [routerLink]="'sign-up'" routerLinkActive="router-link-active">Sign up</a>
+            <a class="nav-link active" [routerLink]="'/sign-up'" routerLinkActive="router-link-active">Sign up</a>
           </li>
-        } @else if (isAuthenticated && rol != "guest") {
+        } @else {
+          @if (rol !== "guest") {
+            <li class="nav-item">
+              <a class="nav-link active" [routerLink]="'/dashboard'" routerLinkActive="router-link-active">Dashboard</a>
+            </li>
+          }
           <li class="nav-item">
-            <a class="nav-link active" [routerLink]="'dashboard'" routerLinkActive="router-link-active">Dashboard</a>
+            <a class="nav-link active" (click)="logout()" style="cursor: pointer;">Log out</a>
           </li>
         }
       </ul>

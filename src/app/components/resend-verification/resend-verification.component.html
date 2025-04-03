@@ -1,0 +1,47 @@
+<div class="min-vh-100 d-flex flex-column justify-content-center align-items-center super-container">
+    <div class="container-fluid">
+        <div class="col-12 text-center mb-4">
+            <app-logo src="recursos-web/LOGOBLANCO.png" alt="NeoCare Logo"></app-logo>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-5 col-md-6 col-lg-5">
+                <app-card>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <div class="mt-3">
+                            <app-title class="text-center  fw-bold" title="Resend Verification" />
+                        </div>
+                        <div class="mt-2">
+                            <app-title class="text-center fs-3 fw-light" title="Enter your email">
+                            </app-title>
+                        </div>
+                        <div class="mt-4 mb-4">
+                            <app-input placeholder="Email" type="email" name="email" formControlName="email" />
+                            @if(fieldErrors['email']) {
+                            <small class="ms-3 text-danger">{{ fieldErrors['email'] }}</small>
+                            }
+                            @if(email?.invalid && ( email?.dirty || email?.touched )){
+                            @if( email?.hasError('required') ){
+                            <small class="ms-3 text-danger">Email is required</small>
+                            }
+                            @if( email?.hasError('email') ){
+                            <small class="ms-3 text-danger">Email is invalid</small>
+                            }
+                            }
+                        </div>
+                        <app-button text="Resend Verification" [disabled]="!form.valid"/>
+                        <div class="mt-3 d-flex justify-content-center">
+                            <div>
+                                <p class="fw-light" [style]="{'color':'var(--color-morado)'}">New user?
+                                    <a [style]="{'color':'var(--color-morado)'}" [routerLink]="['/sign-up']"
+                                        class="fw-bold text-decoration-none">Sign
+                                        up</a>
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </app-card>
+            </div>
+        </div>
+    </div>
+    <p-toast position="bottom-right" key="br"></p-toast>
+</div>

@@ -52,11 +52,13 @@ import { UserEditComponent } from './components/dashboard/users-managements/user
 import { nurseCheckGuard } from './guards/nurse-check.guard'
 import { nurseAdminCheckGuard } from './guards/nurse-admin-check.guard'
 import { roleEditGuard } from './guards/role-edit.guard'
+import { ResendVerificationComponent } from './components/resend-verification/resend-verification.component'
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'log-in', component: LoginComponent },
   { path: 'sign-up', component: SignupComponent },
+  { path: 'resend-verification', component: ResendVerificationComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
