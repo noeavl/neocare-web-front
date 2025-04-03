@@ -4,29 +4,23 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { RelativesService } from '../../../../../services/relatives.service';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-
 import Swal from 'sweetalert2';
 import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-baby-relative-card',
-  imports: [CardComponent,
-     CommonModule, 
-     MatIconModule,
-      SweetAlert2Module,
-    RouterLink],
+  imports: [CardComponent, CommonModule, MatIconModule, SweetAlert2Module, RouterLink],
   templateUrl: './baby-relative-card.component.html',
   styleUrl: './baby-relative-card.component.css'
 })
 export class BabyRelativeCardComponent {
-  @Input() id!: number
-  @Input() email!: string
-  @Input() phone_number!: string
-  @Input() name!: string
-  @Input() last_name_1!: string
-  @Input() last_name_2!: string
-  @Output() reloadRelatives = new EventEmitter()
-  @Output() alertDelete = new EventEmitter()
-  constructor(private relativesService: RelativesService) { }
+  @Input() id!: number;
+  @Input() email!: string;
+  @Input() phone_number!: string;
+  @Input() name!: string;
+  @Input() last_name_1!: string;
+  @Input() last_name_2!: string;
+  @Output() alertDelete = new EventEmitter<number>();
 
   delete(id: number) {
     Swal.fire({
@@ -37,16 +31,8 @@ export class BabyRelativeCardComponent {
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.relativesService.delete(this.id).subscribe(
-          () => {
-            Swal.fire('Deleted!', 'The familiar has been deleted.', 'success')
-            this.reloadRelatives.emit() 
-          },
-          (error) => {
-            Swal.fire('Error', 'Failed to delete the familiar.', 'error')
-          }
-        )
+        this.alertDelete.emit(id); // Emitir el evento al componente padre
       }
-    })
+    });
   }
 }

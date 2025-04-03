@@ -1,143 +1,144 @@
 .add-relative-button {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 10px;
-    background-color: #7A1CAC;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  
-  img.button-img {
-    width: auto;
-    height: 100%;
-    padding: 10px;
-    max-width: 100%;
-    object-fit: contain;
-  }
-  
-  mat-icon {
-    color: var(--color-rosa-claro);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 10px;
+  background-color: #7A1CAC;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
+
+img.button-img {
+  width: auto;
+  height: 100%;
+  padding: 10px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+mat-icon {
+  color: var(--color-rosa-claro);
+}
+
 .domain {
-    height: 60px;
-    width: 60px;
-    
+  height: 60px;
+  width: 60px;
+
 }
 
 .id {
-    background-color: var(--color-rosa);
-    color: var(--color-morado);
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+  background-color: var(--color-rosa);
+  color: var(--color-morado);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 ::ng-deep .ngx-pagination {
-    background: none !important; 
-    border: none !important; 
-    box-shadow: none !important;
-    padding: 0;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0;
 }
 
 ::ng-deep .ngx-pagination .current {
-    color: var(--color-rosa-claro) !important;
-    background-color: transparent !important;
-    font-weight: bold !important;
+  color: var(--color-rosa-claro) !important;
+  background-color: transparent !important;
+  font-weight: bold !important;
 }
 
 ::ng-deep .ngx-pagination li {
-    margin: 0 5px;
-    color: var(--color-morado) !important;
-    cursor: pointer;
-    background: none !important;
-    border: none !important;
+  margin: 0 5px;
+  color: var(--color-morado) !important;
+  cursor: pointer;
+  background: none !important;
+  border: none !important;
 }
 
 ::ng-deep .ngx-pagination li:hover {
-    background-color: var(--color-rosa) !important;
-    border-radius: 20px !important;
+  background-color: var(--color-rosa) !important;
+  border-radius: 20px !important;
 }
 
 ::ng-deep .ngx-pagination a {
-    text-decoration: none !important;
-    color: var(--color-morado) !important;
-    background: none !important;
-    border: none !important;
+  text-decoration: none !important;
+  color: var(--color-morado) !important;
+  background: none !important;
+  border: none !important;
 }
 
 ::ng-deep .ngx-pagination a:hover {
-    background-color: var(--color-rosa) !important;
-    border-radius: 20px !important;
+  background-color: var(--color-rosa) !important;
+  border-radius: 20px !important;
 }
 
 
 .spinner {
-    width: 100%;
-    height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 ::ng-deep mat-spinner circle {
-    stroke: var(--color-violeta) !important;
+  stroke: var(--color-violeta) !important;
 }
 
 /* Estilos para mejorar responsividad */
 .nombre-bebe {
-    word-break: break-word;
-    max-width: 100%;
-    font-size: 1.25rem;
+  word-break: break-word;
+  max-width: 100%;
+  font-size: 1.25rem;
+}
+
+.hospital-name {
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.big-icon {
+  transform: scale(2);
+  margin-bottom: 10px;
+}
+
+.add-relative-button {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #7A1CAC;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.add-relative-button:hover {
+  background-color: var(--primary-color-dark, #303f9f);
+}
+
+.button-img {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 576px) {
+  .nombre-bebe {
+    font-size: 1.1rem;
+    text-align: center;
+    margin-top: 8px;
   }
-  
-  .hospital-name {
-    word-break: break-word;
-    max-width: 100%;
-  }
-  
+
   .big-icon {
-    transform: scale(2);
-    margin-bottom: 10px;
+    transform: scale(1.75);
   }
-  
-  .add-relative-button {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #7A1CAC;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+}
+
+@media (min-width: 577px) and (max-width: 991px) {
+  .nombre-bebe {
+    font-size: 1.2rem;
   }
-  
-  .add-relative-button:hover {
-    background-color: var(--primary-color-dark, #303f9f);
-  }
-  
-  .button-img {
-    width: 20px;
-    height: 20px;
-  }
-  
-  @media (max-width: 576px) {
-    .nombre-bebe {
-      font-size: 1.1rem;
-      text-align: center;
-      margin-top: 8px;
-    }
-    
-    .big-icon {
-      transform: scale(1.75);
-    }
-  }
-  
-  @media (min-width: 577px) and (max-width: 991px) {
-    .nombre-bebe {
-      font-size: 1.2rem;
-    }
-  }
+}
