@@ -1,0 +1,52 @@
+<div class="profile-container">
+    <h2 class="profile-title">My Profile</h2>
+  
+    <div *ngIf="isLoading" class="loading-spinner">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+  
+    <div *ngIf="!isLoading && profileData" class="profile-card">
+      <div class="profile-section">
+        <h3 class="section-title">Personal Information</h3>
+        
+        <div class="info-row">
+          <span class="info-label">Full Name:</span>
+          <span class="info-value">{{ getFullName() }}</span>
+        </div>
+        
+        <div class="info-row">
+          <span class="info-label">Username:</span>
+          <span class="info-value">{{ profileData.user.name }}</span>
+        </div>
+        
+        <div class="info-row">
+          <span class="info-label">Email:</span>
+          <span class="info-value">{{ profileData.user.email }}</span>
+        </div>
+        
+        <div *ngIf="profileData.user.role" class="info-row">
+          <span class="info-label">Role:</span>
+          <span class="info-value">{{ profileData.user.role }}</span>
+        </div>
+        
+        <div *ngIf="profileData.nurse?.rfc" class="info-row">
+          <span class="info-label">RFC:</span>
+          <span class="info-value">{{ profileData.nurse.rfc }}</span>
+        </div>
+      </div>
+  
+      <div class="profile-section">
+        <h3 class="section-title">Account Details</h3>
+        
+        <div class="info-row">
+          <span class="info-label">Created:</span>
+          <span class="info-value">{{ profileData.user.created_at | date:'mediumDate' }}</span>
+        </div>
+        
+        <div class="info-row">
+          <span class="info-label">Last Updated:</span>
+          <span class="info-value">{{ profileData.user.updated_at | date:'mediumDate' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
